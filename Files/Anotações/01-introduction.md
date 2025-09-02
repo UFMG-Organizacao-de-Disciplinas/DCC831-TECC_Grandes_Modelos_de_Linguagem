@@ -1,5 +1,30 @@
 # Large Language Models - Aula 01: Introduction - Rodrygo Santos & Anisio Lacerda
 
+## Table of contents
+
+- [Large Language Models - Aula 01: Introduction - Rodrygo Santos \& Anisio Lacerda](#large-language-models---aula-01-introduction---rodrygo-santos--anisio-lacerda)
+  - [Table of contents](#table-of-contents)
+  - [Imagem](#imagem)
+  - [Language](#language)
+  - [Image (2)](#image-2)
+  - [Notícias](#notícias)
+    - [Forbes](#forbes)
+    - [The Verge](#the-verge)
+    - [TechCrunch](#techcrunch)
+    - [Pew Research Center](#pew-research-center)
+  - [Imagens e vídeos](#imagens-e-vídeos)
+  - [Data Science with OpenAI Codex](#data-science-with-openai-codex)
+  - [Your software engineering agent](#your-software-engineering-agent)
+  - [The Register](#the-register)
+  - [Post](#post)
+  - [Language model](#language-model)
+  - [Language model](#language-model-1)
+  - [Evolution of language models](#evolution-of-language-models)
+  - [Tunable dependence via n-grams](#tunable-dependence-via-n-grams)
+  - [Improved estimation via smoothing](#improved-estimation-via-smoothing)
+  - [Evolution of language models](#evolution-of-language-models-1)
+  - [Neurons](#neurons)
+
 ## Imagem
 
 [Imagem: Silhouette of a human female on the left and a humanoid AI on the right; a white wire connects their brains through their mouths symbolizing communication. By DALL-E 3]
