@@ -56,3 +56,4 @@ Até onde eu sei, acho que agora em 2025.2 é a primeira vez.
 
 - Adicionar Cronograma
 - Fazer o repositório como um site com Quarto.
+- Transcrever os áudios.
