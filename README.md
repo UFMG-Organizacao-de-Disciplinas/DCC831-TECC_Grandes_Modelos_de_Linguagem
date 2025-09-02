@@ -12,23 +12,21 @@
 
 <!-- Links -->
 
-[Slide01]: Files/Slides/01-introduction.pdf
-[Anotação01]: Files/Anotações/01-introduction.md
-[Áudio01]: <Files/Audio/2025-08-12 17.07.13 - LLM - Aula 01.mp3>
 
-<!--  -->
+<!-- Aula 02 -->
 
 [Slide02]: Files/Slides/02-lifecycle.pdf
 [Anotação02]: Files/Anotações/02-lifecycle.md
-[Áudio02]: <Files/Audio/2025-08-14 17.06.20 - LLM - Aula 02.mp3>
-
-<!--  -->
+[Áudio02]: Files/Áudios/2025-08-14_17.06.20-LLM-Aula_02.mp3
 
 [Slide03]: Files/Slides/03-XXX.pdf
 [Anotação03]: Files/Anotações/03-XXX.md
 [Áudio03]: Files/Audio/03-XXX.mp3
+<!-- Aula 01 -->
 
-<!--  -->
+[Slide01]: Files/Slides/01-introduction.pdf
+[Anotação01]: Files/Anotações/01-introduction.md
+[Áudio01]: Files/Áudios/2025-08-12_17.07.13-LLM-Aula_01.mp3
 
 ## Distribuição de pontos
 
