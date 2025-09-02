@@ -27,7 +27,10 @@
 
 ## Imagem
 
-[Imagem: Silhouette of a human female on the left and a humanoid AI on the right; a white wire connects their brains through their mouths symbolizing communication. By DALL-E 3]
+- [Imagem: Silhouette of a human female on the left and a humanoid AI on the right; a white wire connects their brains through their mouths symbolizing communication.]
+- By [DALL-E 3][LinkDallE3].
+
+[LinkDallE3]: https://www.bing.com/images/create/silhouette-of-a-human-female-on-the-left-and-a-hum/1-65df4e5a9e714ef6aa00b0ede7c1af97?id=u91kmTnFntYSUPHvkxITwg==&view=detailv2&idpp=genimg&thId=OIG4.d4_9tImvENFEswSPqrOh&FORM=GCRIDP&ajaxhist=0&ajaxserp=0
 
 ## Language
 
@@ -38,61 +41,64 @@
   - Ambiguity, context-dependency, nuanced semantics
 - A milestone towards AGI?
 
-## Notícias
+## Image (2)
 
 - [Imagem: Welcome to ChatGPT - Hello! How can I help you today? Is there something you need help with or would like to learn more about? I'm here to assist you with any questions you may have.]
 - Credits: Shutterstock
 
----
+## Notícias
 
-- Forbes
-  - [ChatGPT Is The Fastest Growing App In The History Of Web Applications][LinkForbes]
-    - Cindy Gordon
-      - Contributor © CEO, Innovation Leader Passionate about Modernizing via AI
-      - Feb 2, 2023, 06:24pm EST
-  - UBS research just confirmed that ChatGPT is the "fastest-growing consumer application in history," according to research from UBS research just announced that ChatGPT. "In 20 years following the Internet space, we cannot recall a faster ramp in a consumer internet app. By comparison, **TikTok took nine months to reach 100 million monthly users**, and Instagram about 2.5 years." Other popular online services have taken longer to hit the one million user mark. Instagram being the the closest. Another comparison is when Netflix was launched as a subscription service in 1999, the one million user mark took over 3.5 years to reach this many users.
-  - **Already at over one million users in just five days since launching** in November, 2002. The conversational AI bot uses AI/ML and NLP (natural Language processing)...
+### Forbes
+
+- [ChatGPT Is The Fastest Growing App In The History Of Web Applications][LinkForbes]
+  - Cindy Gordon
+    - Contributor © CEO, Innovation Leader Passionate about Modernizing via AI
+    - Feb 2, 2023, 06:24pm EST
+
+> UBS research just confirmed that ChatGPT is the "fastest-growing consumer application in history," according to research from UBS research just announced that ChatGPT. "In 20 years following the Internet space, we cannot recall a faster ramp in a consumer internet app. By comparison, **TikTok took nine months to reach 100 million monthly users**, and Instagram about 2.5 years." Other popular online services have taken longer to hit the one million user mark. Instagram being the the closest. Another comparison is when Netflix was launched as a subscription service in 1999, the one million user mark took over 3.5 years to reach this many users.
+>
+> **Already at over one million users in just five days since launching** in November, 2002. The conversational AI bot uses AI/ML and NLP (natural Language processing)...
 
 [LinkForbes]: https://www.forbes.com/sites/cindygordon/2023/02/02/chatgpt-is-the-fastest-growing-ap-in-the-history-of-web-applications/
 
----
+### The Verge
 
-- [The Verge][LinkTheVerge]
+- [ChatGPT continues to be one of the fastest-growing services ever][LinkTheVerge1]
   - AI
   - by Jon Porter
     - Nov 6, 2023, 3:03 PM GMT-3
-    - ChatGPT continues to be one of the fastest-growing services ever / In less than a year, it's hit **100 million weekly users** and over 2 million developers are currently building on the company's API, including the majority of Fortune 500 companies.
 
-[LinkTheVerge]: https://www.theverge.com/2023/11/6/23948386/chatgpt-active-user-count-openai-developer-conference
+> In less than a year, it's hit **100 million weekly users** and over 2 million developers are currently building on the company's API, including the majority of Fortune 500 companies.
+
+[LinkTheVerge1]: https://www.theverge.com/2023/11/6/23948386/chatgpt-active-user-count-openai-developer-conference
 
 ---
 
-- [The Verge][LinkTheVerge2]
+- [ChatGPT now has over **300 million weekly users**][LinkTheVerge2]
   - AI / OPENAI
   - by Emma Roth
     - Dec 4, 2024, 1:39 PM GMT-3
-    - ChatGPT now has over **300 million weekly users**
-    - During the NYT's DealBook Summit, OpenAI CEO Sam Altman said users send over **1 billion messages per day** to ChatGPT.
+
+> During the NYT's DealBook Summit, OpenAI CEO Sam Altman said users send over **1 billion messages per day** to ChatGPT.
 
 [LinkTheVerge2]: https://www.theverge.com/2024/12/4/24234567/chatgpt-300-million-users-openai-sam-altman
 
----
+### TechCrunch
 
-- [TechCrunch][LinkTechCrunch]
+- [OpenAI says ChatGPT is on track to reach **700M weekly users**][LinkTechCrunch]
   - AI
   - Ivan Mehta
     - 8:25 AM PDT - August 4, 2025
-  - OpenAI says ChatGPT is on track to reach **700M weekly users**
 
 [LinkTechCrunch]: https://techcrunch.com/2025/08/04/openai-says-chatgpt-is-on-track-to-reach-700m-weekly-users/
 
----
+### Pew Research Center
 
-- [Pew Research Center][LinkPewResearch]
-  - Short Reads | June 25, 2025
-  - 34% of U.S. adults have used ChatGPT, about double the share in 2023
-    - BY OLIVIA SIDOTI AND COLLEEN MCCLAIN
-  - The share of Americans who have used [ChatGPT][LinkGPT], an AI chatbot released in November 2022, has roughly doubled since summer 2023. Today, **34% of U.S. adults say they have ever used ChatGPT**, according to a Pew Research Center survey. That includes a 58% majority of adults under 30. Still, **66% of Americans have not used the chatbot, including 20% who say they've heard nothing about it**.
+- [34% of U.S. adults have used ChatGPT, about double the share in 2023][LinkPewResearch]
+- Short Reads | June 25, 2025
+  - BY OLIVIA SIDOTI AND COLLEEN MCCLAIN
+
+> The share of Americans who have used [ChatGPT][LinkGPT], an AI chatbot released in November 2022, has roughly doubled since summer 2023. Today, **34% of U.S. adults say they have ever used ChatGPT**, according to a Pew Research Center survey. That includes a 58% majority of adults under 30. Still, **66% of Americans have not used the chatbot, including 20% who say they've heard nothing about it**.
 
 [LinkPewResearch]: https://www.pewresearch.org/short-reads/2025/06/25/34-of-us-adults-have-used-chatgpt-about-double-the-share-in-2023/
 [LinkGPT]: https://chatgpt.com/
@@ -111,50 +117,40 @@
 
 [LinkVion3]: https://deepmind.google/api/blob/website/media/veo__veo-3__us_wm_a-delicate-feather-rests-on-a-fence-post-a-gust-of-wind-lifts-it.mp4
 
-## [Imagem: Yoda meditates in a forest setting on the planet Dagobah; suddenly, he awakens from his meditation, looks at the camera, and says: "To the course on Large Language Models, welcome you are." By Veo 3]
+---
 
-## Transform your content into engaging AI-generated audio discussions
-
-- You're already on the waitlist! We'll notify you when it's your turn to try illuminate.
-- Attention Is All You Need
-  - 4 min
-  - View Source View Transcript
-  - Play
-- Generative Agents: Interactive Simulacra of...
-  - 5 min
-  - View Source View Transcript
-  - Play
-- Artificial Intelligence Index Report 2024
-  - 8 min
-  - View Source View Transcript
-  - Play
-- Large Language Models Encode Clinical Knowledge
-  - 3 min
-  - View Source View Transcript
-  - Play
-- Fuller library
-  - **Pal.M-E-An Embodied Multimodal...**
-  - 4 min
-  - View Source View Transcript
-  - Play
-- Position: Levels of AGI for Operationalizing...
-  - 4 min
-  - View Source View Transcript
-  - Play
+- [Imagem: Yoda meditates in a forest setting on the planet Dagobah; suddenly, he awakens from his meditation, looks at the camera, and says: "To the course on Large Language Models, welcome you are."]
+- By Veo 3
 
 ---
 
-- **Attention Is All You Need**
+- [Imagem:]
+  - [Google Illuminate][LinkIlluminate]
+    - Transform your content into engaging AI-generated audio discussions
+      - You're already on the waitlist! We'll notify you when it's your turn to try illuminate.
 
-## 1.0.3 AM
+[LinkIlluminate]: https://illuminate.google.com/home?pli=1
 
-- Allsharements working!
+| Título                                          | Duração (min) | Fonte       | Transcrição     | Ação |
+| ----------------------------------------------- | ------------: | ----------- | --------------- | ---- |
+| Attention Is All You Need                       |             4 | View Source | View Transcript | Play |
+| Generative Agents: Interactive Simulacra of...  |             5 | View Source | View Transcript | Play |
+| Artificial Intelligence Index Report 2024       |             8 | View Source | View Transcript | Play |
+| Large Language Models Encode Clinical Knowledge |             3 | View Source | View Transcript | Play |
+| PaLM-E: An Embodied Multimodal...               |             4 | View Source | View Transcript | Play |
+| Position: Levels of AGI for Operationalizing... |             4 | View Source | View Transcript | Play |
 
 ---
 
+- [Vídeo: Ilustrando a ferramenta do Google Meet que automaticamente traduz as palavras que estão sendo faladas em tempo real.]
 - **By Google**
 
 ## Data Science with OpenAI Codex
+
+- [Imagem: Tela inicial do Codex]
+- By [Codex][LinkCodex]
+
+[LinkCodex]: https://openai.com/index/introducing-codex/
 
 ## Your software engineering agent
 
