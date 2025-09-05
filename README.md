@@ -4,18 +4,22 @@
 
 ## Conteúdo do Repositório
 
-| Data     | Aula | Título               | Slide               | Anotação               | Áudio               |
-| -------- | ---- | -------------------- | ------------------- | ---------------------- | ------------------- |
-| 20250812 | 01   | Introduction to LLMs | [Slide 01][Slide01] | [Notas 01][Anotação01] | [Áudio 01][Áudio01] |
-| 20250814 | 02   | Lifecycle of LLMs    | [Slide 02][Slide02] | [Notas 02][Anotação02] | [Áudio 02][Áudio02] |
-| 20250819 | --   | Sem Aula             |                     |                        |                     |
-| 20250821 | --   | DCC Week             |                     |                        |                     |
-| 20250826 | 03   | LLM Data Pipeline    | [Slide 03][Slide03] | [Notas 03][Anotação03] | [Áudio 03][Áudio03] |
-| 20250828 | 04   | Deep Sequence Models | [Slide 04][Slide04] | [Notas 04][Anotação04] | [Áudio 04][Áudio04] |
-| 20250902 | --   | Faringite            |                     |                        |                     |
-| 20250904 | 05   | XXX                  |                     |                        |                     |
+| Data     | Aula | Professor | Título               | Slide               | Anotação               | Áudio               |
+| -------- | ---- | --------- | -------------------- | ------------------- | ---------------------- | ------------------- |
+| 20250812 | 01   | Rodrygo   | Introduction to LLMs | [Slide 01][Slide01] | [Notas 01][Anotação01] | [Áudio 01][Áudio01] |
+| 20250814 | 02   | Rodrygo   | Lifecycle of LLMs    | [Slide 02][Slide02] | [Notas 02][Anotação02] | [Áudio 02][Áudio02] |
+| 20250819 | --   |           | Sem Aula             |                     |                        |                     |
+| 20250821 | --   |           | DCC Week             |                     |                        |                     |
+| 20250826 | 03   | Anísio    | LLM Data Pipeline    | [Slide 03][Slide03] | [Notas 03][Anotação03] | [Áudio 03][Áudio03] |
+| 20250828 | 04   | Anísio    | Deep Sequence Models | [Slide 04][Slide04] | [Notas 04][Anotação04] | [Áudio 04][Áudio04] |
+| 20250902 | --   |           | Faringite            |                     |                        |                     |
+| 20250904 | 05   | Rodrygo   | Attention            | [Slide 05][Slide05] | [Notas 05][Anotação05] | [Áudio 05][Áudio05] |
 
 <!-- Links -->
+
+[Slide05]: Files/Slides/05-attention.pdf
+[Anotação05]: Files/Anotações/05-attention.md
+[Áudio05]: Files/Áudios/2025-09-04_17.16.45-LLM-Aula_05.mp3
 
 <!-- Aula 04 -->
 
