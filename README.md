@@ -14,8 +14,17 @@
 | 20250828 | 04   | Anísio    | Deep Sequence Models | [Slide 04][Slide04] | [Notas 04][Anotação04] | [Áudio 04][Áudio04] |
 | 20250902 | --   |           | Faringite            |                     |                        |                     |
 | 20250904 | 05   | Rodrygo   | Attention            | [Slide 05][Slide05] | [Notas 05][Anotação05] | [Áudio 05][Áudio05] |
+| 20250909 | 06   | Rodrygo   | X                    | [Slide 06][Slide06] | [Notas 06][Anotação06] | [Áudio 06][Áudio06] |
 
 <!-- Links -->
+
+<!-- Aula 06 -->
+
+[Slide06]: Files/Slides/06-XXX.pdf
+[Anotação06]: Files/Anotações/06-XXX.md
+[Áudio06]: Files/Áudios/2025-09-11_17.06.26-LLM-Aula_06.mp3
+
+<!-- Aula 05 -->
 
 [Slide05]: Files/Slides/05-attention.pdf
 [Anotação05]: Files/Anotações/05-attention.md
