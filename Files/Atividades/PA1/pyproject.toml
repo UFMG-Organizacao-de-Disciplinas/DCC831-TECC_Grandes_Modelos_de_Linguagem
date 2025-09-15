@@ -1,0 +1,17 @@
+[project]
+name = "pa1"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "jupyterlab>=4.0",
+    "matplotlib>=3.7.1",
+    "numpy>=1.26,<2.1",
+    "pandas>=2.2.1",
+    "psutil>=5.9.5",
+    "tensorflow>=2.18.0",
+    "tiktoken>=0.5.1",
+    "torch>=2.3.0",
+    "tqdm>=4.66.1",
+]

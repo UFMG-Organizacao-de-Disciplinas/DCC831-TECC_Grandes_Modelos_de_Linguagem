@@ -12,6 +12,7 @@ Submeta duas versões do notebook `01x-setup.ipynb`, conforme descrito abaixo:
 
 1. Versão local (`01x-setup-local.ipynb`)
    - Siga o [tutorial de configuração local do ambiente Python][LinkTutorial].
+     - [MD][LinkTutorial_md]
    - Utilize os arquivos `requirements.txt` e `python_environment_check.py` fornecidos.
    - Execute o notebook localmente no **Jupyter Lab**.
    - Exporte e salve como `01x-setup-local.ipynb`.
@@ -35,7 +36,7 @@ Submeta duas versões do notebook `01x-setup.ipynb`, conforme descrito abaixo:
     - [Local][PA1_Local_req]
 
 [LinkTutorial]: https://docs.google.com/document/d/18bQ22WRcDvQWkH0AziOp8xO0VgjNMCPCleYNb4xfLTQ/edit?usp=sharing
-
+[LinkTutorial_md]: ./PA1/tutorial-en_US.md
 [PA1_Moodle]: https://virtual.ufmg.br/20252/pluginfile.php/466709/mod_assign/introattachment/0/01x-setup.ipynb?forcedownload=1
 [PA1_Local]: ./PA1/01x-setup.ipynb
 [PA1_Moodle_env]: https://virtual.ufmg.br/20252/pluginfile.php/466709/mod_assign/introattachment/0/python_environment_check.py?forcedownload=1
