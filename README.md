@@ -15,8 +15,22 @@
 | 20250902 | --   |           | Faringite            |                     |                        |                     |
 | 20250904 | 05   | Rodrygo   | Attention            | [Slide 05][Slide05] | [Notas 05][Anotação05] | [Áudio 05][Áudio05] |
 | 20250909 | 06   | Rodrygo   | GPT                  | [Slide 06][Slide06] | [Notas 06][Anotação06] | [Áudio 06][Áudio06] |
+| 20250916 | 07   | Anísio    | XXX                  | [Slide 07][Slide07] | [Notas 07][Anotação07] | [Áudio 07][Áudio07] |
+| 20250918 | 08   | Anísio    | XXX                  | [Slide 08][Slide08] | [Notas 08][Anotação08] | [Áudio 08][Áudio08] |
 
 <!-- Links -->
+
+<!-- Aula 08 -->
+
+[Slide08]: Files/Slides/08-XXX.pdf
+[Anotação08]: Files/Anotações/08-XXX.md
+[Áudio08]: Files/Áudios/2025-09-18_17.06.26-LLM-Aula_08.mp3
+
+<!-- Aula 07 -->
+
+[Slide07]: Files/Slides/07-XXX.pdf
+[Anotação07]: Files/Anotações/07-XXX.md
+[Áudio07]: Files/Áudios/2025-09-16_17.06.26-LLM-Aula_07.mp3
 
 <!-- Aula 06 -->
 
