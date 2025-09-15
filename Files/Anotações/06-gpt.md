@@ -1,4 +1,4 @@
-# Aula XX - Professor: Rodrygo/Anísio
+# Aula 06 - Professor: Rodrygo
 
 ## Conteúdo
 
