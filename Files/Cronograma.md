@@ -13,14 +13,14 @@
 |     06 | ter | 09/09 | GPT architecture                |             |
 |     -- | qui | 11/09 | No class                        |             |
 |     07 | ter | 16/09 | Pretraining                     | PA1, PA2    |
-|     08 | qui | 18/09 | Instruction tuning              | PA3, PA4    |
-|     09 | ter | 23/09 | Preference tuning               | PA5         |
-|     10 | qui | 25/09 | Reasoning                       | PA6         |
-| **11** | ter | 30/09 | **Exam #1**                     |             |
-|     12 | qui | 02/10 | TBD                             | PP          |
+|     08 | qui | 18/09 | Classification tuning           | PA3, PA4    |
+|     09 | ter | 23/09 | Instruction tuning              | PA5         |
+|     10 | qui | 25/09 | Preference tuning               | PA6         |
+|     11 | ter | 30/09 | No class                        |             |
+| **12** | qui | 02/10 | **Exam #1**                     | PA7, PP     |
 |     13 | ter | 07/10 | TBD                             |             |
 |     14 | qui | 09/10 | TBD                             |             |
-|     15 | ter | 14/10 | Project Check-In                |             |
+|     15 | ter | 14/10 | TBD                             |             |
 |     16 | qui | 16/10 | TBD                             |             |
 |     17 | ter | 21/10 | TBD                             |             |
 |     18 | qui | 23/10 | Seminars                        |             |
