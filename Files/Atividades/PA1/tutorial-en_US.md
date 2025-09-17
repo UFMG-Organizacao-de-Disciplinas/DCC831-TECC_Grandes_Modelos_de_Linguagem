@@ -51,8 +51,9 @@ or
 
 To begin a new project, download the provided `requirements.txt` file and run the following commands, assuming the file is in the same directory as your terminal session:
 
-`uv init --python 3.11`  
- `uv add -r requirements.txt`
+`uv init --python 3.11`
+
+`uv add -r requirements.txt`
 
 This will create a simple `pyproject.toml` file with initial configurations for your project and install all required packages from the `requirements.txt` file.
 
@@ -60,8 +61,9 @@ This will create a simple `pyproject.toml` file with initial configurations for 
 
 **Note:** If you have problems with the following commands above due to certain dependencies (for example, if you are using Windows), you can always fall back to regular pip:
 
-uv `add pip`  
- `uv run python -m pip install -U -r requirements.txt`
+uv `add pip`
+
+`uv run python -m pip install -U -r requirements.txt`
 
 ### 3. Run Python code
 
