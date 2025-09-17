@@ -25,13 +25,13 @@ Submeta duas versões do notebook `01x-setup.ipynb`, conforme descrito abaixo:
 ---
 
 - Arquivos:
-  - 01x-setup.ipynb 01x-setup.ipynb12 setembro 2025, 11:51 AM
+  - (12 setembro 2025, 11:51 AM) 01x-setup.ipynb
     - [Moodle][PA1_Moodle]
     - [Local][PA1_Local]
-  - python_environment_check.py python_environment_check.py12 setembro 2025, 11:51 AM
+  - (12 setembro 2025, 11:51 AM) python_environment_check.py
     - [Moodle][PA1_Moodle_env]
     - [Local][PA1_Local_env]
-  - requirements.txt requirements.txt12 setembro 2025, 11:51 AM
+  - (12 setembro 2025, 11:51 AM) requirements.txt
     - [Moodle][PA1_Moodle_req]
     - [Local][PA1_Local_req]
 
@@ -57,7 +57,7 @@ Baixe o notebook anexo e execute-o localmente ou no Google Colab. Complete todas
 ---
 
 - Arquivos:
-  - 02x-datapipeline.ipynb 02x-datapipeline.ipynb12 setembro 2025, 11:56 AM
+  - (12 setembro 2025, 11:56 AM) 02x-datapipeline.ipynb
     - [Moodle][PA2_Moodle]
     - [Local][PA2_Local]
 
@@ -75,7 +75,7 @@ Baixe o notebook anexo e execute-o localmente ou no Google Colab. Complete todas
 Baixe o notebook anexo e execute-o localmente ou no Google Colab. Complete todas as células marcadas como exercício. Após finalizar, salve o notebook com todas as respostas e envie o arquivo nesta tarefa.
 
 - Arquivos:
-  - 03x-attention.ipynb 03x-attention.ipynb12 setembro 2025, 11:57 AM
+  - (12 setembro 2025, 11:57 AM) 03x-attention.ipynb
     - [Moodle][PA3_Moodle]
     - [Local][PA3_Local]
 
@@ -93,11 +93,57 @@ Baixe o notebook anexo e execute-o localmente ou no Google Colab. Complete todas
 Baixe o notebook anexo e execute-o localmente ou no Google Colab. Complete todas as células marcadas como exercício. Após finalizar, salve o notebook com todas as respostas e envie o arquivo nesta tarefa.
 
 - Arquivos:
-  - 04x-gpt.ipynb 04x-gpt.ipynb12 setembro 2025, 11:58 AM
+  - (12 setembro 2025, 11:58 AM) 04x-gpt.ipynb
     - [Moodle][PA4_Moodle]
     - [Local][PA4_Local]
 
 [PA4_Moodle]: https://virtual.ufmg.br/20252/pluginfile.php/466721/mod_assign/introattachment/0/04x-gpt.ipynb?forcedownload=1
 [PA4_Local]: ./PA4/04x-gpt.ipynb
 
-## PA5
+## PA5 Pretraining (23/09 @ 23:59)
+
+**Aberto**: terça, 16 Set 2025, 18:40
+
+**Vencimento**: terça, 23 Set 2025, 23:59
+
+---
+
+Baixe o notebook anexo e execute-o localmente ou no Google Colab. **Complete todas as células marcadas como exercício.** Após finalizar, salve o notebook com todas as respostas e envie o arquivo nesta tarefa.
+
+- Arquivos:
+  - (12 setembro 2025, 12:03 PM) 05x-pretraining.ipynb
+    - [Moodle][PA5_Moodle_A]
+    - [Local][PA5_Local_A]
+  - (12 setembro 2025, 12:07 PM) The Time Machine - ch01 to ch05.txt
+    - [Moodle][PA5_Moodle_B]
+    - [Local][PA5_Local_B]
+  - (12 setembro 2025, 12:07 PM) The Time Machine - ch06.txt
+    - [Moodle][PA5_Moodle_C]
+    - [Local][PA5_Local_C]
+
+[PA5_Moodle_A]: https://virtual.ufmg.br/20252/pluginfile.php/466727/mod_assign/introattachment/0/05x-pretraining.ipynb?forcedownload=1
+[PA5_Local_A]: ./PA5/05x-pretraining.ipynb
+[PA5_Moodle_B]: https://virtual.ufmg.br/20252/pluginfile.php/466727/mod_assign/introattachment/0/The%20Time%20Machine%20-%20ch01%20to%20ch05.txt?forcedownload=1
+[PA5_Local_B]: <./PA5/The Time Machine - ch01 to ch05.txt>
+[PA5_Moodle_C]: https://virtual.ufmg.br/20252/pluginfile.php/466727/mod_assign/introattachment/0/The%20Time%20Machine%20-%20ch06.txt?forcedownload=1
+[PA5_Local_C]: <./PA5/The Time Machine - ch06.txt>
+
+## PA6 Classification Tuning (25/09 @ 23:59)
+
+**Abre:** quinta, 18 Set 2025, 18:40
+
+**Vencimento:** quinta, 25 Set 2025, 23:59
+
+---
+
+- Arquivos:
+
+## PA7 Instruction Tuning (30/09 @ 23:59)
+
+**Abre:** terça, 23 Set 2025, 18:40
+
+**Vencimento:** terça, 30 Set 2025, 23:59
+
+---
+
+- Arquivos:
