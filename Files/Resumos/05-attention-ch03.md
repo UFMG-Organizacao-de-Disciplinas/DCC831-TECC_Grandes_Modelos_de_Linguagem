@@ -14,7 +14,7 @@ O mecansimo de atenção nos transformers é uma técnica voltada a permitir que
 
 ## 3.3 Attending to different parts of the input with self-attention
 
-### 3.3.1 1A simple self-attention mechanism without trainable weights
+### 3.3.1 A simple self-attention mechanism without trainable weights
 
 Consideremos o seguinte:
 
@@ -119,7 +119,7 @@ print("Attention weights:", attn_weights_2_tmp)
 print("Sum:", attn_weights_2_tmp.sum())
 ```
 
-> Attention weights: tensor(\[0.1455, 0.2278, 0.2249, 0.1285, 0.1077, 0.1656\])
+> Attention weights: tensor(\[0.1455, 0.2278, 0.2249, 0.1285, 0.1077, 0.1656])
 
 Apesar desse método de normalização ser válido, o mais comum é usar a função softmax pois este método "é melhor em lidar com valores extremos e tem propriedades de gradientes mais desejáveis".
 
@@ -133,7 +133,7 @@ def softmax_naive(x):
 attn_weights_2_naive = softmax_naive(attn_scores_2)
 ```
 
-> Attention weights: tensor(\[0.1385, 0.2379, 0.2333, 0.1240, 0.1082, 0.1581\])
+> Attention weights: tensor(\[0.1385, 0.2379, 0.2333, 0.1240, 0.1082, 0.1581])
 
 Porém, é recomendado usar a implementação otimizada da biblioteca PyTorch:
 
@@ -141,31 +141,40 @@ Porém, é recomendado usar a implementação otimizada da biblioteca PyTorch:
 attn_weights_2 = torch.softmax(attn_scores_2, dim=0)
 ```
 
-> Attention weights: tensor(\[0.1385, 0.2379, 0.2333, 0.1240, 0.1082, 0.1581\])
+> Attention weights: tensor(\[0.1385, 0.2379, 0.2333, 0.1240, 0.1082, 0.1581])
 
 Agora que já calculamos os **Attention Weights** ($\alpha$), podemos calcular o vetor de contexto $z^{(i)}$ para a posição $i=2$ como uma soma ponderada dos vetores de entrada $x^{(j)}$:
 
 $$
-input \times Attention\ Weights = Context\ Vector
+Attention\ Weights \times input  = Context\ Vector
 $$
 
+Agora então iremos pegar os Attention Weights ($\alpha$) e multiplicá-los pelos vetores de entrada $x^{(j)}$ para obter o vetor de contexto $z^{(2)}$:
+
+> DÚDIVDA: Afinal, que operação é feita aqui matematicamente? Não consegui me acertar ao tentar posicionar as matrizes para fazer a multiplicação matricial padrão.
+
 $$
+\alpha \times X =
 \begin{bmatrix}
-  0.43 & 0.15 & 0.89 \\
-  0.55 & 0.87 & 0.66 \\
-  0.57 & 0.85 & 0.64 \\
-  0.22 & 0.58 & 0.33 \\
-  0.77 & 0.25 & 0.10 \\
-  0.05 & 0.80 & 0.55 \\
-\end{bmatrix} \times
-\
-\omega_{2j} =
-\begin{cases}
-  \omega_{21} = x^{1} \cdot q^{2} = 0.43*0.55 + 0.15*0.87 + 0.89*0.66 = 0.9544 \\
-  \omega_{22} = x^{2} \cdot q^{2} = 0.55*0.55 + 0.87*0.87 + 0.66*0.66 = 1.4950 \\
-  \omega_{23} = x^{3} \cdot q^{2} = 0.57*0.55 + 0.85*0.87 + 0.64*0.66 = 1.4754 \\
-  \omega_{24} = x^{4} \cdot q^{2} = 0.22*0.55 + 0.58*0.87 + 0.33*0.66 = 0.8434 \\
-  \omega_{25} = x^{5} \cdot q^{2} = 0.77*0.55 + 0.25*0.87 + 0.10*0.66 = 0.7070 \\
-  \omega_{26} = x^{6} \cdot q^{2} = 0.05*0.55 + 0.80*0.87 + 0.55*0.66 = 1.0865 \\
-\end{cases}
+  0.1385 \\
+  0.2379 \\
+  0.2333 \\
+  0.1240 \\
+  0.1082 \\
+  0.1581 \\
+\end{bmatrix}
+?
+\begin{bmatrix}
+  0.43 & 0.15 & 0.89 \\ % # (x^1) Your
+  0.55 & 0.87 & 0.66 \\ % # (x^2) journey
+  0.57 & 0.85 & 0.64 \\ % # (x^3) starts
+  0.22 & 0.58 & 0.33 \\ % # (x^4) with
+  0.77 & 0.25 & 0.10 \\ % # (x^5) one
+  0.05 & 0.80 & 0.55 \\ % # (x^6) step
+\end{bmatrix}\\
+\begin{bmatrix}
+  0.43
+\end{bmatrix}
 $$
+
+<!-- Eu gostaria de descrever matematicamente qual é o valor final de cada posição i, j do context vector mas vou deixar isso de lado por enquanto -->
