@@ -136,7 +136,15 @@ Baixe o notebook anexo e execute-o localmente ou no Google Colab. **Complete tod
 
 ---
 
+Baixe o notebook anexo e execute-o localmente ou no Google Colab. Complete todas as células marcadas como exercício. Após finalizar, salve o notebook com todas as respostas e envie o arquivo nesta tarefa.
+
 - Arquivos:
+  - 06x-classification.ipynb16 setembro 2025, 21:26 PM
+    - [Moodle][PA6_Moodle]
+    - [Local][PA6_Local]
+
+[PA6_Moodle]: https://virtual.ufmg.br/20252/pluginfile.php/474916/mod_assign/introattachment/0/06x-classification.ipynb?forcedownload=1
+[PA6_Local]: ./PA6/06x-classification.ipynb
 
 ## PA7 Instruction Tuning (30/09 @ 23:59)
 
