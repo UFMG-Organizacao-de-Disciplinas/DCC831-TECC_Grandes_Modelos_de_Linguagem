@@ -29,7 +29,7 @@
 
 [08Slide]: Files/Slides/08-classification.pdf
 [08Anotação]: Files/Anotações/08-classification.md
-[08Áudio]: Files/Áudios/2025-09-18_17.06.26-LLM-Aula_08.mp3
+[08Áudio]: Files/Áudios/2025-09-18_17.08.08-LLM-Aula_08.mp3
 [08Notebook]: Files/Slides/08-classification-ch06.ipynb
 
 <!-- Aula 07 -->
