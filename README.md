@@ -26,6 +26,14 @@
 <!-- Links -->
 
 
+<!-- Aula 10 -->
+
+[10Slide]: Files/Slides/10-Preference-Finetuning-LLMs.pdf
+[10Anotação]: Files/Anotações/10-Faltei.md
+
+<!-- [10Áudio]: Files/Áudios/2025-09-25_17.02.28-LLM-Aula_10.mp3 -->
+<!-- [10Notebook]: Files/Slides/10-Transformers-in-Practice-ch08.ipynb -->
+
 <!-- Aula 09 -->
 
 [09Slide]: Files/Slides/09-Instruction-Finetuning-LLMs.pdf
