@@ -71,6 +71,7 @@
 [05Anotação]: Files/Anotações/05-attention.md
 [05Áudio]: Files/Áudios/2025-09-04_17.16.45-LLM-Aula_05.mp3
 [05Notebook]: Files/Slides/05-attention-ch03.ipynb
+[05Resumo]: Files/Resumos/05-attention-ch03.md
 
 <!-- Aula 04 -->
 
