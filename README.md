@@ -25,6 +25,14 @@
 
 <!-- Links -->
 
+
+<!-- Aula 09 -->
+
+[09Slide]: Files/Slides/09-Instruction-Finetuning-LLMs.pdf
+[09Anotação]: Files/Anotações/09-finetuning.md
+[09Áudio]: Files/Áudios/2025-09-23_17.14.45-LLM-Aula_09.mp3
+[09Notebook]: Files/Slides/09-Instruction-Finetuning-LLMs-ch07.ipynb
+
 <!-- Aula 08 -->
 
 [08Slide]: Files/Slides/08-classification.pdf
