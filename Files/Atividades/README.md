@@ -154,4 +154,12 @@ Baixe o notebook anexo e execute-o localmente ou no Google Colab. Complete todas
 
 ---
 
+Baixe o notebook anexo e execute-o localmente ou no Google Colab. Complete todas as células marcadas como exercício. Após finalizar, salve o notebook com todas as respostas e envie o arquivo nesta tarefa.
+
 - Arquivos:
+  - 07x-instruction.ipynb 16 setembro 2025, 21:26 PM
+    - [Moodle][PA7_Moodle]
+    - [Local][PA7_Local]
+
+[PA7_Moodle]: https://virtual.ufmg.br/20252/pluginfile.php/466737/mod_assign/introattachment/0/07x-instruction.ipynb?forcedownload=1
+[PA7_Local]: ./PA7/07x-instruction.ipynb
