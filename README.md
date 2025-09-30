@@ -4,19 +4,24 @@
 
 ## Conteúdo do Repositório
 
-| Data     | Aula | Professor | Título               | Slide               | Anotação               | Áudio               | Notebook           |
-| -------- | ---- | --------- | -------------------- | ------------------- | ---------------------- | ------------------- | ------------------ |
-| 20250812 | 01   | Rodrygo   | Introduction to LLMs | [Slide 01][01Slide] | [Notas 01][01Anotação] | [Áudio 01][01Áudio] | Sem Notebook       |
-| 20250814 | 02   | Rodrygo   | Lifecycle of LLMs    | [Slide 02][02Slide] | [Notas 02][02Anotação] | [Áudio 02][02Áudio] | Sem Notebook       |
-| 20250819 | --   |           | Sem Aula             |                     |                        |                     |                    |
-| 20250821 | --   |           | DCC Week             |                     |                        |                     |                    |
-| 20250826 | 03   | Anísio    | LLM Data Pipeline    | [Slide 03][03Slide] | [Notas 03][03Anotação] | [Áudio 03][03Áudio] | [ch02][03Notebook] |
-| 20250828 | 04   | Anísio    | Deep Sequence Models | [Slide 04][04Slide] | [Notas 04][04Anotação] | [Áudio 04][04Áudio] | Sem Notebook       |
-| 20250902 | --   |           | Faringite            |                     |                        |                     |                    |
-| 20250904 | 05   | Rodrygo   | Attention            | [Slide 05][05Slide] | [Notas 05][05Anotação] | [Áudio 05][05Áudio] | [ch03][05Notebook] |
-| 20250909 | 06   | Rodrygo   | GPT                  | [Slide 06][06Slide] | [Notas 06][06Anotação] | [Áudio 06][06Áudio] | [ch04][06Notebook] |
-| 20250916 | 07   | Rodrygo   | Pretraining          | [Slide 07][07Slide] | [Notas 07][07Anotação] | [Áudio 07][07Áudio] | [ch05][07Notebook] |
-| 20250918 | 08   | Anísio    | XXX                  | [Slide 08][08Slide] | [Notas 08][08Anotação] | [Áudio 08][08Áudio] | [ch06][08Notebook] |
+| Data     | Aula | Professor | Título               | Slide               | Anotação               | Áudio               | Notebook           | Resumo                |
+| -------- | ---- | --------- | -------------------- | ------------------- | ---------------------- | ------------------- | ------------------ | --------------------- |
+| 20250812 | 01   | Rodrygo   | Introduction to LLMs | [Slide 01][01Slide] | [Notas 01][01Anotação] | [Áudio 01][01Áudio] | Sem Notebook       |                       |
+| 20250814 | 02   | Rodrygo   | Lifecycle of LLMs    | [Slide 02][02Slide] | [Notas 02][02Anotação] | [Áudio 02][02Áudio] | Sem Notebook       |                       |
+| 20250819 | --   |           | Sem Aula             |                     |                        |                     |                    |                       |
+| 20250821 | --   |           | DCC Week             |                     |                        |                     |                    |                       |
+| 20250826 | 03   | Anísio    | LLM Data Pipeline    | [Slide 03][03Slide] | [Notas 03][03Anotação] | [Áudio 03][03Áudio] | [ch02][03Notebook] |                       |
+| 20250828 | 04   | Anísio    | Deep Sequence Models | [Slide 04][04Slide] | [Notas 04][04Anotação] | [Áudio 04][04Áudio] | Sem Notebook       |                       |
+| 20250902 | --   |           | Faringite            |                     |                        |                     |                    |                       |
+| 20250904 | 05   | Rodrygo   | Attention            | [Slide 05][05Slide] | [Notas 05][05Anotação] | [Áudio 05][05Áudio] | [ch03][05Notebook] | [Resumo 05][05Resumo] |
+| 20250909 | 06   | Rodrygo   | GPT                  | [Slide 06][06Slide] | [Notas 06][06Anotação] | [Áudio 06][06Áudio] | [ch04][06Notebook] |                       |
+| 20250916 | 07   | Rodrygo   | Pretraining          | [Slide 07][07Slide] | [Notas 07][07Anotação] | [Áudio 07][07Áudio] | [ch05][07Notebook] |                       |
+| 20250918 | 08   | Anísio    | Classification       | [Slide 08][08Slide] | [Notas 08][08Anotação] | [Áudio 08][08Áudio] | [ch06][08Notebook] |                       |
+| 20250923 | 09   | Anísio    | Finetuning           | [Slide 09][09Slide] | [Notas 09][09Anotação] | [Áudio 09][09Áudio] | [ch07][09Notebook] |                       |
+| 20250925 | 10   | Anísio    | Faltei               | [Slide 10][10Slide] | [Notas 10][10Anotação] | Faltei              | Faltei             |                       |
+| 20250930 | --   | --        | Sem Aula             |                     |                        |                     |                    |                       |
+| 20251002 | --   | --        | Sem Aula             |                     |                        |                     |                    |                       |
+| 20251007 | --   | --        | Prova 1              |                     | [Prova 1][Prova1]      |                     |                    |                       |
 
 <!-- Links -->
 
