@@ -8,7 +8,7 @@
 2. **Team Members:** Full names and student IDs
 3. **Abstract/Executive Summary:** 150-250 words; problem, solution, objectives, expected outcomes.
 4. **Introduction and Motivation:** Background, problem statement, significance, motivation.
-5. **Project Objectives:** SMART objectives.
+5. **Project Objectives:** SMART objectives (clear, specific, measurable, achievable, relevant, and time-bound).
 6. **Proposed Methodology:** Data collection/preparation, model/architecture selection, implementation details, experimental design, evaluation plan.
 7. **Expected Outcomes and Contributions:** Anticipated results, contributions to LLM field, potential applications.
 8. **Timeline and Milestones:** 1. Literature Review; 2. Data Preparation; 3. Model Implementation; 4. Experimentation; 5. Report Draft; 6. Final Submission.
