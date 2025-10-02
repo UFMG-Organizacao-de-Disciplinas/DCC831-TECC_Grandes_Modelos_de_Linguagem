@@ -7,3 +7,5 @@
 *.out
 *.log
 *.gz
+*.blg
+*.bbl
