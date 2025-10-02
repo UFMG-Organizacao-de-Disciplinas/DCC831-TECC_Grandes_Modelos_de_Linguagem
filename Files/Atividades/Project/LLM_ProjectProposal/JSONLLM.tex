@@ -18,16 +18,48 @@
 
 \section{Introdução e Motivação} % Introduction and Motivation: Background, problem statement, significance, motivation.
 
+A extração e estruturação de atributos de produtos em e-commerce representa um desafio crucial devido à diversidade e complexidade das descrições de produtos não estruturadas. Muitos produtos possuem múltiplos atributos essenciais, como tamanho, cor e material, que são fundamentais para decisões informadas de compra. Métodos tradicionais de extração de informações frequentemente enfrentam limitações em precisão e adaptabilidade a descrições variadas. Recentemente, o uso de Grandes Modelos de Linguagem (LLMs) tem demonstrado potencial significativo para superar esses desafios, permitindo uma extração mais precisa e estruturada em formatos como JSON, facilitando a integração com sistemas de e-commerce existentes \citet{ExtractGPT2023, PAE2024}. Esta motivação conduz à proposta do sistema JSONLLM, que visa explorar as capacidades avançadas dos LLMs para melhorar a qualidade da extração e apresentação de atributos de produtos.
+
 \section{Objetivos} % Project Objectives: SMART objectives (clear, specific, measurable, achievable, relevant, and time-bound).
+
+Os principais objetivos deste projeto são: (1) desenvolver um pipeline que integre LLMs para a extração automática e precisa de atributos de produtos a partir de descrições não estruturadas; (2) criar um esquema padronizado em formato JSON para representar os atributos extraídos de forma clara e interoperável; (3) avaliar a precisão e eficiência do modelo proposto em comparação com métodos tradicionais de extração, mediante experimentos controlados; (4) garantir a escalabilidade e aplicabilidade do sistema em ambientes reais de e-commerce, com potencial para integração fácil \citet{ExtractGPT2023, SelfRefinementLLM2024}.
 
 \section{Metodologia} % Proposed Methodology: Data collection/preparation, model/architecture selection, implementation details, experimental design, evaluation plan.
 
+A metodologia envolve a coleta e preparação de um conjunto de dados representativo de descrições de produtos do e-commerce, apoiada por bases públicas como o dataset MAVE, que possui milhões de anotações de pares atributo-valor \citet{MAVE2024}. Será adotada uma arquitetura baseada em LLMs, com experimentações utilizando modelos como GPT-4 e variantes open-source, explorando técnicas de few-shot e zero-shot learning para extração estruturada. O pipeline incluirá a padronização dos atributos extraídos em JSON, com validações automatizadas e refinamento iterativo via técnicas de autoaperfeiçoamento (self-refinement) para aumentar a precisão \citet{PAE2024, SelfRefinementLLM2024}. O desempenho do sistema será avaliado por métricas de precisão, recall e f1-score, comparado a abordagens baseadas em aprendizado de máquina tradicional e ferramentas existentes.
+
 \section{Resultados Esperados e Contribuições} % Expected Outcomes and Contributions: Anticipated results, contributions to LLM field, potential applications.
+
+Espera-se que o sistema JSONLLM melhore significativamente a precisão da extração de atributos de produtos, permitindo a geração de catálogos detalhados e padronizados, enriquecendo a experiência do usuário em plataformas de e-commerce. A contribuição do projeto inclui o desenvolvimento de um pipeline LLM inovador para extração de atributos, o avanço no uso de JSON como padrão para dados estruturados em contexto comercial e a validação empírica da superioridade do método em relação a abordagens tradicionais \citet{ExtractGPT2023, GenerativeFramework2024}. Além disso, o projeto pode ser aplicado em múltiplos domínios de comércio eletrônico, potencializando a interoperabilidade entre sistemas diversos.
+
 
 \section{Cronograma} % Timeline and Milestones: 1. Literature Review; 2. Data Preparation; 3. Model Implementation; 4. Experimentation; 5. Report Draft; 6. Final Submission.
 
-\section{Referências} % References: Cite relevant literature with consistent formatting.
+\begin{table} \centering
+    \caption{Cronograma do Projeto} \label{tab:cronograma}
+    \begin{tabular}{cll}
+        \toprule
+        \textbf{Mês} & \textbf{Atividade} & \textbf{Entregável} \\
+        \midrule
+        1-2 & Revisão Bibliográfica & Relatório de Revisão \\
+        3-4 & Coleta e Preparação de Dados & Dataset Preparado \\
+        5-6 & Implementação do Pipeline LLM & Código do Pipeline \\
+        7-8 & Experimentação e Avaliação & Resultados dos Experimentos \\
+        9   & Redação do Relatório Preliminar & Relatório Preliminar \\
+        10  & Ajustes Finais e Submissão & Projeto Completo \\
+        \bottomrule
+    \end{tabular}
+\end{table}
 
 \section{Desafios e Estratégias de Mitigação} % Potential Challenges and Mitigation Strategies: Potential challenges and mitigation strategies.
+
+% Melissa, isso daqui deveria ser apêndice?
+
+Entre os principais desafios destacam-se: a variabilidade e ambiguidade nas descrições dos produtos, que dificultam a extração consistente de atributos; a necessidade de adaptação do modelo a múltiplos domínios de produto; e a escalabilidade do pipeline para grandes volumes de dados. Para mitigar esses desafios, serão aplicadas estratégias de refinamento iterativo para corrigir erros, adoção de esquemas JSON flexíveis e extensíveis, e uso de conjuntos de dados amplos e diversificados para o treinamento e validação. Além disso, a comparação contínua com métodos tradicionais assegurará a robustez da solução proposta \citet{SelfRefinementLLM2024, GenerativeFramework2024}.
+
+% \section{Referências} % References: Cite relevant literature with consistent formatting.
+
+\bibliographystyle{apalike}
+\bibliography{referencias}
 
 \end{document}
