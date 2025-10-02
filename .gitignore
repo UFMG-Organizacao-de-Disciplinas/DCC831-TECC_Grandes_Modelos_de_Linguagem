@@ -1,3 +1,9 @@
 .vscode/settings.json
 *.pth
 *.data-00000-of-00001
+*.aux
+*.fdb_latexmk
+*.fls
+*.out
+*.log
+*.gz
