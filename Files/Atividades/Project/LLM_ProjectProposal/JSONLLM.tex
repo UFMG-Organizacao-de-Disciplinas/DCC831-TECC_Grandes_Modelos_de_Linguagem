@@ -5,18 +5,17 @@
 \maketitle
 
 \begin{abstract} % 150-250 words; problem, solution, objectives, expected outcomes.
-    \textbf{COMPLETAMENTE TEMPORÁRIO}:
     % Problem
-    Muitos produtos de e-commerce possuem múltiplos atributos (ex.: tamanho, cor, material) que são essenciais para que os clientes tomem decisões de compra informadas. Entretanto, extrair e estruturar essas informações a partir de descrições de produtos não estruturadas é uma tarefa desafiadora.
+    Muitos produtos de e-commerce possuem múltiplos atributos - como tamanho, cor e material - que são essenciais para auxiliar os clientes em tomadas de decisões de compra informadas. No entanto, a estração e a organização dessas informações a partir de descrições textuais de produtos não estruturadas é uma tarefa desafiadora.
     % Solution
-    Nós propomos o JSONLLM, uma nova abordagem que aproveita os grandes modelos de linguagem (LLMs) para extrair e estruturar atributos de produtos em formato JSON. Ao utilizar as avançadas capacidades de compreensão de linguagem natural dos Grandes Modelos de Linguagem, nosso método visa identificar e categorizar com precisão os atributos dos produtos a partir de descrições diversas e complexas.
+    Neste trabalho, propomos o JSONLLM, uma nova abordagem que explora o potencial dos grandes modelos de linguagem (LLMs) para identificar e estruturar atributos de produtos em formato JSON. Nosso método utiliza as capacidades avançadas de compreensão semântica dos LLMs para reconhecer e categorizar com precisão informações provenientes de descrições diversas e complexas.
     % Objectives
-    Os objetivos principais deste projeto incluem: (1) desenvolver um pipeline que integra LLMs para a extração de atributos de produtos; (2) criar um esquema padronizado para representar os atributos extraídos; (3) avaliar a precisão e eficiência do modelo proposto em comparação com métodos tradicionais de extração de informações.
+    Os objetivos principais deste projeto incluem: (1) desenvolver um pipeline que integra LLMs para a extração de atributos de produtos; (2) definir um esquema padronizado para a representação dos atributos extraídos; e (3) avaliar a precisão e eficiência do modelo proposto em comparação a técnicas tradicionais de extração de informações.
     % Expected outcomes
-    Esperamos que este sistema melhore significativamente a precisão da extração de atributos de produtos, facilitando a criação de catálogos de produtos mais ricos e detalhados. Além disso, a estruturação em JSON permitirá uma integração mais fácil com sistemas de e-commerce existentes, melhorando a experiência do usuário final.
+    Espera-se que o sistema resultante melhore significativamente a precisão da extração de atributos de produtos, facilitando a criação de catálogos de produtos mais ricos e detalhados. Vale ressaltar que a estruturação em JSON facilita a integração com sistemas de e-commerce existentes, melhorando a experiência do usuário final.
 \end{abstract}
 
-\section{Introdução e Motivação} % Introduction and Motivation: Background, problem statement, significance, motivation.
+\section{Introdução} % Introduction and Motivation: Background, problem statement, significance, motivation.
 
 A extração e estruturação de atributos de produtos em e-commerce representa um desafio crucial devido à diversidade e complexidade das descrições de produtos não estruturadas. Muitos produtos possuem múltiplos atributos essenciais, como tamanho, cor e material, que são fundamentais para decisões informadas de compra. Métodos tradicionais de extração de informações frequentemente enfrentam limitações em precisão e adaptabilidade a descrições variadas. Recentemente, o uso de Grandes Modelos de Linguagem (LLMs) tem demonstrado potencial significativo para superar esses desafios, permitindo uma extração mais precisa e estruturada em formatos como JSON, facilitando a integração com sistemas de e-commerce existentes \citet{ExtractGPT2023, PAE2024}. Esta motivação conduz à proposta do sistema JSONLLM, que visa explorar as capacidades avançadas dos LLMs para melhorar a qualidade da extração e apresentação de atributos de produtos.
 
@@ -32,30 +31,33 @@ A metodologia envolve a coleta e preparação de um conjunto de dados representa
 
 Espera-se que o sistema JSONLLM melhore significativamente a precisão da extração de atributos de produtos, permitindo a geração de catálogos detalhados e padronizados, enriquecendo a experiência do usuário em plataformas de e-commerce. A contribuição do projeto inclui o desenvolvimento de um pipeline LLM inovador para extração de atributos, o avanço no uso de JSON como padrão para dados estruturados em contexto comercial e a validação empírica da superioridade do método em relação a abordagens tradicionais \citet{ExtractGPT2023, GenerativeFramework2024}. Além disso, o projeto pode ser aplicado em múltiplos domínios de comércio eletrônico, potencializando a interoperabilidade entre sistemas diversos.
 
-
-\section{Cronograma} % Timeline and Milestones: 1. Literature Review; 2. Data Preparation; 3. Model Implementation; 4. Experimentation; 5. Report Draft; 6. Final Submission.
-
-\begin{table} \centering
-    \caption{Cronograma do Projeto} \label{tab:cronograma}
-    \begin{tabular}{cll}
-        \toprule
-        \textbf{Mês} & \textbf{Atividade} & \textbf{Entregável} \\
-        \midrule
-        1-2 & Revisão Bibliográfica & Relatório de Revisão \\
-        3-4 & Coleta e Preparação de Dados & Dataset Preparado \\
-        5-6 & Implementação do Pipeline LLM & Código do Pipeline \\
-        7-8 & Experimentação e Avaliação & Resultados dos Experimentos \\
-        9   & Redação do Relatório Preliminar & Relatório Preliminar \\
-        10  & Ajustes Finais e Submissão & Projeto Completo \\
-        \bottomrule
-    \end{tabular}
-\end{table}
-
 \section{Desafios e Estratégias de Mitigação} % Potential Challenges and Mitigation Strategies: Potential challenges and mitigation strategies.
 
 % Melissa, isso daqui deveria ser apêndice?
 
 Entre os principais desafios destacam-se: a variabilidade e ambiguidade nas descrições dos produtos, que dificultam a extração consistente de atributos; a necessidade de adaptação do modelo a múltiplos domínios de produto; e a escalabilidade do pipeline para grandes volumes de dados. Para mitigar esses desafios, serão aplicadas estratégias de refinamento iterativo para corrigir erros, adoção de esquemas JSON flexíveis e extensíveis, e uso de conjuntos de dados amplos e diversificados para o treinamento e validação. Além disso, a comparação contínua com métodos tradicionais assegurará a robustez da solução proposta \citet{SelfRefinementLLM2024, GenerativeFramework2024}.
+
+\newpage
+
+\section{Cronograma} % Timeline and Milestones: 1. Literature Review; 2. Data Preparation; 3. Model Implementation; 4. Experimentation; 5. Report Draft; 6. Final Submission.
+
+\begin{table}[htbp] \centering
+    \caption{Cronograma do Projeto} \label{tab:cronograma}
+    \begin{tabular}{cl}
+        \toprule
+        \textbf{\textit{Deadline}} & \textbf{Atividade} \\
+        \midrule
+        02/10 & Proposta do projeto                 \\
+        09/10 & Revisão de literatura               \\
+        13/10 & Preparação dos dados                \\
+        14/10 & Mid-Project Check-in (Report Draft) \\
+        21/10 & Implementação do modelo             \\
+        28/10 & Experimentos e avaliações           \\
+        18/11 & Submissão Final                     \\
+        25/11 & Apresentações                       \\
+        \bottomrule
+    \end{tabular}
+\end{table}
 
 % \section{Referências} % References: Cite relevant literature with consistent formatting.
 
