@@ -237,22 +237,101 @@ JV: `all_context_vecs_2 = torch.softmax(inputs@inputs.T, dim=-1) @ inputs`
 
 ## 3.4 Implementing self-attention with trainable weights
 
+O _Self-Attention_ implementado nos modelos LLM (como o GPT) --- conhecido tecnicamente como _Scaled Dot-Product Attention_ --- é uma versão aprimorada do mecanismo simples por introduzir **pesos treináveis**.
+
+A inclusão de matrizes de pesos permite que o modelo aprenda as transformações ideais para os dados de entrada, sendo **crucial** para que o módulo de atenção possa produzir vetores de contexto de alta qualidade e relevância para a tarefa de predição.
+
 ### 3.4.1 Computing the attention weights step by step
+
+A implementação do _self-attention_ com pesos treináveis estende o modelo simples com as seguintes etapas:
+
+1. **Projeção em Q, K e V (Introdução dos Pesos):** Os _Input Embeddings_ de entrada ($x^{(i)}$) são multiplicados por três matrizes de pesos separadas e treináveis ($W_q$, $W_k$ e $W_v$) para criar os vetores de Query ($q$), Key ($k$) e Value ($v$):
+   - Query: $q^{(i)} = x^{(i)} W_q$
+   - Key: $k^{(i)} = x^{(i)} W_k$
+   - Value: $v^{(i)} = x^{(i)} W_v$
+2. **Cálculo dos Scores de Atenção:** Os _scores_ não normalizados são calculados pelo produto escalar entre o vetor **Query** e todos os vetores **Key** (exemplo no código: `query_2 @ keys.T`).
+3. **Escala e Normalização:** Antes de aplicar o Softmax, os _scores_ de atenção são **escalados** (divididos) pela raiz quadrada da dimensão do vetor Key ($\sqrt{d_k}$). Esta etapa é vital para evitar que o produto escalar resulte em valores muito grandes, o que poderia levar a gradientes muito pequenos no Softmax (problema de estabilidade). A normalização final usa a função Softmax (exemplo no código: `torch.softmax(attn_scores_2 / d_k**0.5, dim=-1)`).
+4. **Cálculo do Vetor de Contexto:** O vetor de contexto é calculado pela soma ponderada dos vetores **Value** ($v$) utilizando os pesos de atenção normalizados (exemplo no código: `context_vec_2 = attn_weights_2 @ values`).
 
 ### 3.4.2 Implementing a compact SelfAttention class
 
+Para encapsular e otimizar todo o fluxo, o mecanismo é implementado como uma classe PyTorch (`nn.Module`), como a `SelfAttention_v1` ou `SelfAttention_v2`.
+
+- **`SelfAttention_v1`:** Utiliza `nn.Parameter(torch.rand(...))` para inicializar manualmente os pesos $W_q$, $W_k$ e $W_v$.
+- **`SelfAttention_v2`:** Utiliza camadas `torch.nn.Linear` (exemplo: `self.W_query = nn.Linear(d_in, d_out, bias=qkv_bias)`) para as projeções QKV. O uso de `nn.Linear` é recomendado pois emprega um esquema de inicialização de pesos superior, resultando em um treinamento de modelo mais estável.
+- **Método `forward`:** Este método realiza as projeções QKV, o cálculo dos scores escalados, a normalização via Softmax e a multiplicação pelos valores para produzir o vetor de contexto.
+  - `attn_weights = torch.softmax(attn_scores / keys.shape[-1]**0.5, dim=-1)`
+  - `context_vec = attn_weights @ values`
+
 ## 3.5 Hiding future words with causal attention
+
+O **Atenção Causal** (_Causal Attention_) é um mecanismo essencial para modelos Decoder-Only, como o GPT, que são treinados para a tarefa de **Previsão da Próxima Palavra** (geração sequencial). A finalidade é garantir que a predição em uma determinada posição da sequência dependa **apenas dos _tokens_ anteriores**, impedindo que o modelo "veja" e, consequentemente, trapaceie com a resposta que está à frente.
 
 ### 3.5.1 Applying a causal attention mask
 
+Para implementar a restrição causal, é aplicada uma **máscara triangular**.
+
+1. **Criação da Máscara:** Uma máscara triangular superior é criada utilizando a função `torch.triu`. O resultado é uma matriz onde os valores **acima da diagonal principal** são 1 e os valores na diagonal e abaixo dela são 0.
+2. **Mecanismo de Aplicação (Otimizado):** Em vez de aplicar a máscara por multiplicação (o que exigiria re-normalização após o Softmax), a abordagem eficiente é mascarar os **scores de atenção não normalizados** (o $\Omega$) com **infinito negativo** ($\mathbf{-\infty}$).
+   - **Exemplo em código:** `attn_scores.masked_fill_(mask.bool(), -torch.inf)`.
+3. **Efeito no Softmax:** Como $e^{-\infty}$ é essencialmente zero, quando a função Softmax é aplicada aos scores mascarados, os _tokens_ futuros recebem um peso de atenção zero, e os pesos restantes se normalizam corretamente para 1 automaticamente.
+
 ### 3.5.2 Masking additional attention weights with dropout
+
+Além da máscara causal, é aplicada a técnica de **Dropout** para prevenir o **overfitting** (sobreajuste) durante o treinamento.
+
+- **Mecanismo:** O Dropout mascara **aleatoriamente** alguns pesos de atenção, definindo-os como zero.
+- **Local de Aplicação:** O Dropout é geralmente aplicado **após** o cálculo dos pesos de atenção pelo Softmax.
+- **Escalamento:** Os valores de peso que não são zerados são **escalados** pelo fator $1 / (1 - \text{dropout\_rate})$ para manter a soma total dos pesos esperada.
 
 ### 3.5.3 Implementing a compact causal self-attention class
 
+As lógicas acima são combinadas na classe `CausalAttention`, que representa o módulo de atenção de cabeça única que respeita o fluxo de geração sequencial do GPT.
+
+- **Suporte a Batches:** A classe é projetada para processar múltiplos exemplos em paralelo (dimensão $b$ de _batch size_).
+- **Componentes:** Inclui as projeções QKV (`self.W_query`, `self.W_key`, `self.W_value`) e o módulo de Dropout (`self.dropout`).
+- **Máscara de Buffer:** A máscara causal é registrada como um _buffer_ (`self.register_buffer('mask', ...)`). Isso significa que ela faz parte do estado do modelo (é salva e carregada), mas **não é um parâmetro treinável** (os seus valores não são ajustados durante o treinamento).
+- **Fluxo do `forward`:** A implementação do `forward` aplica os passos em ordem: Projeção QKV $\rightarrow$ Cálculo dos Scores $\rightarrow$ Aplicação da Máscara Causal (com $-\infty$) $\rightarrow$ Softmax (Normalização e Escala) $\rightarrow$ Dropout $\rightarrow$ Multiplicação pelo _Value_ para o vetor de contexto.
+
 ## 3.6 Extending single-head attention to multi-head attention
+
+A **Atenção Multi-Cabeças** (_Multi-Head Attention - MHA_) é o módulo de atenção completo utilizado nas arquiteturas Transformer, como o GPT. Ele estende o mecanismo de _Self-Attention_ de cabeça única (implementado em 3.5) ao executar o mecanismo de atenção múltiplas vezes em paralelo.
+
+- **Propósito:** Permite que o modelo se concentre em **diferentes tipos de relações de contexto** simultaneamente. Por exemplo, uma "cabeça" pode focar em relações sintáticas (gramática), enquanto outra foca em relações semânticas (significado), enriquecendo o vetor de contexto.
+- **Resultados:** O uso de múltiplas cabeças permite ao modelo capturar informações de diferentes subespaços de representação em diferentes posições.
 
 ### 3.6.1 Stacking multiple single-head attention layers
 
+Conceitualmente, a forma mais simples de criar a MHA é **empilhar múltiplas instâncias** do módulo de atenção de cabeça única (como a classe `CausalAttention` de 3.5).
+
+1. **Heads Independentes:** Cada "cabeça" opera de forma independente, com seu próprio conjunto de matrizes de pesos treináveis ($W_q$, $W_k$, $W_v$).
+2. **Cálculo em Paralelo:** Todas as cabeças processam o mesmo _Input Embedding_ e produzem um vetor de contexto individual.
+3. **Combinação (Concatenação):** Os vetores de contexto resultantes de todas as cabeças são então **concatenados** ao longo da última dimensão (`dim=-1`) para formar a saída do MHA (exemplo no código: `torch.cat([head(x) for head in self.heads], dim=-1)` em `MultiHeadAttentionWrapper`).
+
 ### 3.6.2 Implementing multi-head attention with weight splits
 
-# Summary and takeaways
+Embora a abordagem de empilhamento (3.6.1) seja funcional, uma implementação mais eficiente (e padrão) utiliza **multiplicações de matrizes em lote (_batched matrix multiplications_)**.
+
+1. **Matrizes de Pesos Únicas:** Em vez de $N$ matrizes pequenas para cada tipo de vetor (Q, K, V), são criadas **três matrizes de pesos grandes** (ex: `self.W_query`). A dimensão de saída dessas matrizes (`d_out`) é igual ao total combinado das dimensões de todas as cabeças (`num_heads * head_dim`).
+2. **Projeção e Reorganização:** Os _Inputs_ são projetados nas matrizes grandes e, em seguida, os resultados (os tensores Q, K e V) são **remodelados** (usando `.view()` e `.transpose()`) para incluir uma dimensão explícita para as "cabeças" (`num_heads`). Isso simula a divisão do trabalho.
+3. **Cálculo Otimizado:** O cálculo dos _scores_ de atenção (`attn_scores = queries @ keys.transpose(2, 3)`) agora opera em **bateladas**, aplicando a multiplicação matricial QK a todas as cabeças simultaneamente, garantindo alta eficiência de hardware.
+4. **Projeção Final:** Após a combinação dos vetores de contexto de todas as cabeças, uma **camada linear de projeção final** (`self.out_proj`) é aplicada, retornando o tensor ao formato esperado para a próxima camada do Transformer.
+
+## Summary and takeaways
+
+O Capítulo 3 abordou o mecanismo de atenção como o componente que transformou a arquitetura de modelos de linguagem, culminando na criação do **Mecanismo de Atenção Multi-Cabeças (MHA)** que impulsiona modelos como o GPT.
+
+### Conceitos Fundamentais
+
+- **Vetor de Contexto Aprimorado:** O mecanismo de atenção transforma os elementos de entrada (_embeddings_) em representações vetoriais de contexto aprimoradas, que incorporam informações sobre todas as entradas da sequência.
+- **Self-Attention (Auto-Atenção):** É a base do mecanismo, calculando a representação do vetor de contexto como uma soma ponderada sobre as entradas.
+- **Pesos Treináveis (Q, K, V):** Nos LLMs (também chamados de _Scaled-Dot Product Attention_), matrizes de pesos treináveis são introduzidas para calcular as transformações intermediárias das entradas: **Queries (Q)**, **Keys (K)** e **Values (V)**.
+- **Eficiência Computacional:** Embora um mecanismo básico possa ser feito por produtos escalares (_dot products_), a forma mais eficiente e compacta de implementação em _hardware_ moderno utiliza **multiplicações de matrizes em lote**.
+
+### Mecanismos Cruciais para o GPT (Decoder-Only)
+
+- **Atenção Causal (_Causal Attention_):** É adicionada uma **máscara causal** para impedir que a LLM acesse _tokens_ futuros. Isso é vital, pois a LLM gera texto sequencialmente (da esquerda para a direita) e não pode "trapacear" vendo a resposta antecipadamente.
+- **Dropout:** Um **máscara de _dropout_** é adicionada (geralmente após o cálculo dos pesos de atenção) para mascarar aleatoriamente alguns pesos, o que é uma técnica essencial para **reduzir o _overfitting_** durante o treinamento dos LLMs.
+- **Multi-Head Attention (MHA):** O módulo final é composto por múltiplas instâncias de atenção causal, permitindo que o modelo aprenda diferentes tipos de relações de contexto em paralelo. Pode ser criado empilhando módulos de atenção de cabeça única ou, de forma mais eficiente, por meio de multiplicações de matrizes em lote com divisão implícita dos pesos.
+
+Com a implementação dos _Input Embeddings_ (Capítulo 2) e o **Mecanismo de Atenção** (Capítulo 3), agora você tem todos os blocos de construção para montar a arquitetura completa do GPT no próximo capítulo.
