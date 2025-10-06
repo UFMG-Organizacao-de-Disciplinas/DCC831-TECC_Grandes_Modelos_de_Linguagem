@@ -19,7 +19,7 @@ O Mecanismo de Atenção surgiu como uma solução para as limitações das Rede
 
 Com o mecanismo de atenção, o modelo pode aprender a focar em partes específicas da entrada para gerar a saída, o que implica em certas partes terem maior nível de relevância que outras.
 
-O mecansimo de atenção nos transformers é uma técnica voltada a permitir que cada posição da sequência de entrada consiga definir quâo relevante são cada uma das outras posições na sequência.
+O mecanismo de atenção nos transformers é uma técnica voltada a permitir que cada posição da sequência de entrada consiga definir quão relevante é cada uma das outras posições na sequência.
 
 ---
 
