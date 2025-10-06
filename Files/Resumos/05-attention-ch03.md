@@ -153,6 +153,8 @@ print(attn_scores_2)
 
 Agora normalizaremos os **Attention Scores** ($\omega$) para obter os **Attention Weights** ($\alpha$). Uma visualização interessante é que, assim que esses pesos passam a ser normalizados, eles podem ser interpretados como uma distribuição de probabilidade sobre as posições da sequência de entrada.
 
+Obs.: Não garanto essa informação. Apesar de somarem a 1, caso haja valor negativo não sei se ainda assim podem ser interpretados como uma distribuição de probabilidade.
+
 ```python
 attn_weights_2_tmp = attn_scores_2 / attn_scores_2.sum()
 
@@ -230,6 +232,8 @@ Para otimizar o cálculo de todos os vetores de contexto simultaneamente (e não
 - **Cálculo dos Vetores de Contexto (Matriz de Contexto):** A matriz final de vetores de contexto ($Z$) é calculada multiplicando a matriz de Pesos de Atenção (normalizada) pela matriz de entrada original ($Attention\ Weights \times X$).
 
 O uso da multiplicação matricial torna o processo muito mais **compacto e eficiente** para implementação em _hardware_ moderno, substituindo _loops_ aninhados por operações de matrizes.
+
+JV: `all_context_vecs_2 = torch.softmax(inputs@inputs.T, dim=-1) @ inputs`
 
 ## 3.4 Implementing self-attention with trainable weights
 
