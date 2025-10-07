@@ -44,7 +44,31 @@ Após realizar o treino, para que não se perca o esforço computacional, é uma
 
 Apesar disso, o pré-treinamento de uma LLM em um grande _corpus_ é custoso em termos de tempo e recursos, é comum a prática de carregar **pesos pré-treinados abertamente disponíveis** (como os da OpenAI). Isso fornece um ponto de partida sólido para as fases subsequentes de _fine-tuning_.
 
-## Resumo do Capítulo 6 -
+## Resumo do Capítulo 6 - Finetuning for Text Classification
+
+Como treinar um modelo do zero é dispendioso, e retreinar um modelo grande pode ser inviável, o fine-tuning de LLMs pré-treinados é uma abordagem prática e eficiente. Ele geralmente resulta em duas categorias de modelos: os voltados a instrução e os voltados a classificação.
+
+O primeiro é treinado para seguir instruções em linguagem natural, tornando-o versátil para várias tarefas, e para isso, precisa de um grande conjunto de dados e poder computacional. Já o segundo é especializado em categorizar dados em classes predefinidas, como "spam" ou "not spam", exigindo menos dados e recursos computacionais, mas sendo limitado às classes vistas durante o treinamento.
+
+Definimos qual classificação desejamos fazer, e com isso escolhe-se um dataset adequado. No exemplo dado, foi usado um dataset que classifica mensagens de texto como "spam" ou "not spam" ("ham"). Primeiro as categorias precisam ser balanceadas, seja por undersampling (removendo itens das classes maiores) ou oversampling (duplicando os itens das classes menores). Os rótulos então são convertidos em valores inteiros (0 e 1), e o dataset é dividido em conjuntos de treino, validação e teste.
+
+Os dataloaders criam os batches onde cada um de seus exemplos de treino devem ter a mesma quantidade de tokens. Para isso, é necessário definir um tamanho máximo (max_length) e então aplicar padding (com o token `<|endoftext|>` que tem ID 50256) nas sequências menores que esse tamanho, ou truncar as sequências maiores. A tokenização é feita com o tiktoken usando o BPE. Lembrando que os batches são compostos por pares (input, target), onde o input é a sequência de tokens da mensagem a ser classificada e o target é o rótulo da classe (0 ou 1).
+
+Como explicado no capítulo anterior, para evitar retrabalho e gasto desnecessário de recursos, é comum carregar pesos pré-treinados abertamente disponíveis. Assim, o modelo GPT-like é inicializado com as mesmas configurações do pré-treinamento e os pesos são carregados. Para garantir que os pesos foram carregados corretamente, uma verificação simples de geração de texto é feita. Essa verificação falha, o que comprova a necessidade de fine-tuning, já que o modelo não foi ajustado para seguir instruções ou classificar textos.
+
+Para adaptar o modelo pré-treinado à tarefa de classificação, precisamos modificar sua arquitetura. A camada de saída original, que mapeia para o tamanho do vocabulário, é substituída por uma nova camada que mapeia para duas classes ("spam" e "not spam" - 0 e 1), como usual, ela é iniciada com valores aleatórios que serão treinados. Como retreinar todas as camadas simultaneamente seria também muito custoso, todas as camadas são congeladas (definidas como não-treináveis) exceto a nova camada de saída, o último bloco Transformer e a camada LayerNorm final.
+
+Por causa da atenção causal (Causal Attention - mascaramento dos tokens futuros), o último token de entrada é o que contém a informação de todos os tokens anteriores, então, para a classificação, apenas a saída referente ao último token é usada.
+
+Para avaliarmos a performance do modelo, a partir dos _logits_ de 2 dimensões do último token, usamos a função argmax para obter o rótulo da classe prevista (0 ou 1). A acurácia é então calculada como a porcentagem de previsões corretas. Porém, apesar de querermos maximizar a acurácia, ela não é uma função diferenciável, então usamos a perda de entropia cruzada (cross-entropy loss) como um proxy para minimizar a perda e assim maximizar a acurácia. A função de cálculo de perda é ajustada para considerar apenas os _logits_ do último token.
+
+Ao executar o teste de acurácia antes do fine-tuning, o valor resultante de acurácia é próximo de 50%, o que indica que o modelo está fazendo previsões aleatórias, confirmando a necessidade do fine-tuning. O valor da perda também é alto, reforçando essa necessidade.
+
+Durante o fine-tuning, a função de treinamento considera a quantidade de exemplos vistos ao invés da quantidade de tokens vistos. A acurácia é calculada ao final de cada época. O otimizador AdamW é usado para atualizar os pesos das camadas não congeladas. Após 5 épocas, a perda de treinamento e validação diminui significativamente, enquanto a acurácia aumenta, atingindo mais de 97% na validação. A acurácia final no conjunto de teste é de 95.67%, indicando que o fine-tuning foi bem-sucedido.
+
+Por fim, com o modelo treinado, podemos usá-lo para classificar novos textos. A função de classificação tokeniza o texto de entrada, aplica truncamento e padding, e então passa o texto pelo modelo para obter os _logits_ do último token. O argmax desses _logits_ fornece o rótulo da classe prevista (0 ou 1). Testes com mensagens de exemplo confirmam que o modelo classifica corretamente "spam" e "not spam". Os pesos finais do modelo são salvos para uso futuro.
+
+## Resumo do Capítulo 7 - Finetuning for Instruction
 
 ## Somando os Parâmetros Treináveis
 
