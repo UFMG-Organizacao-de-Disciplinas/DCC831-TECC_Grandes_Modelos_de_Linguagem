@@ -12,6 +12,10 @@ A capacidade de geração do GPT é baseada no processo **autoregressivo** (um _
 - **Seleção de Tokens:** O próximo _token_ é escolhido com base nessas probabilidades. Por padrão, isso é feito por **decodificação gulosa (_greedy decoding_)** (selecionando o _token_ com a maior probabilidade), mas pode ser modificado com **amostragem probabilística** e **escalonamento de temperatura** para introduzir diversidade.
 - **Finalidade:** Este é o resultado final que se busca avaliar: a qualidade do texto gerado.
 
+<!--
+Os modelos de geração de texto, como o GPT, são autoregressivos, ou seja, o token gerado em cada passo é adicionado ao contexto para prever o próximo token. Partindo do contexto inicial o modelo gera scores para os vocábulos e os converte em probabilidades. O próximo token é escolhido com base nessas probabilidades, geralmente selecionando o token com a maior probabilidade (decodificação gulosa), porém, isso pode o tornar muito repetitivo. Para adicionar diversidade, pode-se usar amostragem probabilística e escalonamento de temperatura onde baixa temperatura torna a distribuição mais nítida (mais coerente) e alta temperatura torna a distribuição mais plana (mais diversa); também podemos usar o top-k sampling que restringe o vocabulário para os k tokens mais prováveis.
+-->
+
 ### 5.1.2 Calculating the text generation loss: cross-entropy and perplexity --- GEMINI
 
 Para quantificar a qualidade das previsões do modelo, utiliza-se uma função de perda (_loss function_).
@@ -20,6 +24,13 @@ Para quantificar a qualidade das previsões do modelo, utiliza-se uma função d
 - **Perplexity (PPL):** Perplexidade é uma métrica de avaliação que é diretamente derivada da perda de entropia cruzada.
   - **Fórmula:** $PPL = e^{\text{Cross-Entropy Loss}}$.
   - **Interpretação:** É interpretada como o número médio de _tokens_ para os quais o modelo deve escolher a próxima palavra. **Quanto menor a perplexidade**, melhor é a capacidade do modelo de prever o texto.
+
+(DÚVIDA JV): Se tenho um embedding do tamanho do vocabulário e normalizo ele, tenho uma distribuição de probabilidade, certo? Se eu fizer a comparação dessa distribuição de probabilidades com a normalização dos embeddings de cada palavra do vocabulário... eu consigo ver qual palavra é mais próxima? Ou não tem nada a ver uma coisa com a outra?
+
+<!--
+Após a saída dos logits do modelo (scores para cada uma das palavras do vocabulário) e a converter em probabilidades através do softmax, podemos calcular a função de perda (loss function) que mede o quão boa foi a previsão do modelo. A Cross-Entropy Loss (entropia cruzada), ao aplicar o log numa baixa probabilidade do token-target, resulta num número alto, ou seja, a previsão está muito errada, logo, esse valor deve ser diminuído, e isso é feito maximizando o valor dessa variável alvo.
+A perplexity (PPL) é uma métrica que em média representa qual a quantidade de tokens dos quais o modelo deve escolher a próxima palavra.
+-->
 
 ### 5.1.3 Calculating the training and validation set losses --- GEMINI
 
@@ -30,6 +41,11 @@ O cálculo da perda é expandido para avaliar o modelo em conjuntos de dados int
 - **Implementação (no Notebook `07-pretraining-ch05.ipynb`):** No código, isso é implementado através de uma função auxiliar que itera sobre o `DataLoader` (do Capítulo 2), realiza a passagem _forward_ do modelo para cada lote (_batch_) e acumula as perdas médias de cada lote.
   - O modelo é colocado em modo de avaliação (`model.eval()`) para calcular essas perdas, desativando mecanismos como o Dropout para garantir que as perdas sejam determinísticas.
 
+<!--
+Além de avaliar as perdas do treino, é necessário avaliar as perdas no conjunto de validação, isso porque, se houver uma diferença muito grande entre as perdas, o modelo pode estar sofrendo de overfitting, ou seja, decorou o conjunto de treino e não está generalizando.
+Apesar de que o cálculo da loss ocorre para cada uma das estimativas de geração de token, a loss resultante é na verdade a média das losses de cada batch.
+-->
+
 ## 5.2 Training an LLM --- GEMINI
 
 A fase de pré-treinamento envolve a atualização dos pesos da LLM para minimizar a perda de treinamento, ensinando-a a prever o próximo _token_.
@@ -37,6 +53,10 @@ A fase de pré-treinamento envolve a atualização dos pesos da LLM para minimiz
 - **Processo Padrão:** O _training loop_ em si é um procedimento padrão no _deep learning_.
 - **Função de Perda e Otimizador:** O treinamento utiliza a **Cross-Entropy Loss** como função de perda e o **AdamW optimizer** para ajustar os pesos. O AdamW é uma variante do Adam que aprimora o tratamento do _weight decay_ (decaimento de peso).
 - **Alternativa de Pré-treinamento:** Como pré-treinar uma LLM em um grande _corpus_ é dispendioso em termos de tempo e recursos, é comum a prática de carregar **pesos pré-treinados abertamente disponíveis** (como os da OpenAI). Isso fornece um ponto de partida sólido para as fases subsequentes de _fine-tuning_.
+
+<!--
+A diferença do Adam pro AdamW é que o primeiro aplica o decaimento de pesos diretamente na taxa adaptativa, enquanto o AdamW aplica o decaimento de pesos separadamente. Desse modo ele o força a reduzir a intensidade dos pesos, o que ajuda a evitar overfitting.
+-->
 
 ## 5.3 Decoding strategies to control randomness --- GEMINI
 
