@@ -16,7 +16,7 @@ Para evitar overfitting, também é feito o dropout que omite alguns dos pesos d
 
 Todo esse processo é executado pelo módulo de Atenção Multi-Head, que executa o processo h vezes com diferentes matrizes Wq, Wk e Wv. A intenção é que cada cabeça aprenda diferentes aspectos de atenção. Os vetores de contexto de cada cabeça são então concatenados e projetados novamente para o espaço original do embedding.
 
-## Resumo o Capítulo 4 - Implementing a GPT model from Scratch To Generate Text
+## Resumo do Capítulo 4 - Implementing a GPT model from Scratch To Generate Text
 
 Um modelo de linguagem funciona gerando o próximo token com base nos tokens anteriores. E é um processo autoregressivo, ou seja, o resultado gerado é inserido novamente como entrada para gerar o próximo token. Isso amostrando o token com base na distribuição de probabilidade gerada pelo modelo. Porém, antes de haver o treinamento, o modelo gera tokens aleatórios.
 
