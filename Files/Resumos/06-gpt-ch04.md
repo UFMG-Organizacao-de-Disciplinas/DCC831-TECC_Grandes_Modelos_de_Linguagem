@@ -26,6 +26,39 @@ Os principais componentes estruturais adicionados neste capítulo para completar
 2. **Feed Forward Network (FFN)** com a função de ativação **GELU**.
 3. **Shortcut Connections** (Conexões Residuais).
 
+### (JV) 4.1.1 Mais um pouco sobre _transformers_
+
+O **Transformer** é a arquitetura fundamental que serve de base para modelos como o GPT (que utiliza a variante **Decoder-Only**).
+
+Os componentes do Transformer se dividem em três partes principais: a _Pipeline_ de Entrada, o Bloco de Processamento (que se repete) e a Camada de Saída.
+
+#### (JV) 4.1.1.1. Pipeline de Entrada (Input Embeddings)
+
+Esta seção converte o texto em vetores numéricos que o modelo pode processar:
+
+- **Token Embeddings:** O vetor numérico que representa o significado de um _token_ (subpalavra), obtido por uma operação de consulta (_lookup_).
+- **Positional Embeddings:** Vetores adicionados aos _Token Embeddings_ para injetar a informação de **ordem** ou posição na sequência, o que é fundamental, pois o mecanismo de atenção não tem noção de posição.
+
+#### (JV) 4.1.1.2. O Bloco Transformer (The Transformer Block)
+
+O Bloco Transformer é a unidade de processamento central, que é repetida $N$ vezes (a profundidade do modelo).
+
+Ele é composto por dois sub-blocos principais, cada um emparelhado com uma **Conexão Residual** e **Layer Normalization**:
+
+| Componente                     | Função                                                                                                                                                       | Detalhes Específicos do GPT                                                    |
+| :----------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------- |
+| **Multi-Head Attention (MHA)** | Permite que o modelo pondere a importância de cada _token_ anterior (contexto) para a previsão atual.                                                        | É **Causalmente Mascarado** para impedir que o modelo acesse _tokens_ futuros. |
+| **Rede Feed Forward (FFN)**    | Uma rede linear de duas camadas que processa as informações enriquecidas pelo MHA e extrai _features_ mais complexas.                                        | Utiliza a função de ativação **GELU (Gaussian Error Linear Unit)**.            |
+| **Layer Normalization**        | Estabiliza o treinamento e garante que as ativações das camadas mantenham uma média e variância consistentes.                                                | É aplicada após cada sub-bloco.                                                |
+| **Conexões Residuais**         | Adiciona o _Input_ de um sub-bloco diretamente à sua _Output_ (Conexão de Atalho), ajudando a mitigar o problema do _vanishing gradient_ em redes profundas. | Aplicadas após o MHA e após o FFN.                                             |
+
+#### (JV) 4.1.1.3. Camada de Saída (Output Head)
+
+É a camada final que converte a representação interna do modelo em uma previsão:
+
+- **Layer Normalization Final:** Uma normalização aplicada após o último Transformer Block.
+- **Camada de Projeção Linear:** Mapeia a dimensão do _embedding_ de volta para a dimensão do **Vocabulário**, produzindo os _logits_ (scores brutos) que serão usados para calcular a probabilidade do próximo _token_.
+
 ## 4.2 Normalizing activations with layer normalization --- GEMINI
 
 A **Layer Normalization** (Normalização de Camada) é um mecanismo introduzido para **estabilizar o treinamento** de redes neurais profundas.
