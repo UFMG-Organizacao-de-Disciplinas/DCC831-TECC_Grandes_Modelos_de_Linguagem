@@ -2,26 +2,26 @@
 
 ## Conteúdos
 
-|  ## | Tópico                    | Apresentação |  Perguntas |  Anotações |    Data    |
-| --: | :------------------------ | -----------: | ---------: | ---------: | :--------: |
-|  01 | Modern transformers       |     [-][P01] | [Q01][Q01] | [N01][N01] | 2025/11/04 |
-|  02 | Reasoning                 |     [-][P02] |   [-][Q02] | [N02][N02] | 2025/11/11 |
-|  03 | Interpretability          |     [-][P03] |   [-][Q03] | [N03][N03] | 2025/11/06 |
-|  04 | Efficient Attention       |   [P04][P04] | [Q04][Q04] | [N04][N04] | 2025/10/30 |
-|  05 | Poisoning                 |     [-][P05] |   [-][Q05] | [N05][N05] | 2025/10/30 |
-|  06 | Causality                 |     [-][P06] | [Q06][Q06] | [N06][N06] | 2025/10/23 |
-|  07 | Hallucination             |     [-][P07] | [Q07][Q07] | [N07][N07] | 2025/11/04 |
-|  08 | Machine Unlearning        |   [P08][P08] | [Q08][Q08] | [N08][N08] | 2025/10/23 |
-|  09 | Factuality                |     [-][P09] | [Q09][Q09] | [N09][N09] | 2025/10/28 |
-|  10 | Tabular Data              |   [P10][P10] | [Q10][Q10] | [N10][N10] | 2025/11/11 |
-|  11 | Multimodal LLMs           |   [P11][P11] | [Q11][Q11] | [N11][N11] | 2025/10/28 |
-|  12 | Alternative Architectures |     [-][P12] | [Q12][Q12] | [N12][N12] |            |
-|  13 | Harms                     |     [-][P13] |   [-][Q13] | [N13][N13] | 2025/11/11 |
-|  14 | Security and Privacy      |   [P14][P14] | [Q14][Q14] |   [-][N14] | 2025/11/04 |
-|  15 | Model Uncertainty         |     [-][P15] |   [-][Q15] | [N15][N15] | 2025/10/23 |
-|  16 | Transformer Limitations   |     [-][P16] | [Q16][Q16] | [N16][N16] | 2025/11/06 |
-|  17 | Alignment                 |     [-][P17] | [Q17][Q17] | [N17][N17] | 2025/10/28 |
-|  18 | Vertical Domains          |     [-][P18] | [Q18][Q18] | [N18][N18] | 2025/11/06 |
+|  ## | Tópico                    | Apresentação |  Perguntas |  Anotações |
+| --: | :------------------------ | -----------: | ---------: | ---------: |
+|  01 | Modern transformers       |     [-][P01] | [Q01][Q01] | [N01][N01] |
+|  02 | Reasoning                 |     [-][P02] |   [-][Q02] | [N02][N02] |
+|  03 | Interpretability          |     [-][P03] |   [-][Q03] | [N03][N03] |
+|  04 | Efficient Attention       |   [P04][P04] | [Q04][Q04] | [N04][N04] |
+|  05 | Poisoning                 |     [-][P05] |   [-][Q05] | [N05][N05] |
+|  06 | Causality                 |     [-][P06] | [Q06][Q06] | [N06][N06] |
+|  07 | Hallucination             |     [-][P07] | [Q07][Q07] | [N07][N07] |
+|  08 | Machine Unlearning        |   [P08][P08] | [Q08][Q08] | [N08][N08] |
+|  09 | Factuality                |     [-][P09] | [Q09][Q09] | [N09][N09] |
+|  10 | Tabular Data              |   [P10][P10] | [Q10][Q10] | [N10][N10] |
+|  11 | Multimodal LLMs           |   [P11][P11] | [Q11][Q11] | [N11][N11] |
+|  12 | Alternative Architectures |     [-][P12] | [Q12][Q12] | [N12][N12] |
+|  13 | Harms                     |     [-][P13] |   [-][Q13] | [N13][N13] |
+|  14 | Security and Privacy      |   [P14][P14] | [Q14][Q14] |   [-][N14] |
+|  15 | Model Uncertainty         |     [-][P15] |   [-][Q15] | [N15][N15] |
+|  16 | Transformer Limitations   |     [-][P16] | [Q16][Q16] | [N16][N16] |
+|  17 | Alignment                 |     [-][P17] | [Q17][Q17] | [N17][N17] |
+|  18 | Vertical Domains          |     [-][P18] | [Q18][Q18] | [N18][N18] |
 
 <!-- # Links -->
 
