@@ -29,66 +29,66 @@ Files/Atividades/Seminários/
 
 <!-- ## Apresentações -->
 
-[P01]: P01.pdf
-[P02]: P02.pdf
-[P03]: P03.pdf
-[P04]: P04.pdf
-[P05]: P05.pdf
-[P06]: P06.pdf
-[P07]: P07.pdf
-[P08]: P08.pdf
-[P09]: P09.pdf
+[P01]: Presentations/P01.pdf
+[P02]: Presentations/P02.pdf
+[P03]: Presentations/P03.pdf
+[P04]: Presentations/P04.pdf
+[P05]: Presentations/P05.pdf
+[P06]: Presentations/P06.pdf
+[P07]: Presentations/P07.pdf
+[P08]: Presentations/P08.pdf
+[P09]: Presentations/P09.pdf
 [P10]: <./10-Tabular_Data/Slides/LLMs on Tabular Data - Canva.pdf>
-[P11]: P11.pdf
-[P12]: P12.pdf
-[P13]: P13.pdf
-[P14]: P14.pdf
-[P15]: P15.pdf
-[P16]: P16.pdf
-[P17]: P17.pdf
-[P18]: P18.pdf
+[P11]: Presentations/P11.pdf
+[P12]: Presentations/P12.pdf
+[P13]: Presentations/P13.pdf
+[P14]: Presentations/P14.pdf
+[P15]: Presentations/P15.pdf
+[P16]: Presentations/P16.pdf
+[P17]: Presentations/P17.pdf
+[P18]: Presentations/P18.pdf
 
 <!-- ## Perguntas -->
 
-[Q01]: Q01.pdf
-[Q02]: Q02.pdf
-[Q03]: Q03.pdf
-[Q04]: Q04.pdf
-[Q05]: Q05.pdf
-[Q06]: Q06.pdf
-[Q07]: Q07.pdf
-[Q08]: Q08.pdf
-[Q09]: Q09.pdf
+[Q01]: Questions/Q01.pdf
+[Q02]: Questions/Q02.pdf
+[Q03]: Questions/Q03.pdf
+[Q04]: Questions/Q04.pdf
+[Q05]: Questions/Q05.pdf
+[Q06]: Questions/Q06.pdf
+[Q07]: Questions/Q07.pdf
+[Q08]: Questions/Q08.pdf
+[Q09]: Questions/Q09.pdf
 [Q10]: <./10-Tabular_Data/Perguntas - LLMs on Tabular Data.pdf>
-[Q11]: Q11.pdf
-[Q12]: Q12.pdf
-[Q13]: Q13.pdf
-[Q14]: Q14.pdf
-[Q15]: Q15.pdf
-[Q16]: Q16.pdf
-[Q17]: Q17.pdf
-[Q18]: Q18.pdf
+[Q11]: Questions/Q11.pdf
+[Q12]: Questions/Q12.pdf
+[Q13]: Questions/Q13.pdf
+[Q14]: Questions/Q14.pdf
+[Q15]: Questions/Q15.pdf
+[Q16]: Questions/Q16.pdf
+[Q17]: Questions/Q17.pdf
+[Q18]: Questions/Q18.pdf
 
 <!-- ## Anotações -->
 
-[N01]: 01-Modern_Transformers.md
-[N02]: 02-Reasoning.md
-[N03]: 03-Interpretability.md
-[N04]: 04-Efficient_Attention.md
-[N05]: 05-Poisoning.md
-[N06]: 06-Causality.md
-[N07]: 07-Hallucination.md
-[N08]: 08-Machine_Unlearning-Model_Editing.md
-[N09]: 09-Factuality.md
+[N01]: Notes/01-Modern_Transformers.md
+[N02]: Notes/02-Reasoning.md
+[N03]: Notes/03-Interpretability.md
+[N04]: Notes/04-Efficient_Attention.md
+[N05]: Notes/05-Poisoning.md
+[N06]: Notes/06-Causality.md
+[N07]: Notes/07-Hallucination.md
+[N08]: Notes/08-Machine_Unlearning-Model_Editing.md
+[N09]: Notes/09-Factuality.md
 [N10]: 10-Tabular_Data/Notes.md
-[N11]: 11-Multimodal_LLMs.md
-[N12]: 12-Alternative_Architectures.md
-[N13]: 13-Harms.md
-[N14]: 14-Security_and_Privacy.md
-[N15]: 15-Model_Uncertainty.md
-[N16]: 16-Transformer_Limitations.md
-[N17]: 17_Alignment.md
-[N18]: 18-Vertical_Domains.md
+[N11]: Notes/11-Multimodal_LLMs.md
+[N12]: Notes/12-Alternative_Architectures.md
+[N13]: Notes/13-Harms.md
+[N14]: Notes/14-Security_and_Privacy.md
+[N15]: Notes/15-Model_Uncertainty.md
+[N16]: Notes/16-Transformer_Limitations.md
+[N17]: Notes/17_Alignment.md
+[N18]: Notes/18-Vertical_Domains.md
 
 ## Grupos e Seminários
 
