@@ -19,9 +19,9 @@
 |  13 | Harms                     |     [-][P13] |   [-][Q13] | [N13][N13] |
 |  14 | Security and Privacy      |   [P14][P14] | [Q14][Q14] |   [-][N14] |
 |  15 | Model Uncertainty         |     [-][P15] |   [-][Q15] | [N15][N15] |
-|  16 | Transformer Limitations   |     [-][P16] | [Q16][Q16] | [N16][N16] |
-|  17 | Alignment                 |     [-][P17] | [Q17][Q17] | [N17][N17] |
-|  18 | Vertical Domains          |     [-][P18] | [Q18][Q18] | [N18][N18] |
+|  16 | Transformer Limitations   |   [P16][P16] | [Q16][Q16] | [N16][N16] |
+|  17 | Alignment                 |   [P17][P17] | [Q17][Q17] | [N17][N17] |
+|  18 | Vertical Domains          |   [P18][P18] | [Q18][Q18] | [N18][N18] |
 
 <!-- # Links -->
 
