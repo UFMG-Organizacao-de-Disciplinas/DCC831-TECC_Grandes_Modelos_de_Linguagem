@@ -25,8 +25,6 @@
 
 <!-- # Links -->
 
-Files/Atividades/Seminários/
-
 <!-- ## Apresentações -->
 
 [P01]: Presentations/P01.pdf
