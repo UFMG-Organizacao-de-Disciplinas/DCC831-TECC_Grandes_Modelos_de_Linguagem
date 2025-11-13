@@ -1,0 +1,144 @@
+﻿Questões de factualidade
+Questão 1
+Qual é a diferença entre factualidade ruim de um modelo e alucinações?
+Explique considerando que as alucinações podem ser um superconjunto de fenô-
+menos, abrangendo diferentes tipos de desvios além dos erros factuais.
+
+Modelo de resposta
+A factualidade ruim ocorre quando o modelo gera informações incorretas em
+relação a fatos objetivos e verificáveis do mundo real ou do próprio conjunto de
+treinamento — por exemplo, afirmar que um cientista ganhou um prêmio em um
+ano errado ou citar uma lei inexistente. Já as alucinações representam um fenô-
+meno mais amplo, que abrange não apenas erros factuais, mas também incon-
+sistências semânticas, incoerências lógicas, contradições internas e respostas que
+desviam do contexto ou da intenção do usuário. Em outras palavras, toda saída
+factualmente incorreta é uma alucinação, mas nem toda alucinação envolve fal-
+sidade factual — o modelo pode, por exemplo, produzir uma resposta coerente,
+porém irrelevante ou excessivamente especulativa. Essa distinção é importante
+porque avaliar factualidade exige comparação com fontes externas confiáveis,
+enquanto detectar alucinações pode envolver critérios de consistência interna
+e de aderência ao contexto. Reconhecer essa diferença ajuda pesquisadores a
+projetar métricas e estratégias de mitigação mais precisas, diferenciando quando
+o problema está no conhecimento do modelo ou em sua capacidade de manter
+coerência durante a geração textual.
+
+Questão 2
+Suponha que você trabalha em uma grande empresa que utiliza modelos de
+linguagem em aplicações críticas, como assistentes jurídicos, médicos ou finan-
+ceiros.
+Como você detectaria erros factuais nas respostas do modelo e quais estratégias
+adotaria para corrigi-los ou reduzir sua ocorrência em produção?
+
+Modelo de resposta
+A detecção de erros factuais em modelos de linguagem usados em contextos
+críticos deve combinar métodos automáticos e humanos. Ferramentas de avali-
+ação automática, como FActScore, TruthfulQA ou GPTScore, permitem medir
+a aderência das respostas a fatos verificáveis, enquanto avaliações humanas espe-
+cializadas asseguram precisão em domínios sensíveis, como medicina, direito ou
+finanças. Além disso, a integração com sistemas de recuperação aumentada de
+informação (RAG) possibilita a verificação em tempo real com base em fontes
+confiáveis, reduzindo a chance de alucinações factuais.
+
+1
+
+
+
+Para correção e prevenção, podem ser aplicadas estratégias como fine-tuning
+supervisionado com dados anotados de veracidade, edição de modelo para in-
+serir ou atualizar fatos específicos e treinamento contínuo com curadoria rig-
+orosa de dados. Vale ressaltar que existem outras maneiras de contornar isso
+(o aluno pode ser criativo ao responder). Em produção, é crucial implementar
+monitoramento de confiança e rastreabilidade, permitindo identificar respostas
+potencialmente duvidosas antes que sejam exibidas ao usuário. Por fim, audito-
+rias periódicas e revisões humanas devem complementar o ciclo, garantindo que
+o sistema mantenha precisão, transparência e responsabilidade.
+
+Questão 3
+Explique três causas principais de erros factuais em LLMs
+
+Modelo de resposta
+Os erros factuais em LLMs decorrem, em grande parte, de três causas principais
+interligadas: limitações no conhecimento, falhas no raciocínio e deficiências na
+atualização das informações.
+Primeiramente, muitos LLMs apresentam déficit de conhecimento de domínio,
+resultante de treinamento em dados genéricos e não especializados. Isso leva a
+respostas imprecisas em áreas como medicina, direito ou finanças, onde o modelo
+carece de vocabulário técnico e contexto especializado.
+Em segundo lugar, há o problema da informação desatualizada, pois os mod-
+elos são treinados em grandes corpora estáticos e não acompanham mudanças
+recentes no mundo real — por exemplo, eventos políticos, descobertas cientí-
+ficas ou alterações legislativas. Assim, continuam reproduzindo fatos que já
+perderam validade.
+Por fim, os LLMs sofrem com falhas de raciocínio lógico e inferência, quando,
+mesmo possuindo os fatos corretos, não conseguem combiná-los adequadamente
+para chegar a conclusões coerentes. Isso pode ocorrer devido a vieses de treina-
+mento, exposição limitada a exemplos de raciocínio estruturado ou erros no
+processo de decodificação textual.
+Essas três causas evidenciam que os problemas de factualidade não derivam
+apenas da ausência de dados corretos, mas também de como o modelo organiza,
+interpreta e aplica o conhecimento que possui para gerar linguagem de forma
+confiável.
+
+2
+
+
+
+Questão 4
+Compare os modelos de linguagem autônomos e os modelos com recuperação
+aumentada (retrieval-augmented) no contexto da factualidade. Explique de que
+forma essa diferença influencia a capacidade dos LLMs de gerar respostas ver-
+dadeiras e fundamentadas em fatos verificáveis.
+
+Modelo de resposta
+Os modelos de linguagem autônomos baseiam-se exclusivamente no conheci-
+mento interno adquirido durante o treinamento, armazenado em seus parâmet-
+ros. Isso significa que suas respostas derivam de padrões aprendidos em grandes
+volumes de texto, mas sem acesso direto a novas informações após o término
+do treinamento. Como consequência, eles podem cometer erros factuais por
+dependência de dados desatualizados ou pela falta de cobertura em domínios
+específicos.
+Já os modelos com recuperação aumentada (retrieval-augmented generation,
+RAG) combinam a geração de linguagem com mecanismos de busca em fontes
+externas, como bancos de dados, documentos ou a própria web. Essa integração
+permite que o modelo fundamente suas respostas em evidências recentes e ver-
+ificáveis, o que tende a aumentar a precisão factual e a reduzir alucinações.
+Contudo, essa abordagem também enfrenta desafios, como a seleção incorreta
+de fontes, ruído nos resultados de busca e interpretações equivocadas das infor-
+mações recuperadas.
+Em suma, enquanto os modelos autônomos dependem de um conhecimento
+estático, os modelos com recuperação aumentada se beneficiam de uma base
+dinâmica de informações, aproximando-se de sistemas de consulta mais trans-
+parentes e auditáveis. Essa diferença metodológica representa um dos avanços
+mais promissores para tornar os LLMs mais confiáveis e úteis em aplicações
+práticas.
+
+Questão 5
+Quais são alguns riscos ou desafios relacionados à factualidade dos LLMs? Ex-
+plique de que forma esses problemas podem afetar o uso responsável e confiável
+dessa tecnologia.
+
+Modelo de resposta
+A falta de factualidade em modelos de linguagem de grande porte representa
+um dos maiores desafios para seu uso seguro e ético. Entre os principais riscos
+está a disseminação de desinformação, já que os LLMs podem gerar respostas
+falsas, mas convincentes, com linguagem fluente e tom de autoridade. Isso é
+especialmente perigoso em áreas sensíveis, como saúde, direito e política, onde
+
+3
+
+
+
+informações incorretas podem levar a decisões prejudiciais. Outro desafio é a
+ausência de rastreabilidade das fontes, pois muitos modelos não indicam de onde
+extraíram suas informações, dificultando a verificação e a responsabilização por
+erros. Além disso, os LLMs estão sujeitos à contaminação de dados de treina-
+mento, podendo absorver vieses, rumores e informações imprecisas presentes
+na internet. Há também o risco de uso mal-intencionado, como a criação de
+notícias falsas, perfis falsos e campanhas automatizadas de manipulação. Tais
+problemas comprometem a confiança pública na IA e dificultam sua integração
+em contextos críticos. Para enfrentar esses desafios, pesquisadores propõem me-
+didas como auditoria de dados, uso de mecanismos de checagem automática e
+educação digital para que os usuários compreendam as limitações dos modelos
+e usem suas respostas de forma crítica e responsável.
+
+4
