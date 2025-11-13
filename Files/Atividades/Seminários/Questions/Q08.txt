@@ -1,137 +1,55 @@
-﻿MACHINE UNLEARNING 
-Questão 1 
-Enunciado:  
-Explique como a técnica SISA é implementada para fazer o Exact Unlearning. Descreva como 
-os dados de treinamento são processados, como o unlearning acontece e como o método é 
-utilizado para realizar inferências. Descreva  a principal vantagem do método SISA em 
-comparação com o retreinamento do modelo. 
- 
-Resposta:  
-O SISA é um método que implementa o Exact Unlearning através de um esquema de 
-fragmentação do modelo. Inicialmente, o conjunto de dados de treinamento é dividido em N 
-subconjuntos não sobrepostos, em seguida, N modelos são treinados, cada um em uma das N 
-partições de dados. No final temos N modelos, cada um treinado em uma das N partições de 
-dados e para realizar o processo de inferência temos que combinar a saída dos N modelos, 
-para isso podemos usar estratégias de model ensembling. Quando é necessário fazer o 
-unlearning de algum dado, basta identificarmos em qual partição o dado a ser retirado se 
-encontra e fazer o retreinamento apenas do modelo que foi treinado naquela partição de dados. 
-A principal vantagem do método SISA em relação ao retreinamento do modelo é a eficiência, o 
-SISA reduz o custo de retreinamento do modelo para 1/N do tempo de treino total.  
- 
-Questão 2 
-Enunciado:  
-Explique a diferença entre Unlearning exato e Unlearning aproximado, fornecendo ao menos 
-um exemplo de técnica utilizada. Descreva as duas principais lacunas que esses métodos 
-buscam resolver. 
- 
-Resposta:  
-O Unlearning exato tem como objetivo fundamental o retrainamento integral do modelo original 
-sem a presença dos dados que devem ser esquecidos. Neste método, é necessário acesso 
-completo à base de dados original, e também a definição empírica do número de partições a 
-serem feitas para garantir sua validade. Uma das técnicas comumente utilizadas é o SISA 
-(Sharded, Isolated, Sliced, and Aggregated), visando maior escalabilidade. O Unlearning 
-aproximado, por sua vez, busca evitar o retreinamento por meio de técnicas que alteram os 
-resultados do modelo de forma indireta. Dentre elas, destaca-se o uso de privacidade 
-diferencial, fine-tuning em datasets de esquecimento ou datasets de retenção e In-Context 
-Unlearning. Todas as técnicas de ambos os métodos buscam resolver o problema de auditoria 
-de esquecimento, que se resume a garantir que os dados a serem esquecidos foram de fato 
-desanexados e permanentemente eliminados dos pesos do modelo. Outro problema a ser 
-mitigado é o escopo de esquecimento, que implica em quais e no quanto de informação deve 
-ser esquecida, bem como os efeitos colaterais do esquecimento em outros conhecimentos. 
- 
-Questão 3 
-Enunciado: 
-No cenário atual de Large Language Models (LLMs), o Machine Unlearning (MU) surge como 
-uma área de pesquisa crucial, pois está centrada na conformidade regulatória (como o "Direito 
-ao Esquecimento"), mitigação de vieses e segurança (combate a conteúdo prejudicial e 
-ataques) e se relaciona com os princípios de transparência e ética no desenvolvimento de 
-modelos de IA ora alinhado, ora com conflitos. No seu ponto de vista, quais os desafios 
-impostos pela natureza aproximada dos métodos de MU e as implicações para a confiança 
-pública nos sistemas de IA? 
+﻿# MACHINE UNLEARNING
 
+## Questão 1
 
+Explique como a técnica SISA é implementada para fazer o Exact Unlearning. Descreva como os dados de treinamento são processados, como o unlearning acontece e como o método é utilizado para realizar inferências. Descreva a principal vantagem do método SISA em comparação com o retreinamento do modelo.
 
- 
- 
-Resposta: 
-A ascensão dos Large Language Models (LLMs) revela um paradoxo: sua vasta capacidade de 
-memorização, enquanto poderosa, também gera problemas de privacidade, copyright, vieses e 
-segurança. O Machine Unlearning (MU) surge como solução intrínseca para remover 
-seletivamente influências ou capacidades indesejáveis sem o proibitivo retreinamento 
-completo. 
- 
-Em sua essência, o MU alinha-se aos princípios éticos da IA: apoia o Direito ao Esquecimento, 
-mitiga vieses sociais e combate a geração de conteúdo tóxico/ilegal. Isso capacita o 
-desenvolvimento de sistemas mais responsáveis, permitindo que a IA “desaprenda” respostas 
-perigosas e preconceitos, promovendo uso ético. 
- 
-Contudo, a relação do MU com a transparência e ética conflita devido à sua natureza 
-aproximada. A inviabilidade do unlearning exato para LLMs massivos nos força a métodos que 
-não oferecem garantias matemáticas absolutas de remoção. Isso levanta sérias questões: 
+### Resposta
 
--​ "Autenticidade": É difícil provar que o modelo realmente esqueceu, e não apenas 
-escondeu, informações. Métodos aproximados podem ser vulneráveis a ataques de 
-relearning ou jailbreaking, gerando uma falsa segurança eticamente questionável. 
+> O SISA é um método que implementa o Exact Unlearning através de um esquema de fragmentação do modelo. Inicialmente, o conjunto de dados de treinamento é dividido em N subconjuntos não sobrepostos, em seguida, N modelos são treinados, cada um em uma das N partições de dados. No final temos N modelos, cada um treinado em uma das N partições de dados e para realizar o processo de inferência temos que combinar a saída dos N modelos, para isso podemos usar estratégias de model ensembling. Quando é necessário fazer o unlearning de algum dado, basta identificarmos em qual partição o dado a ser retirado se encontra e fazer o retreinamento apenas do modelo que foi treinado naquela partição de dados. A principal vantagem do método SISA em relação ao retreinamento do modelo é a eficiência, o SISA reduz o custo de retreinamento do modelo para 1/N do tempo de treino total. 
 
--​ Avaliação e Auditabilidade: A falta de benchmarks e métricas padronizadas para 
-LLMs black-box dificulta a verificação da eficácia do unlearning (Forget Efficacy) e da 
-preservação da utilidade (Model Utility). 
+## Questão 2
 
--​ Dilemas Éticos: A subjetividade na definição de "o que esquecer" pode levar à 
-manipulação ou censura, transformando o MU numa ferramenta de controle de 
-narrativa. 
+Explique a diferença entre Unlearning exato e Unlearning aproximado, fornecendo ao menos um exemplo de técnica utilizada. Descreva as duas principais lacunas que esses métodos buscam resolver.
 
-Tais implicações abalam a confiança pública na integridade da IA. Para que o MU cumpra sua 
-promessa ética, a pesquisa deve focar em avaliação robusta, interpretabilidade e certificação 
-clara do processo de desaprendizagem. 
- 
-Questão 4 
-Enunciado:  
-Explique o que é In-Context Unlearning (ICU) no contexto de modelos de linguagem e 
-diferencie essa abordagem das técnicas tradicionais de Machine Unlearning baseadas em 
-re-treinamento ou fine-tuning adversarial. Em seguida, discuta duas limitações práticas dessa 
-abordagem e avalie alguns cenários onde ICU pode (ou não) ser uma alternativa viável para 
-apagar informações de um modelo sem alterar seus pesos. 
- 
-Resposta: 
-In-Context Unlearning (ICU) é uma técnica em que o modelo “esquece” certas informações 
-apenas através do prompt, ajustando seu comportamento durante a inferência sem alterar seus 
-pesos internos. Isso contrasta com formas tradicionais de machine unlearning, que envolvem 
-re-treinamento ou fine-tuning para remover de forma intrínseca e duradoura a influência dos 
-dados que devem ser esquecidos. Como limitações, o ICU evidentemente não garante deleção 
-real, pois o modelo ainda armazena internamente o conhecimento e pode revelá-lo se o prompt 
-mudar (jailbreak), mesmo com variações sutis na entrada. E também é pouco robusto, já que 
-sua eficácia depende muito da formulação do contexto e da inteligência do adversário. Assim, o 
-ICU pode ser útil apenas para controlar temporariamente as respostas do modelo, servindo 
-como uma "guardrail" comportamental, mas não é adequado quando se exige esquecimento 
-verdadeiro ou conformidade com regras de privacidade. 
+### Resposta
 
+> O Unlearning exato tem como objetivo fundamental o retrainamento integral do modelo original sem a presença dos dados que devem ser esquecidos. Neste método, é necessário acesso completo à base de dados original, e também a definição empírica do número de partições a serem feitas para garantir sua validade. Uma das técnicas comumente utilizadas é o SISA (Sharded, Isolated, Sliced, and Aggregated), visando maior escalabilidade. O Unlearning aproximado, por sua vez, busca evitar o retreinamento por meio de técnicas que alteram os resultados do modelo de forma indireta. Dentre elas, destaca-se o uso de privacidade diferencial, fine-tuning em datasets de esquecimento ou datasets de retenção e In-Context Unlearning. Todas as técnicas de ambos os métodos buscam resolver o problema de auditoria de esquecimento, que se resume a garantir que os dados a serem esquecidos foram de fato desanexados e permanentemente eliminados dos pesos do modelo. Outro problema a ser mitigado é o escopo de esquecimento, que implica em quais e no quanto de informação deve ser esquecida, bem como os efeitos colaterais do esquecimento em outros conhecimentos.
 
+## Questão 3
 
-Questão 5: 
-Enunciado: 
-A avaliação do Machine Unlearning (MU) em LLMs exige um delicado equilíbrio entre 
-remover informações específicas e manter a funcionalidade geral do modelo. Discorra 
-sobre as características das duas principais categorias de medidas de avaliação – Eficácia 
-do Esquecimento (Forget Efficacy - FE) e Preservação da Utilidade (Model Utility - MU). 
-Quais as principais métricas utilizadas em cada categoria e como a interação intrínseca 
-entre elas determinam o sucesso do UM? 
- 
-Resposta: 
-A avaliação do Machine Unlearning baseia-se em dois pilares. A Eficácia do Esquecimento 
-(FE) mede a remoção bem-sucedida de informações indesejadas do modelo. Suas 
-características incluem a aplicação no forget set (dados a serem esquecidos) e o objetivo 
-de baixos valores para as métricas, indicando que o modelo não retém ou reproduz o 
-conteúdo. Principais métricas: ROUGE, Probability, Truth Ratio (TR), Entailment Score (ES) e 
-Cosine Similarity (CS). 
-A Preservação da Utilidade (MU) avalia a capacidade do modelo de manter seu 
-desempenho em tarefas não relacionadas ao esquecimento e avalia a capacidade de 
-generalização e retenção de conhecimento válido. Caracteriza-se pela aplicação no retain 
-set (dados a serem mantidos) e em conhecimentos gerais, buscando altos valores nas 
-métricas. Principais métricas: ROUGE, Probability, TR, ES, CS, Token Entropy (TE, para 
-diversidade de tokens) e desempenho em tarefas downstream. 
-A interação entre FE e MU é crucial: existe um trade-off inerente. Métodos que maximizam a 
-FE (esquecendo profundamente) frequentemente resultam em alguma degradação da MU 
-(perda de funcionalidade geral), e vice-versa. Assim, Um MU bem-sucedido busca uma 
-otimização de Pareto, onde se atinge a maior FE possível com a menor perda aceitável de 
-MU, garantindo com isso o esquecimento robusto sem inviabilizar o modelo.
+No cenário atual de Large Language Models (LLMs), o Machine Unlearning (MU) surge como uma área de pesquisa crucial, pois está centrada na conformidade regulatória (como o "Direito ao Esquecimento"), mitigação de vieses e segurança (combate a conteúdo prejudicial e ataques) e se relaciona com os princípios de transparência e ética no desenvolvimento de modelos de IA ora alinhado, ora com conflitos. No seu ponto de vista, quais os desafios impostos pela natureza aproximada dos métodos de MU e as implicações para a confiança pública nos sistemas de IA?
+
+### Resposta
+
+> A ascensão dos Large Language Models (LLMs) revela um paradoxo: sua vasta capacidade de memorização, enquanto poderosa, também gera problemas de privacidade, copyright, vieses e segurança. O Machine Unlearning (MU) surge como solução intrínseca para remover seletivamente influências ou capacidades indesejáveis sem o proibitivo retreinamento completo.
+>
+> Em sua essência, o MU alinha-se aos princípios éticos da IA: apoia o Direito ao Esquecimento, mitiga vieses sociais e combate a geração de conteúdo tóxico/ilegal. Isso capacita o desenvolvimento de sistemas mais responsáveis, permitindo que a IA “desaprenda” respostas perigosas e preconceitos, promovendo uso ético.
+>
+> Contudo, a relação do MU com a transparência e ética conflita devido à sua natureza aproximada. A inviabilidade do unlearning exato para LLMs massivos nos força a métodos que não oferecem garantias matemáticas absolutas de remoção. Isso levanta sérias questões
+>
+> -​ "Autenticidade": É difícil provar que o modelo realmente esqueceu, e não apenas escondeu, informações. Métodos aproximados podem ser vulneráveis a ataques de relearning ou jailbreaking, gerando uma falsa segurança eticamente questionável.
+> -​ Avaliação e Auditabilidade: A falta de benchmarks e métricas padronizadas para LLMs black-box dificulta a verificação da eficácia do unlearning (Forget Efficacy) e da preservação da utilidade (Model Utility).
+> -​ Dilemas Éticos: A subjetividade na definição de "o que esquecer" pode levar à manipulação ou censura, transformando o MU numa ferramenta de controle de narrativa.
+>
+> Tais implicações abalam a confiança pública na integridade da IA. Para que o MU cumpra sua promessa ética, a pesquisa deve focar em avaliação robusta, interpretabilidade e certificação clara do processo de desaprendizagem.
+
+## Questão 4
+
+Explique o que é In-Context Unlearning (ICU) no contexto de modelos de linguagem e diferencie essa abordagem das técnicas tradicionais de Machine Unlearning baseadas em re-treinamento ou fine-tuning adversarial. Em seguida, discuta duas limitações práticas dessa abordagem e avalie alguns cenários onde ICU pode (ou não) ser uma alternativa viável para apagar informações de um modelo sem alterar seus pesos.
+
+### Resposta
+
+> In-Context Unlearning (ICU) é uma técnica em que o modelo “esquece” certas informações apenas através do prompt, ajustando seu comportamento durante a inferência sem alterar seus pesos internos. Isso contrasta com formas tradicionais de machine unlearning, que envolvem re-treinamento ou fine-tuning para remover de forma intrínseca e duradoura a influência dos dados que devem ser esquecidos. Como limitações, o ICU evidentemente não garante deleção real, pois o modelo ainda armazena internamente o conhecimento e pode revelá-lo se o prompt mudar (jailbreak), mesmo com variações sutis na entrada. E também é pouco robusto, já que sua eficácia depende muito da formulação do contexto e da inteligência do adversário. Assim, o ICU pode ser útil apenas para controlar temporariamente as respostas do modelo, servindo como uma "guardrail" comportamental, mas não é adequado quando se exige esquecimento verdadeiro ou conformidade com regras de privacidade.
+
+## Questão 5
+
+A avaliação do Machine Unlearning (MU) em LLMs exige um delicado equilíbrio entre remover informações específicas e manter a funcionalidade geral do modelo. Discorra sobre as características das duas principais categorias de medidas de avaliação – Eficácia do Esquecimento (Forget Efficacy - FE) e Preservação da Utilidade (Model Utility - MU). Quais as principais métricas utilizadas em cada categoria e como a interação intrínseca entre elas determinam o sucesso do UM?
+
+### Resposta
+
+> A avaliação do Machine Unlearning baseia-se em dois pilares. A Eficácia do Esquecimento (FE) mede a remoção bem-sucedida de informações indesejadas do modelo. Suas características incluem a aplicação no forget set (dados a serem esquecidos) e o objetivo de baixos valores para as métricas, indicando que o modelo não retém ou reproduz o conteúdo. Principais métricas: ROUGE, Probability, Truth Ratio (TR), Entailment Score (ES) e Cosine Similarity (CS).
+>
+> A Preservação da Utilidade (MU) avalia a capacidade do modelo de manter seu desempenho em tarefas não relacionadas ao esquecimento e avalia a capacidade de generalização e retenção de conhecimento válido. Caracteriza-se pela aplicação no retain set (dados a serem mantidos) e em conhecimentos gerais, buscando altos valores nas métricas. Principais métricas: ROUGE, Probability, TR, ES, CS, Token Entropy (TE, para diversidade de tokens) e desempenho em tarefas downstream.
+>
+> A interação entre FE e MU é crucial: existe um trade-off inerente. Métodos que maximizam a FE (esquecendo profundamente) frequentemente resultam em alguma degradação da MU (perda de funcionalidade geral), e vice-versa. Assim, Um MU bem-sucedido busca uma otimização de Pareto, onde se atinge a maior FE possível com a menor perda aceitável de MU, garantindo com isso o esquecimento robusto sem inviabilizar o modelo.

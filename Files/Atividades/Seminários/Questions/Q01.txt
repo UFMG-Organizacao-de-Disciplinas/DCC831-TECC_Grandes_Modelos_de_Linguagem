@@ -1,107 +1,41 @@
-﻿Perguntas de LLM 
- 
-ENUNCIADO:​
-Ao tentar otimizar um modelo já existente, você aplica a otimização Mixture of Experts 
-(MoE) e realiza uma execução de teste. Contudo, após alguns passos é possível 
-perceber que a perda de validação está estagnada. Qual a causa mais provável ? Como 
-seria uma possível solução?​
+﻿# Perguntas de LLM
+
+## Q1
+
+Ao tentar otimizar um modelo já existente, você aplica a otimização Mixture of Experts (MoE) e realiza uma execução de teste. Contudo, após alguns passos é possível perceber que a perda de validação está estagnada. Qual a causa mais provável ? Como seria uma possível solução?​
 ​
-RESPOSTA: 
-Como o foco da questão está na implementação do Mixture of Experts (MoE), a solução 
-também tem que partir dele e da base do seu funcionamento, dos roteadores e dos 
-experts. A lógica é que provavelmente os roteadores estão de certa forma viciados, ou 
-seja, eles estão tendendo a enviar os tokens sempre para os mesmos experts, que para 
-eles seriam os que sempre levariam ao melhor resultado o possível , ignorando todos os 
-outros experts e fazendo com que o modelo se torne menos eficiente pois os 
-parâmetros de todos os outros experts se tornam “parâmetros mortos”, ou seja, eles 
-consomem memória mas nunca são atualizados. Para resolver o problema é necessário 
-uma função de perdão auxiliar, a qual deve ser uma heurística que penaliza esse 
-comportamento de favoritismo, de forma a evitar esse tipo de comportamento. Essa 
-função pode até piorar o desempenho a curto prazo, mas a longo prazo ela ajuda a 
-evitar esse problema. 
- 
- 
-ENUNCIADO: 
-Se um LLM é considerado mais potente para computação localizada, qual é a 
-otimização mais provável dentro de sua arquitetura e qual uma possível tarefa que 
-poderia ter um desempenho pior que outros modelos? 
-RESPOSTA: 
-Estamos falando do uso de Sliding Window dentro da atenção. Para poder responder 
-ambas a as partes da pergunta, a resposta deve se basear a ideia principal dessa 
-otimização, sendo que esta é a limitação do universo do token na hora da atenção (ou 
-seja, limita o contexto, o vocabulário), que ao invés de levar em conta todos os outros 
-tokens ele olha só para um espaço limitado, nesse caso o tamanho da janela, reduzindo, 
-assim, o contexto e a memória necessária, por isso a melhora no ponto de vista da 
-computação localizada. Nesse sentido, o que é limitado do modelo é a capacidade de 
-inferência, visto que ele passa a enxergar relações mais próximas e deixa de aprender 
-aquelas mais distantes, que são aqueles que são abandonadas por essa otimização. 
-Também é interessante comentar que não necessariamente essa otimização deve ser 
-feita em todas as camadas, mas pode ser feitas em proporções como 1 camada de 
-atenção global para 5 de atenção limitada pela janela, que é o exemplo do Gemma 3. 
- 
- 
+### Resposta
 
-
-
-ENUNCIADO: 
-Tanto a otimização de Grouped-Query Attention (GQA) quanto a otimização de 
-Multi-Head Latent Attention (MLA) visam otimizar o mesmo aspecto do processo de 
-Attention. Qual é esse aspecto e do que se trata/como é cada uma dessas otimizações 
-é feita ou implementada? 
-RESPOSTA: 
-Ambas alternativas tentam diminuir a quantidade de memória, mais especificamente a 
-memória voltada para o armazenamento dos parâmetros de Key (K) e Value (V). 
-Enquanto no Grouped-Query Attention (GQA) existe o agrupamento de vários valores de 
-K e V em várias cabeças, de forma que eles os compartilhem, no Multi-Head Latente 
-Attention (MLA) existe uma compressão do parâmetros de K e V em um espaço latente 
-de menor dimensão, o que reduz a memória Cache em troca da existência de uma 
-multiplicação matricial dentro do processo. Nessa resposta também, é interessante 
-citar que a compressão da MLA é maior que a do GQA (maior redução de uso de 
-memória cache), uma vez que todos os valores de K e V ficam em uma só matriz de 
-decodificação enquanto no GQA são várias, mas mesmo assim são menos do que o 
-processo inicial sem nenhuma otimização, embora no MLA sejam feitas operações 
-mais custosas por serem multiplicações matriciais. 
+Como o foco da questão está na implementação do Mixture of Experts (MoE), a solução também tem que partir dele e da base do seu funcionamento, dos roteadores e dos experts. A lógica é que provavelmente os roteadores estão de certa forma viciados, ou seja, eles estão tendendo a enviar os tokens sempre para os mesmos experts, que para eles seriam os que sempre levariam ao melhor resultado o possível , ignorando todos os outros experts e fazendo com que o modelo se torne menos eficiente pois os parâmetros de todos os outros experts se tornam “parâmetros mortos”, ou seja, eles consomem memória mas nunca são atualizados. Para resolver o problema é necessário uma função de perdão auxiliar, a qual deve ser uma heurística que penaliza esse comportamento de favoritismo, de forma a evitar esse tipo de comportamento. Essa função pode até piorar o desempenho a curto prazo, mas a longo prazo ela ajuda a evitar esse problema. 
  
-ENUNCIADO: 
-Como foi visto ao longo da disciplina, para manter a noção de contexto é levado em 
-consideração o Positional Embedding para ver a posição da palavra na frase ou no texto 
-como um todo. Contudo, a otimização, No Positional Embeddings (NoPE) descarta seu 
-uso. Modelos que adotam o NoPE não levam em consideração a posição da palavra? 
-Justifique. 
-RESPOSTA: 
-Não, LLMs que se utilizam do NoPE ainda sim levam em consideração esse 
-posicionamento. A lógica por trás muda apenas, que, ao invés de saber levar em conta 
-todos os posicionamentos, ele consegue manter a direção temporal por conta da 
-máscara de atenção causal (que leva em consideração apenas os tokens anteriores), 
-mantendo assim o contexto de sentido, ou seja, ele aprende o contexto com base na 
-ordem de quais palavras vêm antes apenas, não levando em consideração a frase toda. 
-Para uma resposta completa vale complementar que: essa alternativa é relativamente 
-radical podendo adotar outras medidas como o RoPE, o qual vetoriza o embedding da 
-palavra que economiza espaço mas ainda sim não é tão preciso quanto o Positional 
-Embedding, que a utilização do NoPE implica em uma estrutura mais simples e que, por 
-fim, embora pareça contra intuitivo, ele tem uma melhor length generalization. 
- 
- 
- 
- 
+## Q2
 
+Se um LLM é considerado mais potente para computação localizada, qual é a otimização mais provável dentro de sua arquitetura e qual uma possível tarefa que poderia ter um desempenho pior que outros modelos? 
 
+### Resposta
 
-ENUNCIADO: 
-Conforme foi visto durante a apresentação do grupo, as evoluções ou otimizações 
-tendem a atacar diferentes aspectos do processo da LLM, seja no uso de memória 
-cache, seja no tamanho do contexto, sendo assim elas são aplicadas em diferentes 
-pontos da arquitetura tradicional vista em aula. Qual das alternativas vistas tem que ser 
-aplicada necessariamente dentro do bloco transformer e cite um dos benefícios que 
-normalmente são associados a ela. 
-RESPOSTA: 
-Para esta resposta, é necessário falar sobre o QK-Norm. O QK-Norm consiste na 
-aplicação de uma camada de RSMNorm (nesse sentido seria necessário falar sobre 
-uma camada de normalização mas foi citado apenas o caso com o RSMNorm na 
-apresentação) sobre os vetores de Key e Query, ou seja, eles necessariamente têm que 
-ser aplicados dentro das cabeças de atenção do bloco transformer, e, dentro do material 
-base de referência, foram citados apenas casos em que essa otimização foi aplicada. 
-Os dois principais benefícios que normalmente são  associados a esta otimização são: 
-melhor estabilização de treinamento e melhora na convergência, então qualquer um dos 
-dois funciona, uma vez que ambos podem ser deduzidos a partir da sua lógica (a 
-normalização dos valores que levam a essa menor variabilidade em todo o processo).
+Estamos falando do uso de Sliding Window dentro da atenção. Para poder responder ambas a as partes da pergunta, a resposta deve se basear a ideia principal dessa otimização, sendo que esta é a limitação do universo do token na hora da atenção (ou seja, limita o contexto, o vocabulário), que ao invés de levar em conta todos os outros tokens ele olha só para um espaço limitado, nesse caso o tamanho da janela, reduzindo, assim, o contexto e a memória necessária, por isso a melhora no ponto de vista da computação localizada. Nesse sentido, o que é limitado do modelo é a capacidade de inferência, visto que ele passa a enxergar relações mais próximas e deixa de aprender aquelas mais distantes, que são aqueles que são abandonadas por essa otimização. Também é interessante comentar que não necessariamente essa otimização deve ser feita em todas as camadas, mas pode ser feitas em proporções como 1 camada de atenção global para 5 de atenção limitada pela janela, que é o exemplo do Gemma 3. 
+ 
+## Q3
+
+Tanto a otimização de Grouped-Query Attention (GQA) quanto a otimização de Multi-Head Latent Attention (MLA) visam otimizar o mesmo aspecto do processo de Attention. Qual é esse aspecto e do que se trata/como é cada uma dessas otimizações é feita ou implementada? 
+
+### Resposta
+
+Ambas alternativas tentam diminuir a quantidade de memória, mais especificamente a memória voltada para o armazenamento dos parâmetros de Key (K) e Value (V). Enquanto no Grouped-Query Attention (GQA) existe o agrupamento de vários valores de K e V em várias cabeças, de forma que eles os compartilhem, no Multi-Head Latente Attention (MLA) existe uma compressão do parâmetros de K e V em um espaço latente de menor dimensão, o que reduz a memória Cache em troca da existência de uma multiplicação matricial dentro do processo. Nessa resposta também, é interessante citar que a compressão da MLA é maior que a do GQA (maior redução de uso de memória cache), uma vez que todos os valores de K e V ficam em uma só matriz de decodificação enquanto no GQA são várias, mas mesmo assim são menos do que o processo inicial sem nenhuma otimização, embora no MLA sejam feitas operações mais custosas por serem multiplicações matriciais. 
+ 
+## Q4
+
+Como foi visto ao longo da disciplina, para manter a noção de contexto é levado em consideração o Positional Embedding para ver a posição da palavra na frase ou no texto como um todo. Contudo, a otimização, No Positional Embeddings (NoPE) descarta seu uso. Modelos que adotam o NoPE não levam em consideração a posição da palavra? Justifique. 
+
+### Resposta
+
+Não, LLMs que se utilizam do NoPE ainda sim levam em consideração esse posicionamento. A lógica por trás muda apenas, que, ao invés de saber levar em conta todos os posicionamentos, ele consegue manter a direção temporal por conta da máscara de atenção causal (que leva em consideração apenas os tokens anteriores), mantendo assim o contexto de sentido, ou seja, ele aprende o contexto com base na ordem de quais palavras vêm antes apenas, não levando em consideração a frase toda. Para uma resposta completa vale complementar que: essa alternativa é relativamente radical podendo adotar outras medidas como o RoPE, o qual vetoriza o embedding da palavra que economiza espaço mas ainda sim não é tão preciso quanto o Positional Embedding, que a utilização do NoPE implica em uma estrutura mais simples e que, por fim, embora pareça contra intuitivo, ele tem uma melhor length generalization. 
+
+## Q5
+
+Conforme foi visto durante a apresentação do grupo, as evoluções ou otimizações tendem a atacar diferentes aspectos do processo da LLM, seja no uso de memória cache, seja no tamanho do contexto, sendo assim elas são aplicadas em diferentes pontos da arquitetura tradicional vista em aula. Qual das alternativas vistas tem que ser aplicada necessariamente dentro do bloco transformer e cite um dos benefícios que normalmente são associados a ela. 
+
+### Resposta
+
+Para esta resposta, é necessário falar sobre o QK-Norm. O QK-Norm consiste na aplicação de uma camada de RSMNorm (nesse sentido seria necessário falar sobre uma camada de normalização mas foi citado apenas o caso com o RSMNorm na apresentação) sobre os vetores de Key e Query, ou seja, eles necessariamente têm que ser aplicados dentro das cabeças de atenção do bloco transformer, e, dentro do material base de referência, foram citados apenas casos em que essa otimização foi aplicada. Os dois principais benefícios que normalmente são associados a esta otimização são: melhor estabilização de treinamento e melhora na convergência, então qualquer um dos dois funciona, uma vez que ambos podem ser deduzidos a partir da sua lógica (a normalização dos valores que levam a essa menor variabilidade em todo o processo).

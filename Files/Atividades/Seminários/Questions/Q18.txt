@@ -1,154 +1,53 @@
-﻿1) 
-ENUNCIADO:​
- 
-Explique por que o uso de modelos de linguagem generalistas pode ser 
-insuficiente em domínios verticais como Medicina e Direito. 
+﻿# Questões Grupo 18
 
- 
+## Q1
 
-RESPOSTA: 
+Explique por que o uso de modelos de linguagem generalistas pode ser insuficiente em domínios verticais como Medicina e Direito.
 
-Modelos generalistas são treinados em grandes volumes de dados amplos e 
-heterogêneos, cobrindo linguagem cotidiana, textos da internet e documentos 
-variados. Isso os torna versáteis, mas também superficiais em relação a áreas 
-que exigem precisão conceitual e raciocínio formalizado. Em Medicina, por 
-exemplo, decisões dependem de diretrizes clínicas, protocolos de segurança, 
-evidências científicas atualizadas e interpretação rigorosa de sintomas e 
-exames. Um modelo generalista pode produzir respostas plausíveis, porém 
-sem fundamentação adequada, levando a sugestões terapêuticas incorretas 
-ou interpretações erradas, o que pode comprometer diretamente a segurança 
-do paciente. Já no Direito, a interpretação normativa envolve hierarquia de 
-leis, análise de precedentes, adequação terminológica e argumentação 
-estruturada. Se o modelo confundir conceitos, citar jurisprudência 
-desatualizada ou sugerir práticas ilegais, o resultado pode ser 
-assessoramento jurídico inadequado, prejuízos institucionais e até violação de 
-responsabilidades éticas. 
-Além disso, modelos generalistas sofrem mais com alucinações, pois tentam 
-completar informações com base em padrões linguísticos genéricos, e não em 
-conhecimento validado. Em domínios verticais, é necessária rastreabilidade, 
-capacidade de citar fontes, coerência metodológica e estabilidade lógica. A 
-especialização reduz esses riscos ao ajustar o modelo com vocabulário 
-técnico, raciocínio estruturado, normas específicas e bases confiáveis, 
-aumentando precisão, confiabilidade e segurança no uso profissional. 
- 
-2) 
-ENUNCIADO: 
-Discuta como LLMs especializados aprendem padrões de raciocínio 
-específicos de um domínio, explicando o que caracteriza a transformação de 
-um modelo generalista em um modelo vertical e mencionando ao menos três 
-técnicas de adaptação utilizadas nesse processo. 
-RESPOSTA: 
+## RESPOSTA
 
+> Modelos generalistas são treinados em grandes volumes de dados amplos e heterogêneos, cobrindo linguagem cotidiana, textos da internet e documentos variados. Isso os torna versáteis, mas também superficiais em relação a áreas que exigem precisão conceitual e raciocínio formalizado. Em Medicina, por exemplo, decisões dependem de diretrizes clínicas, protocolos de segurança, evidências científicas atualizadas e interpretação rigorosa de sintomas e exames. Um modelo generalista pode produzir respostas plausíveis, porém sem fundamentação adequada, levando a sugestões terapêuticas incorretas ou interpretações erradas, o que pode comprometer diretamente a segurança do paciente. Já no Direito, a interpretação normativa envolve hierarquia de leis, análise de precedentes, adequação terminológica e argumentação estruturada. Se o modelo confundir conceitos, citar jurisprudência desatualizada ou sugerir práticas ilegais, o resultado pode ser assessoramento jurídico inadequado, prejuízos institucionais e até violação de responsabilidades éticas.
+>
+> Além disso, modelos generalistas sofrem mais com alucinações, pois tentam completar informações com base em padrões linguísticos genéricos, e não em conhecimento validado. Em domínios verticais, é necessária rastreabilidade, capacidade de citar fontes, coerência metodológica e estabilidade lógica. A especialização reduz esses riscos ao ajustar o modelo com vocabulário técnico, raciocínio estruturado, normas específicas e bases confiáveis, aumentando precisão, confiabilidade e segurança no uso profissional.
 
+## Q2
 
-A transformação de um LLM generalista em um modelo especializado ocorre 
-quando ele deixa de apenas reproduzir linguagem e passa a incorporar a 
-lógica de pensamento característica de um domínio, ou seja, sua forma 
-própria de analisar problemas, justificar decisões e construir conclusões. Em 
-áreas como Medicina, Direito ou Finanças, o conhecimento não consiste 
-apenas em termos técnicos, mas em padrões estáveis de raciocínio, como 
-estabelecer hipóteses, comparar evidências, aplicar normas ou avaliar risco. 
-Três técnicas fundamentais permitem essa adaptação de modo eficiente. O 
-Fine-Tuning ajusta parte ou todos os pesos do modelo com exemplos do 
-domínio, permitindo que ele aprenda relações conceituais profundas e 
-sequências de decisão. LoRA ou Adapters acrescentam pequenas camadas 
-treináveis, mantendo o modelo-base intacto, o que reduz custo e evita 
-esquecimento catastrófico. Já o Instruction Tuning ensina o modelo a seguir 
-instruções de forma alinhada às práticas da área, garantindo coerência 
-argumentativa e formato de resposta adequado. 
-Combinadas, essas técnicas possibilitam que o modelo internalize estruturas 
-de raciocínio, não apenas vocabulário, resultando em respostas mais seguras, 
-consistentes e contextualizadas às necessidades do domínio vertical. 
- 
-3) 
-ENUNCIADO: 
-Compare as abordagens de especialização por Prompt Engineering e 
-Fine-Tuning em domínios verticais, destacando benefícios e limitações de 
-cada uma. 
-RESPOSTA: 
-Prompt Engineering busca adaptar o comportamento de um modelo 
-generalista apenas ajustando a forma como as instruções são apresentadas. 
-Essa abordagem pode incluir exemplos no próprio prompt (few-shot), 
-descrição explícita da tarefa ou técnicas como Chain-of-Thought para 
-incentivar o modelo a explicitar raciocínios. Seu principal benefício é ser 
-rápida, barata e acessível, pois não modifica o modelo internamente e não 
-requer reprocessamento de grandes volumes de dados. Assim, é útil para 
-criar protótipos, prover explicações estruturadas ou resolver tarefas menos 
-sensíveis. No entanto, Prompt Engineering não adiciona conhecimento real ao 
-modelo, apenas o induz a organizar melhor o que já sabe. Por isso, sua 
-eficácia é limitada quando a tarefa exige domínio conceitual profundo, 
-justificativas formais ou tomada de decisão em contextos de alto risco. 
+Discuta como LLMs especializados aprendem padrões de raciocínio específicos de um domínio, explicando o que caracteriza a transformação de um modelo generalista em um modelo vertical e mencionando ao menos três técnicas de adaptação utilizadas nesse processo.
 
+## RESPOSTA
 
+> A transformação de um LLM generalista em um modelo especializado ocorre quando ele deixa de apenas reproduzir linguagem e passa a incorporar a lógica de pensamento característica de um domínio, ou seja, sua forma própria de analisar problemas, justificar decisões e construir conclusões. Em áreas como Medicina, Direito ou Finanças, o conhecimento não consiste apenas em termos técnicos, mas em padrões estáveis de raciocínio, como estabelecer hipóteses, comparar evidências, aplicar normas ou avaliar risco.
+>
+> Três técnicas fundamentais permitem essa adaptação de modo eficiente. O Fine-Tuning ajusta parte ou todos os pesos do modelo com exemplos do domínio, permitindo que ele aprenda relações conceituais profundas e sequências de decisão. LoRA ou Adapters acrescentam pequenas camadas treináveis, mantendo o modelo-base intacto, o que reduz custo e evita esquecimento catastrófico. Já o Instruction Tuning ensina o modelo a seguir instruções de forma alinhada às práticas da área, garantindo coerência argumentativa e formato de resposta adequado.
+>
+> Combinadas, essas técnicas possibilitam que o modelo internalize estruturas de raciocínio, não apenas vocabulário, resultando em respostas mais seguras, consistentes e contextualizadas às necessidades do domínio vertical.
 
-Já o Fine-Tuning envolve ajustar os pesos internos do modelo com corpora 
-especializados, permitindo que ele assimile padrões de raciocínio, 
-terminologias e normas próprias do domínio. Isso reduz alucinações, melhora 
-consistência e torna as respostas mais alinhadas à prática profissional. 
-Contudo, exige curadoria especializada de dados, recursos computacionais 
-significativos e governança metodológica. Dessa forma, Prompt Engineering é 
-apropriado para contextos exploratórios, enquanto Fine-Tuning é necessário 
-em aplicações críticas, como diagnóstico clínico assistido, análise jurídica ou 
-decisões financeiras reguladas. 
- 
-4) 
-ENUNCIADO: 
-Explique por que o tokenizer de modelos generalistas pode ser uma limitação 
-para a especialização de LLMs em domínios verticais e descreva como 
-arquiteturas ou estratégias híbridas podem mitigar esse problema 
-RESPOSTA: 
-O tokenizer de modelos generalistas pode prejudicar a especialização em 
-domínios verticais ao dividir termos técnicos em sub-tokens incoerentes, 
-dificultando que o modelo reconheça conceitos como unidades semânticas 
-completas (ex: “hipertrofia ventricular esquerda” ou “res judicata”). Como o 
-tokenizer define os embeddings de entrada, reconfigurá-lo exigiria re-treinar 
-todo o modelo do zero — algo custoso e pouco prático. Estratégias híbridas 
-resolvem isso sem alterar a base do modelo. Por exemplo, RAG 
-(Retrieval-Augmented Generation) permite ao modelo consultar bases 
-externas contendo vocabulário técnico estruturado, suprindo lacunas sem 
-depender da tokenização original. Adapters ou LoRA introduzem pequenas 
-camadas intermediárias com embeddings específicos do domínio, que 
-capturam o significado de termos técnicos mesmo com um tokenizer genérico. 
-Já a abordagem de tokenização dupla com Mixture-of-Experts (MoE) permite 
-combinar o tokenizer generalista com um tokenizer especializado em paralelo, 
-ativando apenas os “especialistas” relevantes quando vocabulário técnico é 
-detectado. Assim, cada estratégia mitiga a limitação do tokenizer ao adicionar 
-uma camada de interpretação contextualizada, mantendo a eficiência do 
-modelo original e ampliando sua capacidade de compreender a linguagem 
-especializada. 
- 
- 
-5) 
-ENUNCIADO: 
+## Q3
 
+Compare as abordagens de especialização por Prompt Engineering e Fine-Tuning em domínios verticais, destacando benefícios e limitações de cada uma.
 
+## RESPOSTA
 
-Modelos de linguagem aplicados a domínios verticais como medicina e direito 
-são frequentemente avaliados por métricas quantitativas (ex: acurácia em 
-provas, taxa de erro) e por análises qualitativas feitas por especialistas 
-humanos. 
-Discuta como essas duas formas de avaliação se complementam e quais 
-seriam os riscos de depender exclusivamente de uma ou de outra no 
-processo de validação desses modelos. 
-RESPOSTA: 
-A avaliação de modelos de linguagem em domínios verticais precisa integrar 
-métricas quantitativas e avaliações qualitativas para ser completa. As métricas 
-quantitativas, como acurácia em provas padronizadas, taxa de erro, 
-sensibilidade ou concordância com gabaritos, fornecem indicadores objetivos 
-e comparáveis, permitindo mensurar progresso, selecionar modelos e 
-monitorar desempenho ao longo do tempo. Contudo, elas não capturam 
-dimensões essenciais desses domínios, como adequação ética, clareza 
-comunicativa, fundamentação argumentativa ou segurança na tomada de 
-decisão.A avaliação qualitativa feita por especialistas humanos complementa 
-essas lacunas, pois médicos, juristas ou analistas financeiros conseguem 
-identificar se a resposta está alinhada a práticas profissionais reais, se utiliza 
-o raciocínio correto e se respeita normas e expectativas institucionais. 
-Entretanto, depender exclusivamente da avaliação humana também envolve 
-riscos: ela é cara, lenta, sujeita a vieses individuais e não escala para 
-cenários de uso contínuo.Se usarmos apenas métricas numéricas, um modelo 
-pode parecer adequado apesar de produzir respostas perigosamente 
-confiantes, porém equivocadas. Se confiarmos apenas em avaliação humana, 
-podemos não detectar falhas sistemáticas ou não garantir consistência. 
-Portanto, a combinação das duas formas (avaliar o que o modelo acerta e 
-como ele raciocina) é essencial para validar modelos realmente seguros, 
-responsáveis e aplicáveis na prática profissional.
+> Prompt Engineering busca adaptar o comportamento de um modelo generalista apenas ajustando a forma como as instruções são apresentadas. Essa abordagem pode incluir exemplos no próprio prompt (few-shot), descrição explícita da tarefa ou técnicas como Chain-of-Thought para incentivar o modelo a explicitar raciocínios. Seu principal benefício é ser rápida, barata e acessível, pois não modifica o modelo internamente e não requer reprocessamento de grandes volumes de dados. Assim, é útil para criar protótipos, prover explicações estruturadas ou resolver tarefas menos sensíveis. No entanto, Prompt Engineering não adiciona conhecimento real ao modelo, apenas o induz a organizar melhor o que já sabe. Por isso, sua eficácia é limitada quando a tarefa exige domínio conceitual profundo, justificativas formais ou tomada de decisão em contextos de alto risco.
+>
+> Já o Fine-Tuning envolve ajustar os pesos internos do modelo com corpora especializados, permitindo que ele assimile padrões de raciocínio, terminologias e normas próprias do domínio. Isso reduz alucinações, melhora consistência e torna as respostas mais alinhadas à prática profissional. Contudo, exige curadoria especializada de dados, recursos computacionais significativos e governança metodológica. Dessa forma, Prompt Engineering é apropriado para contextos exploratórios, enquanto Fine-Tuning é necessário em aplicações críticas, como diagnóstico clínico assistido, análise jurídica ou decisões financeiras reguladas.
+
+## Q4
+
+Explique por que o tokenizer de modelos generalistas pode ser uma limitação para a especialização de LLMs em domínios verticais e descreva como arquiteturas ou estratégias híbridas podem mitigar esse problema
+
+## RESPOSTA
+
+> O tokenizer de modelos generalistas pode prejudicar a especialização em domínios verticais ao dividir termos técnicos em sub-tokens incoerentes, dificultando que o modelo reconheça conceitos como unidades semânticas completas (ex: “hipertrofia ventricular esquerda” ou “res judicata”). Como o tokenizer define os embeddings de entrada, reconfigurá-lo exigiria re-treinar todo o modelo do zero — algo custoso e pouco prático. Estratégias híbridas resolvem isso sem alterar a base do modelo. Por exemplo, RAG (Retrieval-Augmented Generation) permite ao modelo consultar bases externas contendo vocabulário técnico estruturado, suprindo lacunas sem depender da tokenização original. Adapters ou LoRA introduzem pequenas camadas intermediárias com embeddings específicos do domínio, que capturam o significado de termos técnicos mesmo com um tokenizer genérico.
+>
+> Já a abordagem de tokenização dupla com Mixture-of-Experts (MoE) permite combinar o tokenizer generalista com um tokenizer especializado em paralelo, ativando apenas os “especialistas” relevantes quando vocabulário técnico é detectado. Assim, cada estratégia mitiga a limitação do tokenizer ao adicionar uma camada de interpretação contextualizada, mantendo a eficiência do modelo original e ampliando sua capacidade de compreender a linguagem especializada.
+
+## Q5
+
+Modelos de linguagem aplicados a domínios verticais como medicina e direito são frequentemente avaliados por métricas quantitativas (ex: acurácia em provas, taxa de erro) e por análises qualitativas feitas por especialistas humanos. | Discuta como essas duas formas de avaliação se complementam e quais seriam os riscos de depender exclusivamente de uma ou de outra no processo de validação desses modelos.
+
+## RESPOSTA
+
+> A avaliação de modelos de linguagem em domínios verticais precisa integrar métricas quantitativas e avaliações qualitativas para ser completa. As métricas quantitativas, como acurácia em provas padronizadas, taxa de erro, sensibilidade ou concordância com gabaritos, fornecem indicadores objetivos e comparáveis, permitindo mensurar progresso, selecionar modelos e monitorar desempenho ao longo do tempo. Contudo, elas não capturam dimensões essenciais desses domínios, como adequação ética, clareza comunicativa, fundamentação argumentativa ou segurança na tomada de decisão.A avaliação qualitativa feita por especialistas humanos complementa essas lacunas, pois médicos, juristas ou analistas financeiros conseguem identificar se a resposta está alinhada a práticas profissionais reais, se utiliza o raciocínio correto e se respeita normas e expectativas institucionais. Entretanto, depender exclusivamente da avaliação humana também envolve riscos: ela é cara, lenta, sujeita a vieses individuais e não escala para cenários de uso contínuo.Se usarmos apenas métricas numéricas, um modelo pode parecer adequado apesar de produzir respostas perigosamente confiantes, porém equivocadas. Se confiarmos apenas em avaliação humana, podemos não detectar falhas sistemáticas ou não garantir consistência.
+>
+> Portanto, a combinação das duas formas (avaliar o que o modelo acerta e como ele raciocina) é essencial para validar modelos realmente seguros, responsáveis e aplicáveis na prática profissional.

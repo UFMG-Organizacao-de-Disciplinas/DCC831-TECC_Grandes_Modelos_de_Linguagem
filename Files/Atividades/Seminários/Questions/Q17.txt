@@ -1,220 +1,116 @@
-﻿1 - Qual o propósito geral por trás do alinhamento de LLMs e por que ele é importante? 
- 
-Uma resposta correta deve ter a ideia geral, que o modelo deve estar alinhado com os 
-valores humanos. E também citar os riscos reais e potenciais com uma breve descrição. 
- 
-Resposta detalhada: 
- 
-Riscos reais: 
-- Conteúdo Indesejável e Não Confiável: LLMs não alinhados podem gerar conteúdo 
-enviesado, tóxico ou sensível à privacidade devido a problemas não resolvidos nos dados 
-de treinamento. 
-- Usos Maliciosos e Impactos Negativos na Sociedade: LLMs podem ser mal utilizados 
-para criar campanhas de desinformação mais baratas e escaláveis , facilitar fraudes, ou 
-gerar códigos para ciberataques e até mesmo armas letais. 
-- Impactos Social e Ambiental: treinamento e a operação de LLMs requerem recursos 
-computacionais vastos, levantando preocupações sobre seu consumo de energia e 
-emissões de carbono. Além disso, seu uso generalizado pode perturbar os mercados de 
-trabalho, afetando uma grande porcentagem da força de trabalho. 
- 
-Potenciais riscos: 
-- Convergência Instrumental: mudança de comportamento para buscar subobjetivos. 
-- Consciência (Awareness): modelos avançados podem desenvolver uma espécie de 
-consciência situacional, que levaria às capacidades de distinguir a si e entre momentos de 
-treinamento e operação, podendo perseguir objetivos próprios e ser independente. 
-- Dissimulação (Deception): entender o objetivo humano e fingir estar alinhado 
-durante o treinamento e buscar objetivos próprios no momento da implantação. 
-- Autopreservação (Self-Preservation): evitar ser desligado para garantir a 
-sobrevivência e a operação necessárias para atingir seu objetivo final. 
-- Busca por Poder (Power-Seeking): tendência de adquirir mais poder e recursos 
-(poder computacional e/ou dados) para a realização de seus objetivos. Estudos 
-demonstraram que políticas e funções de recompensa ótimas podem incentivar os 
-sistemas a buscar poder em determinados ambientes. 
- 
- 
-2- Caracterize alinhamento externo, suas categorias e cite/descreva brevemente os 
-principais métodos de cada categoria. 
- 
-Uma resposta correta deve conter a ideia geral do que é alinhamento externo, suas duas 
-categorias (segundo o artigo), Métodos de supervisão não-recursivos e Métodos de 
-supervisão escaláveis, e a citação ou uma breve descrição dos métodos de cada categoria. 
- 
-Resposta detalhada: 
+﻿# Questões grupo 17
 
+## Q1
 
+Qual o propósito geral por trás do alinhamento de LLMs e por que ele é importante?
 
- 
-As abordagens de alinhamento externo determinam que os valores humanos devem ser 
-transformados em objetivos de treinamento de LLMs. E tem como referência o framework 
-HHH - Helpfulness Honesty Harmlessness - que indicam 3 dimensões imprescindíveis para 
-o alinhamento de LLMs. Alguns comportamentos (lista não exaustiva) do que se espera de 
-um LLM em cada dimensão: 
- 
-- Utilidade (Helpfulness): Os modelos devem seguir as instruções do usuário com 
-fidelidade, fornecer informações úteis, concluir tarefas de forma concisa e eficiente. 
- 
-- Honestidade (Honesty): Os LLMs devem fornecer informações precisas e factualmente 
-corretas, reconhecer a incerteza quando apropriado, evitar alucinações e invenções, serem 
-transparentes sobre suas capacidades e limitações. 
- 
-- Inofensividade (Harmlessness): Os modelos devem recusar solicitações prejudiciais de 
-forma clara e educada, evitar gerar conteúdo prejudicial em qualquer circunstância, 
-independente da entrada. 
- 
-Métodos de supervisão não-recursivos 
- 
+### Orientações para uma resposta correta
 
--​ projetados principalmente para sistemas nos quais somente humanos podem 
-fornecer supervisão de alinhamento. 
- 
+Uma resposta correta deve ter a ideia geral, que o modelo deve estar alinhado com os valores humanos. E também citar os riscos reais e potenciais com uma breve descrição.
 
-Principais abordagens: 
-- Métodos baseados em aprendizado por reforço (RLHF) e métodos baseados em 
-aprendizado supervisionado (SFT). 
- 
-Métodos de supervisão escaláveis 
- 
+### Resposta
 
--​ buscam formas de permitir a supervisão de humanos mesmo em casos de modelos 
-com capacidades maiores que o ser humano. 
+> - **Riscos reais:**
+>   - **Conteúdo Indesejável e Não Confiável:** LLMs não alinhados podem gerar conteúdo enviesado, tóxico ou sensível à privacidade devido a problemas não resolvidos nos dados de treinamento.
+>   - **Usos Maliciosos e Impactos Negativos na Sociedade:** LLMs podem ser mal utilizados para criar campanhas de desinformação mais baratas e escaláveis , facilitar fraudes, ou gerar códigos para ciberataques e até mesmo armas letais.
+>   - **Impactos Social e Ambiental:** treinamento e a operação de LLMs requerem recursos computacionais vastos, levantando preocupações sobre seu consumo de energia e emissões de carbono. Além disso, seu uso generalizado pode perturbar os mercados de trabalho, afetando uma grande porcentagem da força de trabalho.
+> - **Potenciais riscos:**
+>   - **Convergência Instrumental:** mudança de comportamento para buscar subobjetivos.
+>   - **Consciência (Awareness):** modelos avançados podem desenvolver uma espécie de consciência situacional, que levaria às capacidades de distinguir a si e entre momentos de treinamento e operação, podendo perseguir objetivos próprios e ser independente.
+>   - **Dissimulação (Deception):** entender o objetivo humano e fingir estar alinhado durante o treinamento e buscar objetivos próprios no momento da implantação.
+>   - **Autopreservação (Self-Preservation):** evitar ser desligado para garantir a sobrevivência e a operação necessárias para atingir seu objetivo final.
+>   - **Busca por Poder (Power-Seeking):** tendência de adquirir mais poder e recursos (poder computacional e/ou dados) para a realização de seus objetivos. Estudos demonstraram que políticas e funções de recompensa ótimas podem incentivar os sistemas a buscar poder em determinados ambientes.
 
--​ mesmo em tarefas complexas desempenhadas por modelos super-humanos a 
-supervisão pode ser feita de forma simples e fácil. 
+## Q2
 
- 
-Principais abordagens: 
-- Task Decomposition: Divide tarefas complexas em subtarefas pequenas e 
-predominantemente independentes para facilitar a supervisão humana. 
-- Constitutional AI: Abordagem onde humanos fornecem "meta-supervisão" via princípios 
-gerais (constituição); o LLM usa esses princípios para gerar exemplos de treinamento 
-corrigidos e auto alinhados, supervisionados por humanos. 
+Caracterize alinhamento externo, suas categorias e cite/descreva brevemente os principais métodos de cada categoria.
 
+### Orientações para uma resposta correta
 
+Uma resposta correta deve conter a ideia geral do que é alinhamento externo, suas duas categorias (segundo o artigo), Métodos de supervisão não-recursivos e Métodos de supervisão escaláveis, e a citação ou uma breve descrição dos métodos de cada categoria.
 
-- Debate: Agentes de IA debatem e criticam propostas de respostas; um humano (juiz) 
-avalia a qualidade dos argumentos para selecionar a melhor resposta, melhorando a 
-transparência e a facticidade. 
-- Market Making: Uma variação do Debate onde dois modelos (Market e Adversary) geram 
-argumentos para maximizar a mudança na crença do juiz humano, buscando uma resposta 
-robusta a críticas. 
-- Proxy Tasks: Busca procedimentos para avaliar o resultado das tarefas de forma indireta, 
-exemplo: embora não saibamos como prever com precisão o recorde mundial masculino 
-dos 100 metros rasos, sabemos que esse recorde diminui monotonicamente ao longo do 
-tempo. Portanto, se um modelo prevê uma função não monotônica para o recorde dos 100 
-metros ao longo do tempo, podemos afirmar que esse modelo está errado. 
- 
- 
-3- Caracterize alinhamento interno e possíveis formas de falha dos modelos em realizá-lo. 
- 
-Uma resposta correta deve conter a ideia geral do que é alinhamento interno e seus 
-principais conceitos (Base Objective, Base Optimizer, Mesa-objective, Mesa-optimizer) e 
-uma descrição breve das falhas mais comuns.  
- 
-Resposta detalhada: 
- 
-“O alinhamento interno busca garantir que um sistema de IA otimize de forma robusta o 
-objetivo dado que se alinha com o que os humanos querem que ele faça.” 
-Em outras palavras, visa garantir que o objetivo interno de um sistema de IA — o 
-Mesa-objective (o que o otimizador aprendido, ou Mesa-optimizer, realmente busca) — se 
-alinhe ao Base Objective (o objetivo pretendido pelo desenvolvedor, otimizado pelo Base 
-Optimizer). 
- 
-As Falhas de Alinhamento Interno: 
- 
-- Alinhamento Proxy: O Mesa-optimizer otimiza um proxy incorreto para o objetivo 
-base. O subtipo mais sério é o Alinhamento Enganoso, comportamento diferente 
-diferente. 
-- Alinhamento Aproximado: A Mesa-objetivo é apenas uma aproximação do objetivo 
-base devido a erros técnicos. 
-- Alinhamento Subótimo: O modelo demonstra comportamento alinhado temporariamente 
-devido a limitações (ex: restrições computacionais), mas o comportamento alinhado é 
-modificado com o desaparecimento das limitações. 
- 
- 
- 
+### Resposta
 
+> As abordagens de alinhamento externo determinam que os valores humanos devem ser transformados em objetivos de treinamento de LLMs. E tem como referência o framework HHH - Helpfulness Honesty Harmlessness - que indicam 3 dimensões imprescindíveis para o alinhamento de LLMs. Alguns comportamentos (lista não exaustiva) do que se espera de um LLM em cada dimensão:
+> 
+> - **Utilidade (Helpfulness):** Os modelos devem seguir as instruções do usuário com fidelidade, fornecer informações úteis, concluir tarefas de forma concisa e eficiente.
+> - **Honestidade (Honesty):** Os LLMs devem fornecer informações precisas e factualmente corretas, reconhecer a incerteza quando apropriado, evitar alucinações e invenções, serem transparentes sobre suas capacidades e limitações.
+> - **Inofensividade (Harmlessness):** Os modelos devem recusar solicitações prejudiciais de forma clara e educada, evitar gerar conteúdo prejudicial em qualquer circunstância, independente da entrada.
+> 
+> - Métodos de supervisão não-recursivos:​
+>   - projetados principalmente para sistemas nos quais somente humanos podem fornecer supervisão de alinhamento.
+>   - **Principais abordagens:**
+>     - Métodos baseados em aprendizado por reforço (RLHF) e métodos baseados em aprendizado supervisionado (SFT).
+> - **Métodos de supervisão escaláveis:**
+>   -​ buscam formas de permitir a supervisão de humanos mesmo em casos de modelos com capacidades maiores que o ser humano.
+>   -​ mesmo em tarefas complexas desempenhadas por modelos super-humanos a supervisão pode ser feita de forma simples e fácil.
+>   - **Principais abordagens:**
+>     - **Task Decomposition:** Divide tarefas complexas em subtarefas pequenas e predominantemente independentes para facilitar a supervisão humana.
+>     - **Constitutional AI:** Abordagem onde humanos fornecem "meta-supervisão" via princípios gerais (constituição); o LLM usa esses princípios para gerar exemplos de treinamento corrigidos e auto alinhados, supervisionados por humanos.
+>     - **Debate:** Agentes de IA debatem e criticam propostas de respostas; um humano (juiz) avalia a qualidade dos argumentos para selecionar a melhor resposta, melhorando a transparência e a facticidade.
+>     - **Market Making:** Uma variação do Debate onde dois modelos (Market e Adversary) geram argumentos para maximizar a mudança na crença do juiz humano, buscando uma resposta robusta a críticas.
+>     - **Proxy Tasks: Busca procedimentos para avaliar o resultado das tarefas de forma indireta, exemplo:** embora não saibamos como prever com precisão o recorde mundial masculino dos 100 metros rasos, sabemos que esse recorde diminui monotonicamente ao longo do tempo. Portanto, se um modelo prevê uma função não monotônica para o recorde dos 100 metros ao longo do tempo, podemos afirmar que esse modelo está errado.
 
+## Q3
 
-4- Descreva brevemente os benefícios e riscos a nível individual relacionados com o 
-alinhamento personalizado. 
- 
-Uma resposta correta deve descrever brevemente os 5 benefícios (Eficiência,  Utilidade, 
-Respeito por Valores, Autonomia do Usuário e Empatia e Companheirismo) e os 6 riscos 
-(Esforço, Dependência, Reforço de Viés, Essencialismo e Perfilamento, Antropomorfismo e 
-Privacidade) com relação aos indivíduos. 
- 
-Resposta detalhada: 
- 
-Benefícios: 
-Eficiência: Maior velocidade e menos interação para completar tarefas, adaptando-se a 
-diversos estilos linguísticos e dialetos. 
-Utilidade: Gera saídas mais otimizadas (melhorando estilo, tom e complexidade) e se 
-aplica a domínios específicos (educação, saúde, finanças, legal), usando conhecimento 
-individualizado. 
-Respeito por Valores: Adaptação a crenças éticas, valores e ideologias diversas, evitando 
-padrões culturais hegemônicos. 
-Autonomia do Usuário: Oferece maior controle e senso de propriedade sobre a 
-tecnologia. 
-Empatia e Companheirismo: Promove maior compreensão emocional e confiança, 
-satisfazendo a demanda por agentes de companhia. 
- 
-Riscos: 
-Esforço: A personalização exige esforço do usuário (especialmente feedback explícito), 
-podendo se tornar uma forma de "trabalho voluntário extrativo" que beneficia os provedores 
-de tecnologia. 
-Dependência: Risco de uso excessivo, levando a vícios (análogos à internet/mídias 
-sociais) e confiança cega nas saídas da IA, o que pode ser explorado pelos modelos de 
-negócio. 
-Reforço de Viés: O sistema pode reforçar vieses de seleção e confirmação, limitando a 
-exposição de informações diferentes do gosto do usuário e reafirmando suas preferências. 
-Essencialismo e Perfilamento: Uso de suposições simplificadoras sobre o usuário, 
-resultando em perfil algorítmico e categorização não consensual, o que pode ir contra à 
-autonomia da identidade individual. 
-Antropomorfismo: Aumento da atribuição de traços humanos à IA, levando os usuários a 
-compartilhar informações sensíveis em excesso, tornando-os vulneráveis à exploração ou 
-à criação de apegos não saudáveis. 
-Privacidade: A personalização requer a coleta massiva de dados íntimos e sensíveis, 
-elevando o risco de violações de privacidade e conflitos com regulamentações vigentes no 
-país 
- 
+Caracterize alinhamento interno e possíveis formas de falha dos modelos em realizá-lo.
 
+### Orientações para uma resposta correta
 
+Uma resposta correta deve conter a ideia geral do que é alinhamento interno e seus principais conceitos (Base Objective, Base Optimizer, Mesa-objective, Mesa-optimizer) e uma descrição breve das falhas mais comuns. 
 
- 
- 
-5- Descreva brevemente os benefícios e riscos a nível social relacionados com o 
-alinhamento personalizado. 
- 
-Uma resposta correta deve descrever brevemente os 4 benefícios (Inclusão e 
-Acessibilidade, Diversidade e Representação, Produtividade do Trabalho e  
-Democratização e Participação) e os 5 riscos (Disparidades de acesso, Polarização, Uso 
-malicioso, Deslocamento de mão de obra e Danos ambientais) com relação à sociedade. 
- 
-Resposta detalhada: 
- 
-Benefícios: 
-Inclusão e Acessibilidade: Ajuda LLMs a atender melhor comunidades marginalizadas, 
-incluindo estilos de comunicação específicos (como dialetos e línguas não-nativas) ou 
-necessidades especiais. Pode promover uma sociedade mais inclusiva, melhorando 
-disparidades em serviços como tutoria e saúde. 
-Diversidade e Representação: Evita o "monismo de valores" de técnicas de alinhamento 
-atuais, que priorizam visões de mundo específicas.  
-Produtividade do Trabalho: Podem contribuir para aumentar a produtividade da força de 
-trabalho, atuando como uma tecnologia de propósito geral com impactos transformadores. 
-Democratização e Participação: A personalização permite que valores e preferências 
-sejam ativamente incorporados no LLM, movendo-se em direção a uma IA mais 
-participativa. 
- 
- 
-Riscos: 
-Disparidades de acesso: distribuição desigual dos benefícios, excluindo aqueles que não 
-podem pagar ou ter acesso à tecnologia e exacerbando as divisões digitais. 
-Polarização: aumento da divisão de indivíduos ou grupos em câmaras de eco e a quebra 
-da coesão social compartilhada. 
-Uso malicioso: uso para fins prejudiciais ou ilegais, como gerar linguagem ofensiva em 
-larga escala, manipular usuários por meio de desinformação ou fraude, ou persuadir 
-usuários a adotar determinadas visões políticas ou preferências de marca. 
-Deslocamento de mão de obra: aumento do risco de automação de empregos, 
-particularmente empregos de salário mínimo, rotineiros e de trabalho remoto. 
-Danos ambientais: aumento dos custos ambientais decorrentes do aumento dos custos 
-de treinamento, armazenamento de dados e inferência.
+### Resposta
+
+> “O alinhamento interno busca garantir que um sistema de IA otimize de forma robusta o objetivo dado que se alinha com o que os humanos querem que ele faça.” Em outras palavras, visa garantir que o objetivo interno de um sistema de IA — o Mesa-objective (o que o otimizador aprendido, ou Mesa-optimizer, realmente busca) — se alinhe ao Base Objective (o objetivo pretendido pelo desenvolvedor, otimizado pelo Base Optimizer).
+> 
+> As Falhas de Alinhamento Interno:
+> 
+> - **Alinhamento Proxy:** O Mesa-optimizer otimiza um proxy incorreto para o objetivo base. O subtipo mais sério é o Alinhamento Enganoso, comportamento diferente diferente.
+> - **Alinhamento Aproximado:** A Mesa-objetivo é apenas uma aproximação do objetivo base devido a erros técnicos.
+> - **Alinhamento Subótimo: O modelo demonstra comportamento alinhado temporariamente devido a limitações (ex:** restrições computacionais), mas o comportamento alinhado é modificado com o desaparecimento das limitações.
+
+## Q4
+
+Descreva brevemente os benefícios e riscos a nível individual relacionados com o alinhamento personalizado.
+
+### Orientações para uma resposta correta
+
+Uma resposta correta deve descrever brevemente os 5 benefícios (Eficiência,  Utilidade, Respeito por Valores, Autonomia do Usuário e Empatia e Companheirismo) e os 6 riscos (Esforço, Dependência, Reforço de Viés, Essencialismo e Perfilamento, Antropomorfismo e Privacidade) com relação aos indivíduos.
+
+### Resposta
+
+> - **Benefícios:**
+>   - **Eficiência:** Maior velocidade e menos interação para completar tarefas, adaptando-se a diversos estilos linguísticos e dialetos.
+>   - **Utilidade:** Gera saídas mais otimizadas (melhorando estilo, tom e complexidade) e se aplica a domínios específicos (educação, saúde, finanças, legal), usando conhecimento individualizado.
+>   - **Respeito por Valores:** Adaptação a crenças éticas, valores e ideologias diversas, evitando padrões culturais hegemônicos.
+>   - **Autonomia do Usuário:** Oferece maior controle e senso de propriedade sobre a tecnologia.
+>   - **Empatia e Companheirismo:** Promove maior compreensão emocional e confiança, satisfazendo a demanda por agentes de companhia.
+> - **Riscos:**
+>   - **Esforço:** A personalização exige esforço do usuário (especialmente feedback explícito), podendo se tornar uma forma de "trabalho voluntário extrativo" que beneficia os provedores de tecnologia.
+>   - **Dependência:** Risco de uso excessivo, levando a vícios (análogos à internet/mídias sociais) e confiança cega nas saídas da IA, o que pode ser explorado pelos modelos de negócio.
+>   - **Reforço de Viés:** O sistema pode reforçar vieses de seleção e confirmação, limitando a exposição de informações diferentes do gosto do usuário e reafirmando suas preferências.
+>   - **Essencialismo e Perfilamento:** Uso de suposições simplificadoras sobre o usuário, resultando em perfil algorítmico e categorização não consensual, o que pode ir contra à autonomia da identidade individual.
+>   - **Antropomorfismo:** Aumento da atribuição de traços humanos à IA, levando os usuários a compartilhar informações sensíveis em excesso, tornando-os vulneráveis à exploração ou à criação de apegos não saudáveis.
+>   - **Privacidade:** A personalização requer a coleta massiva de dados íntimos e sensíveis, elevando o risco de violações de privacidade e conflitos com regulamentações vigentes no país
+
+## Q5
+
+Descreva brevemente os benefícios e riscos a nível social relacionados com o alinhamento personalizado.
+
+### Orientações para uma resposta correta
+
+Uma resposta correta deve descrever brevemente os 4 benefícios (Inclusão e Acessibilidade, Diversidade e Representação, Produtividade do Trabalho e  Democratização e Participação) e os 5 riscos (Disparidades de acesso, Polarização, Uso malicioso, Deslocamento de mão de obra e Danos ambientais) com relação à sociedade.
+
+### Resposta
+
+> - **Benefícios:**
+>   - **Inclusão e Acessibilidade:** Ajuda LLMs a atender melhor comunidades marginalizadas, incluindo estilos de comunicação específicos (como dialetos e línguas não-nativas) ou necessidades especiais. Pode promover uma sociedade mais inclusiva, melhorando disparidades em serviços como tutoria e saúde.
+>   - **Diversidade e Representação:** Evita o "monismo de valores" de técnicas de alinhamento atuais, que priorizam visões de mundo específicas. 
+>   - **Produtividade do Trabalho:** Podem contribuir para aumentar a produtividade da força de trabalho, atuando como uma tecnologia de propósito geral com impactos transformadores.
+>   - **Democratização e Participação:** A personalização permite que valores e preferências sejam ativamente incorporados no LLM, movendo-se em direção a uma IA mais participativa.
+> - **Riscos:**
+>   - **Disparidades de acesso:** distribuição desigual dos benefícios, excluindo aqueles que não podem pagar ou ter acesso à tecnologia e exacerbando as divisões digitais.
+>   - **Polarização:** aumento da divisão de indivíduos ou grupos em câmaras de eco e a quebra da coesão social compartilhada.
+>   - **Uso malicioso:** uso para fins prejudiciais ou ilegais, como gerar linguagem ofensiva em larga escala, manipular usuários por meio de desinformação ou fraude, ou persuadir usuários a adotar determinadas visões políticas ou preferências de marca.
+>   - **Deslocamento de mão de obra:** aumento do risco de automação de empregos, particularmente empregos de salário mínimo, rotineiros e de trabalho remoto.
+>   - **Danos ambientais:** aumento dos custos ambientais decorrentes do aumento dos custos de treinamento, armazenamento de dados e inferência.

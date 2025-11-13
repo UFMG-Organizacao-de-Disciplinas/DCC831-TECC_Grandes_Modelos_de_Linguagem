@@ -1,178 +1,70 @@
-﻿1 - O que define um MLLM (Multimodal Large Language Model) e 
-como ele difere de um modelo unimodal? 
+﻿# Grupo 11
 
-Um MLLM é um modelo baseado em LLM capaz de receber, processar e gerar 
-informações multimodais. Ele difere de um modelo unimodal por ser capaz de processar 
-e integrar informações de duas ou mais modalidades, como texto, imagem, e áudio, por 
-exemplo. Enquanto um modelo unimodal é capaz de processar apenas dados de uma 
-única modalidade. 
+## Q1
 
-Orientações para uma resposta correta 
+O que define um MLLM (Multimodal Large Language Model) e como ele difere de um modelo unimodal?
 
-Uma resposta correta deve, acima de tudo, definir o MLLM como um modelo que utiliza 
-um LLM como sua base, ou backbone. Deve também focar de maneira explícita na 
-capacidade essencial de receber, processar, raciocinar e integrar informações de 
-múltiplas modalidades, no mínimo duas, podendo serem mais, como texto, imagem e 
-aúdio. Para ser completa, a resposta precisa contrastar diretamente essa capacidade 
-com o modelo unimodal , enfatizando que este último processa apenas uma 
-modalidade, ficando "cego" para outros tipos de dados e, por isso, produzindo uma 
-gama limitada de resultados, enquanto o MLLM oferece resultados mais amplos. Esta 
-abordagem multimodal é crucial porque a percepção do mundo real é intrinsecamente 
-multimodal, e os MLLMs tentam preencher a lacuna entre o raciocínio do LLM e a 
-percepção do mundo. 
+### Resposta
 
- 
- 
-3 - Você foi recém contratado como engenheiro de machine learning 
+> Um MLLM é um modelo baseado em LLM capaz de receber, processar e gerar informações multimodais. Ele difere de um modelo unimodal por ser capaz de processar e integrar informações de duas ou mais modalidades, como texto, imagem, e áudio, por exemplo. Enquanto um modelo unimodal é capaz de processar apenas dados de uma única modalidade.
 
-em uma empresa que possui um LLM proprietário, extremamente robusto e 
-muito caro, treinado exclusivamente com dados de texto. Sua primeira 
-tarefa é liderar um projeto para adaptar este LLM e criar um novo produto 
-de "Visual Question Answering" (VQA), onde os usuários podem fazer 
-perguntas sobre imagens.  
+### Orientações para uma resposta correta
 
-A diretriz principal da gestão é: não podemos re-treinar ou modificar 
-o LLM original (ele deve permanecer "congelado") para evitar os custos 
-computacionais proibitivos de um re-treinamento completo.  
+> Uma resposta correta deve, acima de tudo, definir o MLLM como um modelo que utiliza um LLM como sua base, ou backbone. Deve também focar de maneira explícita na capacidade essencial de receber, processar, raciocinar e integrar informações de múltiplas modalidades, no mínimo duas, podendo serem mais, como texto, imagem e aúdio. Para ser completa, a resposta precisa contrastar diretamente essa capacidade com o modelo unimodal, enfatizando que este último processa apenas uma modalidade, ficando "cego" para outros tipos de dados e, por isso, produzindo uma gama limitada de resultados, enquanto o MLLM oferece resultados mais amplos. Esta abordagem multimodal é crucial porque a percepção do mundo real é intrinsecamente multimodal, e os MLLMs tentam preencher a lacuna entre o raciocínio do LLM e a percepção do mundo.
 
-Quais componentes de arquitetura você propõe adicionar e treinar 
-para realizar a tarefa sem alterar o LLM , e qual é a função principal desses 
-novos componentes? 
+## Q2
 
-Para esta tarefa, propomos manter o LLM congelado e introduzir dois novos 
-componentes: um Encoder, como um ViT pré-treinado, para extrair as características da 
-imagem, e uma Modality Interface. O componente crucial que precisaremos treinar é 
-essa interface (um "Input Projector", que pode ser um Q-Former, por exemplo). A função 
-principal desta interface é atuar como uma "ponte" treinável que aprende a alinhar as 
+Você foi recém contratado como engenheiro de machine learning em uma empresa que possui um LLM proprietário, extremamente robusto e muito caro, treinado exclusivamente com dados de texto. Sua primeira tarefa é liderar um projeto para adaptar este LLM e criar um novo produto de "Visual Question Answering" (VQA), onde os usuários podem fazer perguntas sobre imagens. | A diretriz principal da gestão é: não podemos re-treinar ou modificar o LLM original (ele deve permanecer "congelado") para evitar os custos computacionais proibitivos de um re-treinamento completo. | Quais componentes de arquitetura você propõe adicionar e treinar para realizar a tarefa sem alterar o LLM, e qual é a função principal desses novos componentes?
 
+### Resposta
 
+> Para esta tarefa, propomos manter o LLM congelado e introduzir dois novos componentes: um Encoder, como um ViT pré-treinado, para extrair as características da imagem, e uma Modality Interface. O componente crucial que precisaremos treinar é essa interface (um "Input Projector", que pode ser um Q-Former, por exemplo). A função principal desta interface é atuar como uma "ponte" treinável que aprende a alinhar as características visuais do encoder com o espaço de características de texto que o LLM congelado já entende, como demonstrado por modelos como o BLIP-2.
 
- 
+### Orientações para uma resposta correta
 
-características visuais do encoder com o espaço de características de texto que o LLM 
-congelado já entende, como demonstrado por modelos como o BLIP-2. 
+> Uma resposta correta deve respeitar a restrição do "LLM congelado". Deve identificar os dois componentes a serem adicionados (Encoder de Modalidade e Interface de Modalidade). Preferencialmente, deve apontar a Interface (ex: Input Projector, Q-Former) como o componente a ser treinado e explicar sua função de "ponte" ou "alinhamento" dos espaços de características.
 
-Orientações para uma resposta correta 
+## Q3
 
-Uma resposta correta deve respeitar a restrição do "LLM congelado". Deve identificar os 
-dois componentes a serem adicionados (Encoder de Modalidade e Interface de 
-Modalidade). Preferencialmente, deve apontar a Interface (ex: Input Projector, 
-Q-Former) como o componente a ser treinado e explicar sua função de "ponte" ou 
-"alinhamento" dos espaços de características. 
+Descreva alguns dos possíveis desafios envolvendo arquiteturas multimodais.
 
- 
- 
-4 - Descreva alguns dos possíveis desafios envolvendo arquiteturas 
+### Resposta
 
-multimodais. 
-As arquiteturas multimodais enfrentam desafios como a escassez de dados pareados 
-entre modalidades (texto, imagem, áudio, vídeo), o que dificulta o aprendizado conjunto, 
-a forte dependência de LLMs, que introduzem vieses, ambiguidades semânticas, como 
-interpretações incorretas de relações entre conceitos ou descrições visuais, e 
-alucinações, em que o modelo gera informações imprecisas ou inexistentes. A 
-contaminação de datasets (com exemplos já expostos ao treinamento) é outro problema 
-crítico, pois distorce a avaliação de desempenho, inflando métricas e mascarando falhas 
-de generalização. Somam-se ainda as diferenças de dimensionalidade entre 
-modalidades, que complicam o alinhamento e a fusão das representações, os desafios 
-de sincronização temporal, a baixa interpretabilidade, o alto custo computacional e 
-energético e a dificuldade de adaptação a novos domínios ou modalidades emergentes. 
+> As arquiteturas multimodais enfrentam desafios como a escassez de dados pareados entre modalidades (texto, imagem, áudio, vídeo), o que dificulta o aprendizado conjunto, a forte dependência de LLMs, que introduzem vieses, ambiguidades semânticas, como interpretações incorretas de relações entre conceitos ou descrições visuais, e alucinações, em que o modelo gera informações imprecisas ou inexistentes. A contaminação de datasets (com exemplos já expostos ao treinamento) é outro problema crítico, pois distorce a avaliação de desempenho, inflando métricas e mascarando falhas de generalização. Somam-se ainda as diferenças de dimensionalidade entre modalidades, que complicam o alinhamento e a fusão das representações, os desafios de sincronização temporal, a baixa interpretabilidade, o alto custo computacional e energético e a dificuldade de adaptação a novos domínios ou modalidades emergentes.
 
-Orientações para uma resposta correta 
-Uma resposta correta deve apontar alguns dos principais desafios das arquiteturas 
-multimodais, sem precisar listar todos. Deve demonstrar compreensão de que esses 
-desafios surgem da integração de diferentes modalidades de dados, com estruturas e 
-dimensões distintas. Deve mencionar ao menos um ou dois pontos centrais, como a 
-escassez de dados pareados, as dificuldades de alinhamento entre modalidades ou 
-problemas herdados dos LLMs, como viés e alucinações. Para ser completa, deve 
-deixar claro que a natureza multimodal aumenta a complexidade de treinamento e 
-generalização dos modelos. 
- 
- 
-9 - Liste 3 problemas clássicos que MLLMs podem ser aplicadas. 
+### Orientações para uma resposta correta
 
-Orientações para uma resposta correta 
+> Uma resposta correta deve apontar alguns dos principais desafios das arquiteturas multimodais, sem precisar listar todos. Deve demonstrar compreensão de que esses desafios surgem da integração de diferentes modalidades de dados, com estruturas e dimensões distintas. Deve mencionar ao menos um ou dois pontos centrais, como a escassez de dados pareados, as dificuldades de alinhamento entre modalidades ou problemas herdados dos LLMs, como viés e alucinações. Para ser completa, deve deixar claro que a natureza multimodal aumenta a complexidade de treinamento e generalização dos modelos.
 
-Uma resposta correta deve listar quaisquer três aplicações clássicas de MLLMs, 
-conforme apresentado no slide 6 da apresentação. A resposta deve demonstrar a 
+## Q4
 
+Liste 3 problemas clássicos que MLLMs podem ser aplicadas.
 
+### Orientações para uma resposta correta
 
- 
+> Uma resposta correta deve listar quaisquer três aplicações clássicas de MLLMs, conforme apresentado no slide 6 da apresentação. A resposta deve demonstrar a compreensão de como esses modelos são aplicados a tarefas que exigem a integração de múltiplas modalidades. Exemplos válidos para citação incluem:
+>
+> -​ Visual Question Answering (VQA): A capacidade de fornecer uma resposta em linguagem natural a uma pergunta feita sobre o conteúdo de uma imagem ou vídeo.
+> -​ Image Captioning and Description (Legendagem de Imagens): A tarefa de gerar um resumo textual coerente que descreva o que está acontecendo em uma imagem.
+> -​ Document Understanding (Compreensão de Documentos): A habilidade de interpretar documentos escaneados, o que exige raciocínio sobre o layout, bem como sobre o texto e os gráficos contidos nele.
+> -​ Video Understanding (Compreensão de Vídeo): A capacidade de resumir ou raciocinar sobre eventos que ocorrem em sequências de vídeo.
+> -​ Medical Imaging Analysis (Análise de Imagens Médicas): O uso do modelo para interpretar imagens de radiologia em conjunto com notas clínicas para auxiliar no diagnóstico.
+> -​ Robotics and Embodied AI (Robótica e IA Incorporada): Permitir que robôs compreendam e ajam com base em instruções que podem ser tanto visuais quanto textuais.
 
-compreensão de como esses modelos são aplicados a tarefas que exigem a integração 
-de múltiplas modalidades. 
+## Q5
 
-Exemplos válidos para citação incluem: 
+MLLMs seguem uma arquitetura padrão. Quais são as 3 partes comumente usadas por esses modelos, e o que cada uma faz?
 
-●​ Visual Question Answering (VQA): A capacidade de fornecer uma resposta 
-em linguagem natural a uma pergunta feita sobre o conteúdo de uma imagem ou 
-vídeo. 
+### Resposta
 
-●​ Image Captioning and Description (Legendagem de Imagens): A tarefa de 
-gerar um resumo textual coerente que descreva o que está acontecendo em 
-uma imagem. 
+> Os MLLMs geralmente seguem uma arquitetura composta por três partes principais: Modality Encoder, Modality Interface e Modality Generator. O Modality Encoder é responsável por receber os dados de uma modalidade específica (como texto, imagem, áudio ou vídeo) e transformá-los em representações numéricas (features) que capturam seus significados semânticos. Exemplos incluem o ViT (Vision Transformer) para imagens e o BERT para texto. Modality Interface atua como o componente de integração entre modalidades, projetando e alinhando as representações produzidas pelos encoders em um espaço compartilhado. Essa etapa é crucial para que o modelo consiga compreender relações entre diferentes tipos de dados, como associar uma descrição textual a uma imagem. Em muitos modelos, essa interface pode ser um módulo como um Q-Former ou Input Projector, responsável por aprender o mapeamento entre as modalidades. Por fim, o Modality Generator é o componente encarregado de gerar a saída final na modalidade desejada, por exemplo, texto em tarefas de VQA ou legendas de imagens para image captioning, é possível utilizar um LLM ou outro decodificador capaz de produzir saídas coerentes e contextualizadas com base no espaço multimodal integrado.
 
-●​ Document Understanding (Compreensão de Documentos): A habilidade de 
-interpretar documentos escaneados, o que exige raciocínio sobre o layout, bem 
-como sobre o texto e os gráficos contidos nele. 
+### Orientações para uma resposta correta
 
-●​ Video Understanding (Compreensão de Vídeo): A capacidade de resumir ou 
-raciocinar sobre eventos que ocorrem em sequências de vídeo. 
-
-●​ Medical Imaging Analysis (Análise de Imagens Médicas): O uso do modelo 
-para interpretar imagens de radiologia em conjunto com notas clínicas para 
-auxiliar no diagnóstico. 
-
-●​ Robotics and Embodied AI (Robótica e IA Incorporada): Permitir que robôs 
-compreendam e ajam com base em instruções que podem ser tanto visuais 
-quanto textuais. 
-
- 
- 
- 
-10 - MLLMs seguem uma arquitetura padrão. Quais são as 3 partes 
-comumente usadas por esses modelos, e o que cada uma faz? 
-Os MLLMs geralmente seguem uma arquitetura composta por três partes principais: 
-Modality Encoder, Modality Interface e Modality Generator. O Modality Encoder é 
-responsável por receber os dados de uma modalidade específica (como texto, imagem, 
-áudio ou vídeo) e transformá-los em representações numéricas (features) que capturam 
-seus significados semânticos. Exemplos incluem o ViT (Vision Transformer) para 
-imagens e o BERT para texto. Modality Interface atua como o componente de 
-integração entre modalidades, projetando e alinhando as representações produzidas 
-pelos encoders em um espaço compartilhado. Essa etapa é crucial para que o modelo 
-consiga compreender relações entre diferentes tipos de dados, como associar uma 
-descrição textual a uma imagem. Em muitos modelos, essa interface pode ser um 
-módulo como um Q-Former ou Input Projector, responsável por aprender o mapeamento 
-entre as modalidades. Por fim, o Modality Generator é o componente encarregado de 
-gerar a saída final na modalidade desejada, por exemplo, texto em tarefas de VQA ou 
-legendas de imagens para image captioning, é possível utilizar um LLM ou outro 
-decodificador capaz de produzir saídas coerentes e contextualizadas com base no 
-espaço multimodal integrado. 
-
-
-
- 
-
- 
-Orientações para uma resposta correta 
- 
-Uma resposta correta deve identificar claramente as três partes principais da arquitetura 
-de um MLLM: Modality Encoder, Modality Interface e Modality Generator. 
-Deve descrever o papel funcional de cada uma delas: 
-
-●​ O Modality Encoder deve ser apresentado como o módulo que extrai 
-características (features) dos dados de cada modalidade (imagem, texto, áudio, 
-etc.). 
-
-●​ A Modality Interface deve ser descrita como a ponte de alinhamento e integração 
-entre modalidades, responsável por projetar todas as representações em um 
-espaço semântico comum, permitindo o raciocínio multimodal. 
-
-●​ O Modality Generator deve ser caracterizado como o componente que produz a 
-saída final, geralmente em texto, imagem ou outra modalidade, a partir das 
-representações integradas. 
-
- 
-Para ser considerada completa, a resposta precisa deixar explícito que essas três 
-partes trabalham de forma encadeada (codificação, integração e geração), refletindo o 
-fluxo de informação típico em arquiteturas multimodais modernas.
+> Uma resposta correta deve identificar claramente as três partes principais da arquitetura de um MLLM: Modality Encoder, Modality Interface e Modality Generator. Deve descrever o papel funcional de cada uma delas:
+>
+> -​ O Modality Encoder deve ser apresentado como o módulo que extrai características (features) dos dados de cada modalidade (imagem, texto, áudio, etc.).
+> -​ A Modality Interface deve ser descrita como a ponte de alinhamento e integração entre modalidades, responsável por projetar todas as representações em um espaço semântico comum, permitindo o raciocínio multimodal.
+> -​ O Modality Generator deve ser caracterizado como o componente que produz a saída final, geralmente em texto, imagem ou outra modalidade, a partir das representações integradas.
+>
+> Para ser considerada completa, a resposta precisa deixar explícito que essas três partes trabalham de forma encadeada (codificação, integração e geração), refletindo o fluxo de informação típico em arquiteturas multimodais modernas.
