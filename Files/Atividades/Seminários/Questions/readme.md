@@ -1,5 +1,25 @@
 # Perguntas
 
+- [Perguntas](#perguntas)
+  - [Grupo: 01](#grupo-01)
+  - [Grupo: 02](#grupo-02)
+  - [Grupo: 03](#grupo-03)
+  - [Grupo: 04](#grupo-04)
+  - [Grupo: 05](#grupo-05)
+  - [Grupo: 06](#grupo-06)
+  - [Grupo: 07](#grupo-07)
+  - [Grupo: 08](#grupo-08)
+  - [Grupo: 09](#grupo-09)
+  - [Grupo: 10](#grupo-10)
+  - [Grupo: 11](#grupo-11)
+  - [Grupo: 12](#grupo-12)
+  - [Grupo: 13](#grupo-13)
+  - [Grupo: 14](#grupo-14)
+  - [Grupo: 15](#grupo-15)
+  - [Grupo: 16](#grupo-16)
+  - [Grupo: 17](#grupo-17)
+  - [Grupo: 18](#grupo-18)
+
 ## Grupo: 01
 
 - Pergunta 1: Ao tentar otimizar um modelo já existente, você aplica a otimização Mixture of Experts (MoE) e realiza uma execução de teste. Contudo, após alguns passos é possível perceber que a perda de validação está estagnada. Qual a causa mais provável ? Como seria uma possível solução?​
@@ -84,7 +104,7 @@
 - Pergunta 5:
   >
 
-## Grupo: 06 - Causalidade
+## Grupo: 06
 
 - Pergunta 1: Por que a incorporação de princípios de interpretabilidade causal se tornou uma necessidade urgente no desenvolvimento e uso de LLMs?
   > A busca por interpretabilidade causal nos LLMs tornou-se urgente devido à crescente falta de confiança, transparência e conformidade ética associadas à sua arquitetura. Esses modelos são fundamentados em um paradigma probabilístico autoregressivo, cujo objetivo é prever o próximo token com base em associações aprendidas a partir de um vasto corpus de textos. No entanto, esse processo leva os LLMs a capturar correlações espúrias e reproduzir vieses linguísticos e estereótipos sociais presentes nos dados de treinamento.
@@ -102,6 +122,7 @@
   > Para superar essas limitações, pesquisadores propuseram o framework COS, que estabelece três critérios fundamentais para definir um benchmark robusto de raciocínio causal:
   >
   > 1. Causal / Intervencional: O benchmark deve avaliar a capacidade do modelo de lidar com intervenções e contrafactuais, em vez de se restringir à observação de associações.
+  >
   > 2. Open-Ended: Em vez de questões de múltipla escolha, que permitem ao modelo adivinhar respostas com base em pistas linguísticas, o benchmark deve exigir respostas geradas livremente, estimulando inferência causal explícita e explicações estruturadas.
   > 3. Scalable (Escalável): O benchmark deve introduzir múltiplos fatores e aumentar progressivamente a complexidade causal, mantendo coerência estrutural. Isso permite testar a robustez e a generalização do modelo em sistemas cada vez mais complexos.
   >
@@ -130,7 +151,9 @@
   > Formalmente, um SCM é composto por:
   >
   > 1.​ Um conjunto de variáveis endógenas, que representam os nós do grafo e cujos valores são determinados dentro do modelo;​
+  >
   > 2.​ Um conjunto de variáveis exógenas, que representam fatores externos ou ruídos que afetam as variáveis endógenas;​
+  >
   > 3.​ Um conjunto de funções estruturais, uma para cada variável endógena, definindo como cada variável é gerada a partir de seus pais no grafo e das variáveis exógenas associadas.
   >
   > A principal diferença, portanto, é que:
@@ -155,8 +178,10 @@
   > - Risco Ético e Social: informações equivocadas podem induzir decisões erradas, afetando a confiança dos usuários e levantando questões sobre responsabilidade e segurança no uso de IA.
 - Pergunta 2: Quais estratégias podem ser aplicadas para detectar alucinações em LLMs?
   > 1. Detecção de Alucinação de Factualidade Busca identificar informações incorretas em relação ao mundo real.
+  >
   >    - Verificação de Fatos: Compara as respostas com fontes confiáveis. Pode ser feita por busca externa, que decompõe o texto em fatos e os confirma em bases externas (como no FACTSCORE), ou por verificação interna, em que o próprio modelo avalia a consistência de suas respostas (ex.: método Chain-of-Verification).
   >    - Estimação de Incerteza: Parte do princípio de que a alucinação está ligada à incerteza do modelo. Pode usar métricas internas (como a probabilidade dos tokens) ou o comportamento externo do modelo, medindo a consistência entre múltiplas respostas (como em SelfCheckGPT ou LMvLM).
+  >
   > 2. Detecção de Alucinação de Fidelidade Avalia se a saída do modelo é fiel à instrução ou ao contexto fornecido. As principais técnicas incluem:
   >    - Métricas Baseadas em Fatos: Comparam entidades e relações entre o texto gerado e o original.
   >    - Métricas Baseadas em Classificadores: Utilizam modelos de inferência textual (NLI) para avaliar implicação lógica.
@@ -173,7 +198,8 @@
   >
   > Embora eficaz, o RAG é vulnerável a falhas no estágio de recuperação (Retrieval Failure), como a recuperação de informações irrelevantes (noisy retrievals) que introduzem dados incorretos ou ruído no processo de geração.
 - Pergunta 4: Analise as causas fundamentais da alucinação nos LLMs, abrangendo os três principais estágios de desenvolvimento do modelo: Dados, Treinamento e Inferência. Descreva um fator contribuinte para a alucinação em cada uma dessas três categorias principais.
-  > 1. Dados: Se o conjunto de treinamento contiver informações incompletas, desatualizadas, enviesadas ou raras (como fatos de domínio muito específico), o modelo não terá base sólida para responder e pode simplesmente inventar. Isso inclui tanto conhecimento factual antigo quanto desinformação ou vieses presentes no corpus.
+  > 1. Dados: Se o conjunto de treinamento contiver informações incompletas, desatualizadas, enviesadas ou raras (como fatos de domínio muito específico), o modelo não terá base sólida para
+  >    responder e pode simplesmente inventar. Isso inclui tanto conhecimento factual antigo quanto desinformação ou vieses presentes no corpus.
   > 2. Treinamento: Durante o ajuste fino (SFT) ou o alinhamento com feedback humano (RLHF), o modelo pode aprender a "agradar" o avaliador ou o usuário, respondendo com segurança mesmo quando não sabe. Esse fenômeno — bajulação (sycophancy) ou desalinhamento entre o que "sabe" e o que "diz" — incentiva a criação de respostas fabricadas.
   > 3. Inferência (Geração de Resposta): Na hora de gerar o texto, estratégias de decodificação com maior aleatoriedade (como temperatura alta) podem levar à seleção de palavras improváveis, aumentando o risco de invenções. Além disso, falhas de raciocínio em tarefas complexas e excesso de confiança no que já foi gerado também contribuem para alucinações.
   >
@@ -485,4 +511,4 @@
 - Pergunta 5: Modelos de linguagem aplicados a domínios verticais como medicina e direito são frequentemente avaliados por métricas quantitativas (ex: acurácia em provas, taxa de erro) e por análises qualitativas feitas por especialistas humanos. | Discuta como essas duas formas de avaliação se complementam e quais seriam os riscos de depender exclusivamente de uma ou de outra no processo de validação desses modelos.
   > A avaliação de modelos de linguagem em domínios verticais precisa integrar métricas quantitativas e avaliações qualitativas para ser completa. As métricas quantitativas, como acurácia em provas padronizadas, taxa de erro, sensibilidade ou concordância com gabaritos, fornecem indicadores objetivos e comparáveis, permitindo mensurar progresso, selecionar modelos e monitorar desempenho ao longo do tempo. Contudo, elas não capturam dimensões essenciais desses domínios, como adequação ética, clareza comunicativa, fundamentação argumentativa ou segurança na tomada de decisão.A avaliação qualitativa feita por especialistas humanos complementa essas lacunas, pois médicos, juristas ou analistas financeiros conseguem identificar se a resposta está alinhada a práticas profissionais reais, se utiliza o raciocínio correto e se respeita normas e expectativas institucionais. Entretanto, depender exclusivamente da avaliação humana também envolve riscos: ela é cara, lenta, sujeita a vieses individuais e não escala para cenários de uso contínuo.Se usarmos apenas métricas numéricas, um modelo pode parecer adequado apesar de produzir respostas perigosamente confiantes, porém equivocadas. Se confiarmos apenas em avaliação humana, podemos não detectar falhas sistemáticas ou não garantir consistência.
   >
-  > Portanto, a combinação das duas formas (avaliar o que o modelo acerta e como ele raciocina) é essencial para validar modelos realmente seguros, responsáveis e aplicáveis na prática profissional.
+  > Portanto, a combinação das duas formas (avaliar o que o modelo acerta e como ele raciocina) é essencial para validar modelos realmente seguros, responsáveis e aplicáveis na prática profissional.- [Perguntas](#perguntas)
