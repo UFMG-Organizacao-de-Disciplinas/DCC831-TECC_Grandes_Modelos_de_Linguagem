@@ -271,16 +271,44 @@
 
 ## Grupo: 10 Tabular Data
 
-- Pergunta 1:
+- Pergunta 1: O que significa serializar uma tabela e por que essa etapa é fundamental para o raciocínio tabular? Além disso, quais métodos ou formatos de serialização tendem a melhorar o desempenho dos modelos nessas tarefas?
+  > Serializar uma tabela significa converter sua estrutura de linhas, colunas e células em um formato textual sequencial que possa ser interpretado por modelos de linguagem. Essa etapa é fundamental porque LLMs só conseguem processar texto; portanto, a tabela precisa ser transformada em uma representação linear que preserve, tanto quanto possível, sua organização original. Uma boa serialização facilita que o modelo reconstrua mentalmente a estrutura tabular, o que é essencial para tarefas de raciocínio, extração de informações e question answering.
   >
-- Pergunta 2:
+  > Para melhorar o desempenho do modelo nessa etapa, diferentes métodos e formatos de serialização podem ser utilizados:
   >
-- Pergunta 3:
+  > 1. Uso de formatos textuais estruturados, como CSV, Markdown, JSON, XML, HTML ou até SQL. Entre esses, HTML costuma gerar melhores resultados por preservar hierarquia explícita entre cabeçalho e corpo da tabela.
   >
-- Pergunta 4:
+  > 2. Representação em linguagem natural, utilizando separadores de cabeçalho e linhas ou frases que descrevam cada célula. Embora simples, esse método pode perder parte da estrutura tabular.
   >
-- Pergunta 5:
+  > 3. Self-augmentation prompting, técnica em que o próprio LLM gera informações intermediárias sobre a tabela, como intervalos, destaques ou relações relevantes, adicionando contexto antes de realizar a tarefa final.
+- Pergunta 2: Cite 3 características que tornam o processamento de tabelas complexo para LLMs.
+  > Diversos fatores afetam negativamente a praticidade do processamento de dados tabulares por LLMs, dentre eles podemos listar:
   >
+  > 1. Volume de dados: dependendo das tabelas utilizadas, podem haver milhões de tuplas de dados a serem processados, cada coluna com um formato de dado diferente (precisando por vezes ser truncado) o que pode reduzir o contexto essencial para a compreensão dos dados.
+  >
+  > 2. Complexidade do mecanismo de atenção: tendo complexidade quadrática, o tempo de processamento se torna longo para conseguir processar o volume de dados.
+  >
+  > 3. Multimodalidade: algumas tabelas podem estar em formato de texto, em documentos digitais ou em formato de imagem. Cada uma desses modos apresenta complexidades distintas para que os dados apresentados sejam compreendidos.
+  >
+  > 4. Tipos distintos de tabela: sendo versátil em sua estrutura, as tabelas podem representar diversos tipos de informação e cada coluna (ou linha) pode representar um tipo de dado diferente. Além disso, ela também pode ser em sua forma reta, onde cada célula é única e representa uma unidade de informação, ou em seu formato hierárquico, no qual algumas células representam diferentes níveis de parentesco estrutural, e certas sub-células compartilham propriedades coletivas comuns.
+  >
+  > 5. Ordem independência: a ordem das linhas e das colunas é arbitrária e dependente do que se busca encontrar. Inicialmente podem estar organizadas em um formato preferencial aos fins de quem as criou, porém as informações que ali constam permanecem as mesmas independente de sua ordem.
+  >
+  > 6. Correlação numérica: algumas colunas podem estar numericamente associadas, sendo um somatório ou resultado de alguma operação realizada, entendimento que pode ser perdido no momento do processamento pelas LLMs.
+  >
+  > 7. Correlação implícita: algumas correlações podem existir porém podem não estar claramente explícitas ou explicadas.
+  >
+  > 8. Serialização: para que os dados tabulares sejam interpretáveis pela LLM, eles precisam passar pelo processo de serialização, o que pode gerar perda de informações relevantes antes presentes.
+  >
+  > 9. Metainformação: tabelas podem conter outras informações relevantes para o seu entendimento além de seu cabeçalho e linhas. Alguns desses são as notas, legendas, subtítulos ou descrições das colunas.
+  >
+  > 10. Contextualização: uma tabela por si só pode ser mal interpretada caso não haja o contexto em que ela está inserida e o que deseja representar, ou então quais são as informações relevantes para a tarefa em questão.
+- Pergunta 3: É entendido que o HTML é a linguagem de marcação que tem gerado os melhores resultados no entendimento de dados tabulares. Sendo assim, qual característica é estipulada como sendo a causadora desses bons resultados? E o que poderia ser feito para forçosamente amenizar este viés?
+  > O bom desempenho do HTML no entendimento de dados tabulares provavelmente decorre do fato de que LLMs são extensivamente treinados com páginas da web, nas quais esse formato é predominante. Como resultado, o modelo desenvolve uma familiaridade natural com a estrutura hierárquica do HTML, o que facilita a interpretação de tabelas representadas nesse formato. Para avaliar se esse efeito positivo é realmente causado pelas propriedades estruturais do HTML, e não apenas pela exposição desbalanceada durante o pré-treinamento, seria necessário treinar um modelo totalmente do zero utilizando quantidades equilibradas de diferentes tipos de linguagem de marcação. Outra alternativa seria treinar o modelo sem acesso a dados contendo HTML, permitindo comparar o desempenho sob diferentes condições de exposição. Somente com um treinamento balanceado ou controlado seria possível medir o impacto real de cada formato sobre o entendimento do modelo. Isso permitiria reduzir o viés causado pela predominância do HTML nos dados de pré-treino e avaliar de forma justa a contribuição de cada linguagem de marcação.
+- Pergunta 4: De que forma os agentic workflows permitem que o modelo execute tarefas multi-turn, como correção iterativa de queries ou refinamento de respostas?
+  > Agentic workflows permitem que uma LLM execute tarefas multi-turn porque inserem o modelo em um ciclo contínuo de ação, verificação e correção. Diferentemente de uma interação de passo único, em que o modelo gera uma resposta final sem qualquer feedback estruturado, o agentic workflow transforma a LLM em um agente capaz de interagir com ferramentas externas, avaliar o resultado de suas próprias ações e ajustar a saída de forma iterativa. O processo normalmente começa com a geração de uma ação inicial, como uma query SQL, um comando ou um raciocínio parcial. Essa ação é enviada para uma ferramenta externa, por exemplo, um mecanismo de execução SQL, uma API ou um módulo de validação. O retorno dessa execução pode incluir erros sintáticos, inconsistências lógicas, ausência de resultados ou até respostas inesperadas. Esse feedback funciona como uma forma indireta de supervisão, pois indica ao modelo que sua ação precisa ser corrigida ou refinada. A partir desse retorno, a LLM gera uma nova tentativa, ajustando a query, revisando sua interpretação da tarefa ou reconstruindo o raciocínio. Essa iteração continua quantas vezes for necessário até que uma resposta correta e coerente seja alcançada. Assim, os agentic workflows possibilitam o raciocínio multi-turn ao permitir que o modelo aprenda com cada iteração, refine progressivamente suas ações e resolva tarefas complexas que exigem vários ciclos de verificação, correção e melhoria, algo que um único passo de geração textual não seria capaz de realizar.
+- Pergunta 5: No contexto do SUC Benchmark, o que é a tarefa de reverse lookup e por que ela é importante para avaliar a compreensão estrutural de tabelas por LLMs?
+  > A tarefa de reverse lookup no contexto do SUC Benchmark consiste em solicitar que a LLM encontre uma linha, coluna ou chave da tabela a partir de um valor interno, em vez de iniciar a busca por meio de um rótulo já conhecido. Trata-se do processo inverso do lookup tradicional. Enquanto o lookup comum responde, por exemplo, “qual é o preço do produto X?”, o reverse lookup exige que o modelo responda “qual produto tem o preço informado?”. Esse tipo de tarefa é essencial porque obriga a LLM a identificar onde cada valor aparece dentro da tabela e a qual coluna ou atributo esse valor está associado. Para realizar reverse lookup de maneira correta, o modelo precisa compreender a estrutura da tabela como um todo. Isso inclui reconhecer o relacionamento entre células e colunas, localizar a linha em que o valor ocorre e manter coerência estrutural mesmo depois de a tabela ter sido convertida para texto. Esse processo exige que a LLM reconstrua mentalmente a organização tabular, distinguindo o papel de cada coluna e identificando padrões de alinhamento. O reverse lookup é importante para avaliar se o modelo consegue interpretar a organização interna da tabela, não apenas seus conteúdos isolados. Essa habilidade revela o grau de entendimento estrutural que a LLM possui e indica se ele é capaz de navegar pelas relações entre linhas, colunas e células de forma semelhante a um leitor humano.
 
 ## Grupo: 11 Multimodal LLMs
 
@@ -332,44 +360,16 @@
 
 ## Grupo: 13 Harms
 
-- Pergunta 1: O que significa serializar uma tabela e por que essa etapa é fundamental para o raciocínio tabular? Além disso, quais métodos ou formatos de serialização tendem a melhorar o desempenho dos modelos nessas tarefas?
-  > Serializar uma tabela significa converter sua estrutura de linhas, colunas e células em um formato textual sequencial que possa ser interpretado por modelos de linguagem. Essa etapa é fundamental porque LLMs só conseguem processar texto; portanto, a tabela precisa ser transformada em uma representação linear que preserve, tanto quanto possível, sua organização original. Uma boa serialização facilita que o modelo reconstrua mentalmente a estrutura tabular, o que é essencial para tarefas de raciocínio, extração de informações e question answering.
+- Pergunta 1:
   >
-  > Para melhorar o desempenho do modelo nessa etapa, diferentes métodos e formatos de serialização podem ser utilizados:
+- Pergunta 2:
   >
-  > 1. Uso de formatos textuais estruturados, como CSV, Markdown, JSON, XML, HTML ou até SQL. Entre esses, HTML costuma gerar melhores resultados por preservar hierarquia explícita entre cabeçalho e corpo da tabela.
+- Pergunta 3:
   >
-  > 2. Representação em linguagem natural, utilizando separadores de cabeçalho e linhas ou frases que descrevam cada célula. Embora simples, esse método pode perder parte da estrutura tabular.
+- Pergunta 4:
   >
-  > 3. Self-augmentation prompting, técnica em que o próprio LLM gera informações intermediárias sobre a tabela, como intervalos, destaques ou relações relevantes, adicionando contexto antes de realizar a tarefa final.
-- Pergunta 2: Cite 3 características que tornam o processamento de tabelas complexo para LLMs.
-  > Diversos fatores afetam negativamente a praticidade do processamento de dados tabulares por LLMs, dentre eles podemos listar:
+- Pergunta 5:
   >
-  > 1. Volume de dados: dependendo das tabelas utilizadas, podem haver milhões de tuplas de dados a serem processados, cada coluna com um formato de dado diferente (precisando por vezes ser truncado) o que pode reduzir o contexto essencial para a compreensão dos dados.
-  >
-  > 2. Complexidade do mecanismo de atenção: tendo complexidade quadrática, o tempo de processamento se torna longo para conseguir processar o volume de dados.
-  >
-  > 3. Multimodalidade: algumas tabelas podem estar em formato de texto, em documentos digitais ou em formato de imagem. Cada uma desses modos apresenta complexidades distintas para que os dados apresentados sejam compreendidos.
-  >
-  > 4. Tipos distintos de tabela: sendo versátil em sua estrutura, as tabelas podem representar diversos tipos de informação e cada coluna (ou linha) pode representar um tipo de dado diferente. Além disso, ela também pode ser em sua forma reta, onde cada célula é única e representa uma unidade de informação, ou em seu formato hierárquico, no qual algumas células representam diferentes níveis de parentesco estrutural, e certas sub-células compartilham propriedades coletivas comuns.
-  >
-  > 5. Ordem independência: a ordem das linhas e das colunas é arbitrária e dependente do que se busca encontrar. Inicialmente podem estar organizadas em um formato preferencial aos fins de quem as criou, porém as informações que ali constam permanecem as mesmas independente de sua ordem.
-  >
-  > 6. Correlação numérica: algumas colunas podem estar numericamente associadas, sendo um somatório ou resultado de alguma operação realizada, entendimento que pode ser perdido no momento do processamento pelas LLMs.
-  >
-  > 7. Correlação implícita: algumas correlações podem existir porém podem não estar claramente explícitas ou explicadas.
-  >
-  > 8. Serialização: para que os dados tabulares sejam interpretáveis pela LLM, eles precisam passar pelo processo de serialização, o que pode gerar perda de informações relevantes antes presentes.
-  >
-  > 9. Metainformação: tabelas podem conter outras informações relevantes para o seu entendimento além de seu cabeçalho e linhas. Alguns desses são as notas, legendas, subtítulos ou descrições das colunas.
-  >
-  > 10. Contextualização: uma tabela por si só pode ser mal interpretada caso não haja o contexto em que ela está inserida e o que deseja representar, ou então quais são as informações relevantes para a tarefa em questão.
-- Pergunta 3: É entendido que o HTML é a linguagem de marcação que tem gerado os melhores resultados no entendimento de dados tabulares. Sendo assim, qual característica é estipulada como sendo a causadora desses bons resultados? E o que poderia ser feito para forçosamente amenizar este viés?
-  > O bom desempenho do HTML no entendimento de dados tabulares provavelmente decorre do fato de que LLMs são extensivamente treinados com páginas da web, nas quais esse formato é predominante. Como resultado, o modelo desenvolve uma familiaridade natural com a estrutura hierárquica do HTML, o que facilita a interpretação de tabelas representadas nesse formato. Para avaliar se esse efeito positivo é realmente causado pelas propriedades estruturais do HTML, e não apenas pela exposição desbalanceada durante o pré-treinamento, seria necessário treinar um modelo totalmente do zero utilizando quantidades equilibradas de diferentes tipos de linguagem de marcação. Outra alternativa seria treinar o modelo sem acesso a dados contendo HTML, permitindo comparar o desempenho sob diferentes condições de exposição. Somente com um treinamento balanceado ou controlado seria possível medir o impacto real de cada formato sobre o entendimento do modelo. Isso permitiria reduzir o viés causado pela predominância do HTML nos dados de pré-treino e avaliar de forma justa a contribuição de cada linguagem de marcação.
-- Pergunta 4: De que forma os agentic workflows permitem que o modelo execute tarefas multi-turn, como correção iterativa de queries ou refinamento de respostas?
-  > Agentic workflows permitem que uma LLM execute tarefas multi-turn porque inserem o modelo em um ciclo contínuo de ação, verificação e correção. Diferentemente de uma interação de passo único, em que o modelo gera uma resposta final sem qualquer feedback estruturado, o agentic workflow transforma a LLM em um agente capaz de interagir com ferramentas externas, avaliar o resultado de suas próprias ações e ajustar a saída de forma iterativa. O processo normalmente começa com a geração de uma ação inicial, como uma query SQL, um comando ou um raciocínio parcial. Essa ação é enviada para uma ferramenta externa, por exemplo, um mecanismo de execução SQL, uma API ou um módulo de validação. O retorno dessa execução pode incluir erros sintáticos, inconsistências lógicas, ausência de resultados ou até respostas inesperadas. Esse feedback funciona como uma forma indireta de supervisão, pois indica ao modelo que sua ação precisa ser corrigida ou refinada. A partir desse retorno, a LLM gera uma nova tentativa, ajustando a query, revisando sua interpretação da tarefa ou reconstruindo o raciocínio. Essa iteração continua quantas vezes for necessário até que uma resposta correta e coerente seja alcançada. Assim, os agentic workflows possibilitam o raciocínio multi-turn ao permitir que o modelo aprenda com cada iteração, refine progressivamente suas ações e resolva tarefas complexas que exigem vários ciclos de verificação, correção e melhoria, algo que um único passo de geração textual não seria capaz de realizar.
-- Pergunta 5: No contexto do SUC Benchmark, o que é a tarefa de reverse lookup e por que ela é importante para avaliar a compreensão estrutural de tabelas por LLMs?
-  > A tarefa de reverse lookup no contexto do SUC Benchmark consiste em solicitar que a LLM encontre uma linha, coluna ou chave da tabela a partir de um valor interno, em vez de iniciar a busca por meio de um rótulo já conhecido. Trata-se do processo inverso do lookup tradicional. Enquanto o lookup comum responde, por exemplo, “qual é o preço do produto X?”, o reverse lookup exige que o modelo responda “qual produto tem o preço informado?”. Esse tipo de tarefa é essencial porque obriga a LLM a identificar onde cada valor aparece dentro da tabela e a qual coluna ou atributo esse valor está associado. Para realizar reverse lookup de maneira correta, o modelo precisa compreender a estrutura da tabela como um todo. Isso inclui reconhecer o relacionamento entre células e colunas, localizar a linha em que o valor ocorre e manter coerência estrutural mesmo depois de a tabela ter sido convertida para texto. Esse processo exige que a LLM reconstrua mentalmente a organização tabular, distinguindo o papel de cada coluna e identificando padrões de alinhamento. O reverse lookup é importante para avaliar se o modelo consegue interpretar a organização interna da tabela, não apenas seus conteúdos isolados. Essa habilidade revela o grau de entendimento estrutural que a LLM possui e indica se ele é capaz de navegar pelas relações entre linhas, colunas e células de forma semelhante a um leitor humano.
 
 ## Grupo: 14 Security and Privacy
 
