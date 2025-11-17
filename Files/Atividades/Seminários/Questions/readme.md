@@ -1,26 +1,26 @@
 # Perguntas
 
 - [Perguntas](#perguntas)
-  - [Grupo: 01](#grupo-01)
-  - [Grupo: 02](#grupo-02)
-  - [Grupo: 03](#grupo-03)
-  - [Grupo: 04](#grupo-04)
-  - [Grupo: 05](#grupo-05)
-  - [Grupo: 06](#grupo-06)
-  - [Grupo: 07](#grupo-07)
-  - [Grupo: 08](#grupo-08)
-  - [Grupo: 09](#grupo-09)
-  - [Grupo: 10](#grupo-10)
-  - [Grupo: 11](#grupo-11)
-  - [Grupo: 12](#grupo-12)
-  - [Grupo: 13](#grupo-13)
-  - [Grupo: 14](#grupo-14)
-  - [Grupo: 15](#grupo-15)
-  - [Grupo: 16](#grupo-16)
-  - [Grupo: 17](#grupo-17)
-  - [Grupo: 18](#grupo-18)
+  - [Grupo: 01 Modern Transformers](#grupo-01-modern-transformers)
+  - [Grupo: 02 Reasoning](#grupo-02-reasoning)
+  - [Grupo: 03 Interpretability](#grupo-03-interpretability)
+  - [Grupo: 04 Efficient Attention](#grupo-04-efficient-attention)
+  - [Grupo: 05 Poisoning](#grupo-05-poisoning)
+  - [Grupo: 06 Causality](#grupo-06-causality)
+  - [Grupo: 07 Hallucination](#grupo-07-hallucination)
+  - [Grupo: 08 Machine Unlearning](#grupo-08-machine-unlearning)
+  - [Grupo: 09 Factuality](#grupo-09-factuality)
+  - [Grupo: 10 Tabular Data](#grupo-10-tabular-data)
+  - [Grupo: 11 Multimodal LLMs](#grupo-11-multimodal-llms)
+  - [Grupo: 12 Alternative Architectures](#grupo-12-alternative-architectures)
+  - [Grupo: 13 Harms](#grupo-13-harms)
+  - [Grupo: 14 Security and Privacy](#grupo-14-security-and-privacy)
+  - [Grupo: 15 Model Uncertainty](#grupo-15-model-uncertainty)
+  - [Grupo: 16 Transformer Limitations](#grupo-16-transformer-limitations)
+  - [Grupo: 17 Alignment](#grupo-17-alignment)
+  - [Grupo: 18 Vertical Domains](#grupo-18-vertical-domains)
 
-## Grupo: 01
+## Grupo: 01 Modern Transformers
 
 - Pergunta 1: Ao tentar otimizar um modelo já existente, você aplica a otimização Mixture of Experts (MoE) e realiza uma execução de teste. Contudo, após alguns passos é possível perceber que a perda de validação está estagnada. Qual a causa mais provável ? Como seria uma possível solução?​
   > Como o foco da questão está na implementação do Mixture of Experts (MoE), a solução também tem que partir dele e da base do seu funcionamento, dos roteadores e dos experts. A lógica é que provavelmente os roteadores estão de certa forma viciados, ou seja, eles estão tendendo a enviar os tokens sempre para os mesmos experts, que para eles seriam os que sempre levariam ao melhor resultado o possível , ignorando todos os outros experts e fazendo com que o modelo se torne menos eficiente pois os parâmetros de todos os outros experts se tornam "parâmetros mortos", ou seja, eles consomem memória mas nunca são atualizados. Para resolver o problema é necessário uma função de perdão auxiliar, a qual deve ser uma heurística que penaliza esse comportamento de favoritismo, de forma a evitar esse tipo de comportamento. Essa função pode até piorar o desempenho a curto prazo, mas a longo prazo ela ajuda a evitar esse problema.
@@ -33,7 +33,7 @@
 - Pergunta 5: Conforme foi visto durante a apresentação do grupo, as evoluções ou otimizações tendem a atacar diferentes aspectos do processo da LLM, seja no uso de memória cache, seja no tamanho do contexto, sendo assim elas são aplicadas em diferentes pontos da arquitetura tradicional vista em aula. Qual das alternativas vistas tem que ser aplicada necessariamente dentro do bloco transformer e cite um dos benefícios que normalmente são associados a ela.
   > Para esta resposta, é necessário falar sobre o QK-Norm. O QK-Norm consiste na aplicação de uma camada de RSMNorm (nesse sentido seria necessário falar sobre uma camada de normalização mas foi citado apenas o caso com o RSMNorm na apresentação) sobre os vetores de Key e Query, ou seja, eles necessariamente têm que ser aplicados dentro das cabeças de atenção do bloco transformer, e, dentro do material base de referência, foram citados apenas casos em que essa otimização foi aplicada. Os dois principais benefícios que normalmente são associados a esta otimização são: melhor estabilização de treinamento e melhora na convergência, então qualquer um dos dois funciona, uma vez que ambos podem ser deduzidos a partir da sua lógica (a normalização dos valores que levam a essa menor variabilidade em todo o processo).
 
-## Grupo: 02
+## Grupo: 02 Reasoning
 
 - Pergunta 1:
   >
@@ -46,7 +46,7 @@
 - Pergunta 5:
   >
 
-## Grupo: 03
+## Grupo: 03 Interpretability
 
 - Pergunta 1:
   >
@@ -59,7 +59,7 @@
 - Pergunta 5:
   >
 
-## Grupo: 04
+## Grupo: 04 Efficient Attention
 
 - Pergunta 1: Por que a implementação padrão da atenção é considerada "IO-unaware" (ignorante em I/O) e qual o principal problema de desempenho que isso causa?
   > A atenção padrão é considerada "IO-unaware" (ignorante em I/O) porque seu algoritmo não é projetado levando em conta a hierarquia de memória das GPUs. Ele trata a memória da GPU como um bloco único, ignorando a diferença significativa de desempenho entre a memória principal e a memória no chip. A memória principal da GPU é grande (podendo chegar a dezenas de gigabytes), mas comparativamente lenta, especialmente em termos de latência (centenas de ciclos). A memória no chip é minúscula (centenas de kilobytes por unidade de computação), mas ultra-rápida, com latência baixíssima (dezenas de ciclos) e enorme largura de banda.
@@ -91,7 +91,7 @@
   >
   > A capacidade de treinar com um contexto maior é o que leva a modelos melhores. Um modelo com contexto 4k pode ingerir 4096 tokens de uma sequência para prever o próximo token, enquanto um modelo baseado na atenção padrão só podia ingerir 1024 tokens. Isso permite ao modelo aprender dependências de longo prazo, entender a estrutura de documentos inteiros, ou acompanhar narrativas complexas. Como mostrado nos resultados do paper do FlashAttention-1, o GPT-2 treinado com contexto 4k alcançou uma perplexidade menor, e em tarefas de classificação de documentos longos, o contexto maior levou a um ganho significativo de acurácia.
 
-## Grupo: 05
+## Grupo: 05 Poisoning
 
 - Pergunta 1:
   >
@@ -104,7 +104,7 @@
 - Pergunta 5:
   >
 
-## Grupo: 06
+## Grupo: 06 Causality
 
 - Pergunta 1: Por que a incorporação de princípios de interpretabilidade causal se tornou uma necessidade urgente no desenvolvimento e uso de LLMs?
   > A busca por interpretabilidade causal nos LLMs tornou-se urgente devido à crescente falta de confiança, transparência e conformidade ética associadas à sua arquitetura. Esses modelos são fundamentados em um paradigma probabilístico autoregressivo, cujo objetivo é prever o próximo token com base em associações aprendidas a partir de um vasto corpus de textos. No entanto, esse processo leva os LLMs a capturar correlações espúrias e reproduzir vieses linguísticos e estereótipos sociais presentes nos dados de treinamento.
@@ -163,7 +163,7 @@
   >
   > Essa formalização possibilita analisar como os dados são gerados e simular mudanças no sistema, algo que o grafo causal isoladamente não permite. Assim, o SCM é considerado o nível mais completo de modelagem causal, unindo o aspecto gráfico à capacidade de cálculo e previsão sob manipulação.
 
-## Grupo: 07
+## Grupo: 07 Hallucination
 
 - Pergunta 1: O que são alucinações em modelos de linguagem de grande escala (LLMs) e por que são um problema crítico?
   > Em modelos de linguagem de grande escala refere-se ao fenômeno em que o modelo gera informações incorretas, imprecisas ou completamente inventadas. Embora as respostas produzidas possam parecer plausíveis e coerentes, elas não correspondem a fatos verificáveis.
@@ -215,7 +215,7 @@
   >
   > A principal vantagem dessa abordagem é que ela não depende apenas de similaridade textual (como métricas baseadas em n-grams), mas avalia a consistência lógica e semântica da resposta. Assim, é possível detectar alucinações mesmo quando o modelo escreve de forma fluente e convincente, mas sem base no texto original.
 
-## Grupo: 08
+## Grupo: 08 Machine Unlearning
 
 - Pergunta 1: Explique como a técnica SISA é implementada para fazer o Exact Unlearning. Descreva como os dados de treinamento são processados, como o unlearning acontece e como o método é utilizado para realizar inferências. Descreva a principal vantagem do método SISA em comparação com o retreinamento do modelo.
   > O SISA é um método que implementa o Exact Unlearning através de um esquema de fragmentação do modelo. Inicialmente, o conjunto de dados de treinamento é dividido em N subconjuntos não sobrepostos, em seguida, N modelos são treinados, cada um em uma das N partições de dados. No final temos N modelos, cada um treinado em uma das N partições de dados e para realizar o processo de inferência temos que combinar a saída dos N modelos, para isso podemos usar estratégias de model ensembling. Quando é necessário fazer o unlearning de algum dado, basta identificarmos em qual partição o dado a ser retirado se encontra e fazer o retreinamento apenas do modelo que foi treinado naquela partição de dados. A principal vantagem do método SISA em relação ao retreinamento do modelo é a eficiência, o SISA reduz o custo de retreinamento do modelo para 1/N do tempo de treino total.
@@ -242,7 +242,7 @@
   >
   > A interação entre FE e MU é crucial: existe um trade-off inerente. Métodos que maximizam a FE (esquecendo profundamente) frequentemente resultam em alguma degradação da MU (perda de funcionalidade geral), e vice-versa. Assim, Um MU bem-sucedido busca uma otimização de Pareto, onde se atinge a maior FE possível com a menor perda aceitável de MU, garantindo com isso o esquecimento robusto sem inviabilizar o modelo.
 
-## Grupo: 09
+## Grupo: 09 Factuality
 
 - Pergunta 1: Qual é a diferença entre factualidade ruim de um modelo e alucinações? Explique considerando que as alucinações podem ser um superconjunto de fenômenos, abrangendo diferentes tipos de desvios além dos erros factuais.
   > A factualidade ruim ocorre quando o modelo gera informações incorretas em relação a fatos objetivos e verificáveis do mundo real ou do próprio conjunto de treinamento — por exemplo, afirmar que um cientista ganhou um prêmio em um ano errado ou citar uma lei inexistente. Já as alucinações representam um fenômeno mais amplo, que abrange não apenas erros factuais, mas também inconsistências semânticas, incoerências lógicas, contradições internas e respostas que desviam do contexto ou da intenção do usuário. Em outras palavras, toda saída factualmente incorreta é uma alucinação, mas nem toda alucinação envolve falsidade factual — o modelo pode, por exemplo, produzir uma resposta coerente, porém irrelevante ou excessivamente especulativa. Essa distinção é importante porque avaliar factualidade exige comparação com fontes externas confiáveis, enquanto detectar alucinações pode envolver critérios de consistência interna e de aderência ao contexto. Reconhecer essa diferença ajuda pesquisadores a projetar métricas e estratégias de mitigação mais precisas, diferenciando quando o problema está no conhecimento do modelo ou em sua capacidade de manter coerência durante a geração textual.
@@ -269,7 +269,7 @@
   >
   > informações incorretas podem levar a decisões prejudiciais. Outro desafio é a ausência de rastreabilidade das fontes, pois muitos modelos não indicam de onde extraíram suas informações, dificultando a verificação e a responsabilização por erros. Além disso, os LLMs estão sujeitos à contaminação de dados de treinamento, podendo absorver vieses, rumores e informações imprecisas presentes na internet. Há também o risco de uso mal-intencionado, como a criação de notícias falsas, perfis falsos e campanhas automatizadas de manipulação. Tais problemas comprometem a confiança pública na IA e dificultam sua integração em contextos críticos. Para enfrentar esses desafios, pesquisadores propõem medidas como auditoria de dados, uso de mecanismos de checagem automática e educação digital para que os usuários compreendam as limitações dos modelos e usem suas respostas de forma crítica e responsável.
 
-## Grupo: 10
+## Grupo: 10 Tabular Data
 
 - Pergunta 1:
   >
@@ -282,7 +282,7 @@
 - Pergunta 5:
   >
 
-## Grupo: 11
+## Grupo: 11 Multimodal LLMs
 
 - Pergunta 1: O que define um MLLM (Multimodal Large Language Model) e como ele difere de um modelo unimodal?
   > Um MLLM é um modelo baseado em LLM capaz de receber, processar e gerar informações multimodais. Ele difere de um modelo unimodal por ser capaz de processar e integrar informações de duas ou mais modalidades, como texto, imagem, e áudio, por exemplo. Enquanto um modelo unimodal é capaz de processar apenas dados de uma única modalidade.
@@ -317,7 +317,7 @@
     >
     > Para ser considerada completa, a resposta precisa deixar explícito que essas três partes trabalham de forma encadeada (codificação, integração e geração), refletindo o fluxo de informação típico em arquiteturas multimodais modernas.
 
-## Grupo: 12
+## Grupo: 12 Alternative Architectures
 
 - Pergunta 1: Por que arquiteturas alternativas, mesmo desempenhando melhor em certos cenários, não conseguem substituir o transformer padrão?
   > Apesar de arquiteturas alternativas como RetNet, RWKV, Mamba e variações como o Differential Transformer apresentarem vantagens claras em cenários específicos, como uma maior eficiência em sequências longas, custo de inferência mais baixo ou melhor estabilidade numérica, elas ainda não conseguem substituir o Transformer padrão porque ele oferece um equilíbrio robusto entre desempenho, generalidade e maturidade. O Transformer já foi extensivamente testado e otimizado em uma enorme variedade de domínios (NLP, visão, multimodalidade), e ao longo dos anos consolidou um conjunto de ferramentas e técnicas que vão muito além da arquitetura em si. Exemplos para isso são kernels otimizados como FlashAttention, bibliotecas padrão em diferentes frameworks, definições consolidadas de pré-treino, técnicas de escalonamento de contexto, quantização, paralelismo e servimento em produção. Migrar para uma arquitetura alternativa exigiria refazer grande parte dessa infraestrutura, desenvolvendo novos kernels, novas rotinas de treinamento e novas otimizações. Modelos como o Mamba, por exemplo, dependem de implementações específicas de SSM seletivo e algoritmos paralelos customizados para explorar totalmente seu potencial em GPU, o que ainda não está tão maduro quanto o Transformer. Além disso, muitas dessas arquiteturas são desenhadas para atacar gargalos bem definidos, como custo quadrático da atenção ou uso de memória em contexto longo, e, por isso, acabam não superando o Transformer em todas as tarefas relevantes. Como o Transformer já demonstrou desempenho competitivo e estável em ampla escala, adotar uma arquitetura mais recente pode introduzir um risco, o que desincentiva sua substituição completa e favorece um cenário de uso complementar ou híbrido em vez de um abandono da arquitetura atual.
@@ -330,7 +330,7 @@
 - Pergunta 5: Em arquiteturas alternativas, quais são as vantagens de reparametrizar um parâmetro (e.g. definir uma equação para ele) em vez de tratá-lo simplesmente como um escalar aprendível?
   > Em arquiteturas alternativas, reparametrizar um parâmetro, ou seja, defini-lo como função de outros termos, como tempo, posição, entrada ou até de outros parâmetros, em vez de tratá-lo apenas como um escalar aprendível independente, traz vantagens conceituais e práticas. Em primeiro lugar, isso força o modelo a respeitar estruturas que já se sabe que são desejáveis, como decaimento no tempo, normalização, limites de estabilidade, simetria e positividade. Com isso, o espaço de soluções que o otimizador pode explorar fica mais restrito a comportamentos plausíveis, o que tende a melhorar a capacidade de generalização e a estabilidade numérica, já que o parâmetro deixa de assumir valores arbitrários e passa a seguir uma forma controlada, como um decaimento exponencial suave ou uma função que naturalmente satura e evita explosões. Em segundo lugar, a reparametrização costuma tornar o processo de otimização mais bem comportado, pois substitui variáveis diretamente instáveis, como ganhos multiplicativos grandes, por representações em um espaço onde o gradiente se propaga de maneira mais estável, como trabalhar com o log de um ganho ou com uma variável angular em vez do valor bruto. Em terceiro lugar, reparametrizar permite compartilhar estrutura entre diferentes partes do modelo, por exemplo tempos de esquecimento similares entre camadas ou dependências suaves de posição ao longo da rede, o que reduz o número total de parâmetros e favorece o aprendizado em cenários com menos dados. Em arquiteturas como Mamba, RetNet ou mecanismos de atenção modificados, reparametrizar taxas de decaimento, coeficientes de mistura e termos de normalização é uma estratégia central para garantir estabilidade, eficiência em contexto longo e um comportamento mais interpretável, evitando deixar esses fatores como escalares soltos e arbitrários.
 
-## Grupo: 13
+## Grupo: 13 Harms
 
 - Pergunta 1:
   >
@@ -343,7 +343,7 @@
 - Pergunta 5:
   >
 
-## Grupo: 14
+## Grupo: 14 Security and Privacy
 
 - Pergunta 1: Num cenário em que vários Large Language Models comerciais — como ChatGPT, Claude e Llama — oferecem funcionalidades e resultados cada vez mais parecidos, explique por que essa convergência torna a segurança mais frágil, focando nos chamados ataques de extração de modelo (model extraction attacks). Descreva como esse tipo de ataque funciona e por que a semelhança entre modelos aumenta a chance de alguém conseguir roubar propriedade intelectual.
   > Quando vários modelos comerciais passam a se comportar de maneira parecida, isso facilita bastante quem quer copiar ou imitar um modelo protegido. O ataque de extração basicamente consiste em fazer um grande número de requisições à API do modelo alvo (o "victim model") com prompts bem pensados, coletar as respostas e usar esse conjunto de entrada/saída para treinar um modelo próprio — o chamado modelo pirata. Em termos práticos, o atacante não precisa acessar os pesos nem a arquitetura original: basta reproduzir o comportamento através de muitos exemplos. A razão pela qual a similaridade entre modelos piora o problema é simples: técnicas de sondagem e conjuntos de prompts que funcionam num modelo tendem a funcionar também em outros semelhantes. Isso significa que o atacante pode aplicar a mesma estratégia em vários provedores, reaproveitando prompts, padrões de queries e heurísticas de extração, o que reduz tempo e custo do ataque. Em vez de gastar milhões para treinar um modelo do zero, basta pagar pelas chamadas de API para obter respostas que servem como "rótulos" de alta qualidade para treinar um substituto com fidelidade elevada. Em resumo, quanto mais homogêneos os modelos, maior a transferência das técnicas de ataque e mais viável — técnica e economicamente — se torna a cópia do comportamento e das capacidades que são, na prática, propriedade intelectual dos provedores.
@@ -360,7 +360,7 @@
 - Pergunta 5: Você foi contratado para fazer a parte de segurança de uma empresa de LLMs, e, ao chegar na empresa, te apresentam o desafio atual da empresa. Atualmente, a cada modelo que nasce, gasta aproximadamente 3 dias para que também se encontre o Jailbreak do mesmo modelo. A empresa não tem qualquer tipo de proteção, portanto, faça uma proposta de como solucionar, ou pelo menos mitigar, o problema
   > A ideia da resposta é falar que para mitigar o problema de jailbreaks rápidos, uma estratégia eficaz e robusta é a implementação de um Modelo Supervisor, também chamado de Guardrail Model ou Moderation Layer, que opera em cascata antes e/ou depois do Large Language Model principal. O funcionamento básico consiste em treinar ou ajustar um modelo auxiliar menor para atuar como um classificador de risco. O processo de mitigação se daria em três etapas principais: primeiro, o Pré-filtro (Input Moderation), onde o Modelo Supervisor analisa o prompt do usuário antes que ele chegue ao LLM principal, identificando padrões de linguagem, frases-chave ou técnicas de ofuscação que são característicos de tentativas de jailbreak. Se o prompt for classificado como suspeito ou malicioso, a requisição é bloqueada ou retorna uma mensagem de erro. Em seguida, o Pós-filtro (Output Moderation), em que, após o LLM principal gerar uma resposta, o Modelo Supervisor a inspeciona, verificando se a saída contém conteúdo proibido, discurso de ódio ou instruções para atividades ilegais. Se a resposta violar as políticas de segurança, ela é substituída por uma resposta segura ou censurada. Por fim, o Reforço Contínuo e Defesa em Profundidade é crucial: a eficácia do Supervisor é mantida através do re-treinamento constante utilizando os jailbreaks reais encontrados, transformando o ciclo de ataque em um ciclo de defesa e aprendizado. Outras respostas como Pré treinamento do modelo ou fine tuning para evitar esse tipo de situação também estariam parcialmente certas, embora não seja a estratégia mais eficaz abordada pelo mercado.
 
-## Grupo: 15
+## Grupo: 15 Model Uncertainty
 
 - Pergunta 1:
   >
@@ -373,7 +373,7 @@
 - Pergunta 5:
   >
 
-## Grupo: 16
+## Grupo: 16 Transformer Limitations
 
 - Pergunta 1: Por que o Transformer, mesmo sendo tão poderoso, não consegue lidar bem com linguagens como PARITY (verifica se a quantidade de 1s em uma sentença é par ou ímpar) e 2DYCK (verifica se os parênteses estão corretamente balanceados)?
   > Porque o mecanismo de self-attention não tem memória infinita.O modelo processa toda a sequência ao mesmo tempo, sem uma pilha de memória que permita lembrar a ordem e a profundidade das informações. Por isso, ele não consegue contar ou representar hierarquias recursivas quando a entrada cresce.
@@ -410,7 +410,7 @@
   >
   > Como o mecanismo de atenção não reproduz a recorrência necessária para entender dependências temporais complexas, os shortcuts tornam o cálculo eficiente, mas o raciocínio frágil e limitado. O Transformer acerta o resultado, mas não compreende o processo de forma profunda ou estrutural.
 
-## Grupo: 17
+## Grupo: 17 Alignment
 
 - Pergunta 1: Qual o propósito geral por trás do alinhamento de LLMs e por que ele é importante?
   > - **Riscos reais:**
@@ -488,7 +488,7 @@
   - Orientações para uma resposta correta:
     > Uma resposta correta deve descrever brevemente os 4 benefícios (Inclusão e Acessibilidade, Diversidade e Representação, Produtividade do Trabalho e Democratização e Participação) e os 5 riscos (Disparidades de acesso, Polarização, Uso malicioso, Deslocamento de mão de obra e Danos ambientais) com relação à sociedade.
 
-## Grupo: 18
+## Grupo: 18 Vertical Domains
 
 - Pergunta 1: Explique por que o uso de modelos de linguagem generalistas pode ser insuficiente em domínios verticais como Medicina e Direito.
   > Modelos generalistas são treinados em grandes volumes de dados amplos e heterogêneos, cobrindo linguagem cotidiana, textos da internet e documentos variados. Isso os torna versáteis, mas também superficiais em relação a áreas que exigem precisão conceitual e raciocínio formalizado. Em Medicina, por exemplo, decisões dependem de diretrizes clínicas, protocolos de segurança, evidências científicas atualizadas e interpretação rigorosa de sintomas e exames. Um modelo generalista pode produzir respostas plausíveis, porém sem fundamentação adequada, levando a sugestões terapêuticas incorretas ou interpretações erradas, o que pode comprometer diretamente a segurança do paciente. Já no Direito, a interpretação normativa envolve hierarquia de leis, análise de precedentes, adequação terminológica e argumentação estruturada. Se o modelo confundir conceitos, citar jurisprudência desatualizada ou sugerir práticas ilegais, o resultado pode ser assessoramento jurídico inadequado, prejuízos institucionais e até violação de responsabilidades éticas.
