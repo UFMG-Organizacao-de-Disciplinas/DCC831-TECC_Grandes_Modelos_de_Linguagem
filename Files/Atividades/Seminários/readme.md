@@ -5,9 +5,9 @@
 |  ## | Tópico                    | Apresentação | [Perguntas][FullQ] |  Anotações |
 | --: | :------------------------ | -----------: | -----------------: | ---------: |
 |  01 | Modern transformers       |   [P01][P01] |         [Q01][Q01] | [N01][N01] |
-|  02 | Reasoning                 |   [P02][P02] |           [-][Q02] | [N02][N02] |
+|  02 | Reasoning                 |   [P02][P02] |           [-][Q02] |   [-][N02] |
 |  03 | Interpretability          |   [P03][P03] |         [Q03][Q03] | [N03][N03] |
-|  04 | Efficient Attention       |   [P04][P04] |         [Q04][Q04] | [N04][N04] |
+|  04 | Efficient Attention       |   [P04][P04] |         [Q04][Q04] |   [-][N04] |
 |  05 | Poisoning                 |   [P05][P05] |           [-][Q05] | [N05][N05] |
 |  06 | Causality                 |   [P06][P06] |         [Q06][Q06] | [N06][N06] |
 |  07 | Hallucination             |   [P07][P07] |         [Q07][Q07] | [N07][N07] |
