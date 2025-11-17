@@ -55,12 +55,12 @@
   > **Métricas Internas:** Analisar as representações neurais. Por exemplo, o Participation Ratio (PR) pode medir se o modelo aprendeu uma hierarquia dimensional (PR alto para planejamento, PR baixo para cálculo), imitando a organização cerebral.
 - `Pergunta 3:`
   Você é o líder de P&D da "MedInfer", uma startup de tecnologia em saúde criando um assistente de IA para auxiliar médicos em diagnósticos diferenciais. A ferramenta deve analisar o histórico do paciente, sintomas atuais e literatura médica para sugerir possíveis diagnósticos (um problema de raciocínio abdutivo). | O maior risco é a alucinação e a consistência lógica. Um raciocínio plausível, mas incorreto, pode ser fatal.
-  1. Mapeamento do Risco: Quais são os dois maiores desafios de usar um LLM fundacional padrão (sem modificações) neste cenário?
-  2. Proposta de Solução Híbrida: Proponha uma solução que combine pelo menos duas "Inovações Arquitetônicas" e um "Paradigma de Aprendizagem" para mitigar esses riscos.
-  3. Métricas de Avaliação: Por que a "Acurácia" da resposta final é uma métrica perigosa e insuficiente aqui? Proponha duas métricas de processo que seriam mais adequadas.
+  1. **Mapeamento do Risco:** Quais são os dois maiores desafios de usar um LLM fundacional padrão (sem modificações) neste cenário?
+  2. **Proposta de Solução Híbrida:** Proponha uma solução que combine pelo menos duas "Inovações Arquitetônicas" e um "Paradigma de Aprendizagem" para mitigar esses riscos.
+  3. **Métricas de Avaliação:** Por que a "Acurácia" da resposta final é uma métrica perigosa e insuficiente aqui? Proponha duas métricas de processo que seriam mais adequadas.
      > A resposta ideal deve focar em segurança, confiabilidade e explicabilidade.
      >
-     > 1. Mapeamento do Risco:
+     > 1. **Mapeamento do Risco:**
      >
      >    - **Alucinação:** O modelo pode gerar "fatos" médicos plausíveis, mas incorretos, ou misturar detalhes de pacientes.
      >
@@ -85,13 +85,17 @@
   > Melhorias:
   >
   > - Melhora a precisão lógica e matemática, permitindo que o modelo raciocine de forma estruturada.
+  >
   > - Aumenta a interpretabilidade, pois o processo de pensamento é visível e pode ser analisado.
+  >
   > - Reduz respostas impulsivas, estimulando o modelo a reﬂetir antes de concluir.
   >
   > Limitações:
   >
-  > - Propagação de erros: se uma etapa intermediária estiver errada, todo o raciocínio ﬁnal será incorreto.
-  > - Dependência do tamanho do modelo: LLMs menores podem não conseguir gerar cadeias de raciocínio eﬁcazes.
+  > - **Propagação de erros:** se uma etapa intermediária estiver errada, todo o raciocínio ﬁnal será incorreto.
+  >
+  > - **Dependência do tamanho do modelo:** LLMs menores podem não conseguir gerar cadeias de raciocínio eﬁcazes.
+  >
   > - Possível excesso de detalhamento ("overthinking"), quando o modelo cria etapas desnecessárias.
 - `Pergunta 5:` Quais são as três abordagens promissoras para aprimorar o raciocínio (reasoning) em modelos de linguagem de grande porte (LLMs)? Explique cada uma delas e cite pelo menos uma técnica representativa de cada abordagem.
 
@@ -125,30 +129,30 @@
 - `Pergunta 1:` Por que a implementação padrão da atenção é considerada "IO-unaware" (ignorante em I/O) e qual o principal problema de desempenho que isso causa?
   > A atenção padrão é considerada "IO-unaware" (ignorante em I/O) porque seu algoritmo não é projetado levando em conta a hierarquia de memória das GPUs. Ele trata a memória da GPU como um bloco único, ignorando a diferença significativa de desempenho entre a memória principal e a memória no chip. A memória principal da GPU é grande (podendo chegar a dezenas de gigabytes), mas comparativamente lenta, especialmente em termos de latência (centenas de ciclos). A memória no chip é minúscula (centenas de kilobytes por unidade de computação), mas ultra-rápida, com latência baixíssima (dezenas de ciclos) e enorme largura de banda.
   >
-  > O problema é que a atenção padrão materializa as matrizes intermediárias S (de escores de atenção) e P (de escores normalizados), ambas de tamanho N × N, na memória. Como N (comprimento da sequência) cresce, essas matrizes se tornam gigantescas e não cabem na memória rápida, forçando o algoritmo a escrevê-las e lê-las da memória lenta múltiplas vezes. O fluxo de I/O é o seguinte: (1) ler os inputs Q (query) e K (key) da memória lenta; (2) escrever a matriz S na memória lenta; (3) ler a matriz S da memória lenta para aplicação do softmax; (4) escrever a matriz P, resultante da aplicação do softmax, na memória lenta; (5) ler a matriz P e o input V (value) da memória lenta; (6) escrever o resultado da atenção na memória lenta. Esse excesso de leituras e escritas na memória lenta é o verdadeiro gargalo. A GPU, com suas potentes unidades de computação, passa a maior parte do tempo ociosa, esperando dados serem lidos da ou escritos na memória lenta. Esse problema é conhecido como "memory-bound" (limitado pela memória), onde o tempo de execução é ditado pela largura de banda da memória, e não pela velocidade de cálculo da GPU.
-- `Pergunta 2:` O FlashAttention precisa processar os dados em blocos (tiling). Como ele consegue calcular o softmax, que precisa carregar toda uma linha de dados da matriz S (de escores de atenção, com tamanho N × N) para calcular o denominador naquela mesma linha?
+  > O problema é que a atenção padrão materializa as matrizes intermediárias S (de escores de atenção) e P (de escores normalizados), ambas de tamanho $N \times N$, na memória. Como N (comprimento da sequência) cresce, essas matrizes se tornam gigantescas e não cabem na memória rápida, forçando o algoritmo a escrevê-las e lê-las da memória lenta múltiplas vezes. O fluxo de I/O é o seguinte: (1) ler os inputs Q (query) e K (key) da memória lenta; (2) escrever a matriz S na memória lenta; (3) ler a matriz S da memória lenta para aplicação do softmax; (4) escrever a matriz P, resultante da aplicação do softmax, na memória lenta; (5) ler a matriz P e o input V (value) da memória lenta; (6) escrever o resultado da atenção na memória lenta. Esse excesso de leituras e escritas na memória lenta é o verdadeiro gargalo. A GPU, com suas potentes unidades de computação, passa a maior parte do tempo ociosa, esperando dados serem lidos da ou escritos na memória lenta. Esse problema é conhecido como "memory-bound" (limitado pela memória), onde o tempo de execução é ditado pela largura de banda da memória, e não pela velocidade de cálculo da GPU.
+- `Pergunta 2:` O FlashAttention precisa processar os dados em blocos (tiling). Como ele consegue calcular o softmax, que precisa carregar toda uma linha de dados da matriz S (de escores de atenção, com tamanho $N \times N$) para calcular o denominador naquela mesma linha?
   > O desafio do softmax padrão é que ele requer carregar e conhecer todos os elementos de uma linha da matriz S para calcular o denominador naquela mesma linha. Além disso, para estabilidade numérica, o softmax padrão primeiro subtrai, de todos os elementos de cada linha de S, o valor máximo dentre esses elementos. Porém, carregar e conhecer todos os elementos de cada linha de S é incompatível com a técnica de processamento em blocos (tiling).
   >
   > Para lidar com esse desafio, o FlashAttention utiliza uma técnica chamada online softmax. Essa técnica consiste em manter na memória rápida da GPU duas estatísticas parciais para cada linha da matriz S: o máximo parcial, que é o escore máximo visto até até o momento, e o denominador parcial, que é a soma de todos os escores conhecidos até então. Fixado o input Q (query), a cada novo bloco dos inputs K (key) e V (value) processado, o FlashAttention procede da seguinte forma: (1) calcula o máximo local do bloco atual e então atualiza o máximo parcial; (2) calcula o denominador local do bloco atual utilizando o novo máximo parcial e então o soma ao denominador antigo, previamente reescalado com base na mudança dos máximos, para atualizar o denominador parcial; e (3) reescala o output acumulado até a iteração anterior por um determinado fator (baseado na mudança dos máximos e dos denominadores) e então o soma ao output local do bloco atual, obtendo assim o novo output acumulado. Ao final do loop, o valor do output na memória rápida da GPU é matematicamente idêntico ao que seria se o softmax fosse calculado de uma única vez (como no softmax padrão), mas sem nunca ter lido, da memória lenta, linhas inteiras da matriz S e sem nunca ter precisado de múltiplos passes sobre os dados.
-- `Pergunta 3:` Durante o passo de forward, o FlashAttention não salva as matrizes S (de escores de atenção, com tamanho N × N) e P (de escores normalizados após a aplicação do softmax, com tamanho N × N). O que ele salva em substituição a essas matrizes para preservar a capacidade de calcular os gradientes durante o passo de backward?
+- `Pergunta 3:` Durante o passo de forward, o FlashAttention não salva as matrizes S (de escores de atenção, com tamanho $N \times N$) e P (de escores normalizados após a aplicação do softmax, com tamanho $N \times N$). O que ele salva em substituição a essas matrizes para preservar a capacidade de calcular os gradientes durante o passo de backward?
   > Durante o passo de forward, a atenção padrão mantém salvas as matrizes S e P na memória principal da GPU, para uso posterior no passo de backward, porque essas matrizes são necessárias para calcular os gradientes com respeito às matrizes de entrada do componente de atenção.
   >
   > O FlashAttention muda completamente essa abordagem por meio de uma estratégia baseada em recomputação. Durante o passo de forward, o FlashAttention nunca materializa as matrizes S e P em memória. Em vez disso, para o passo de backward, o FlashAttention mantém em memória apenas:
   >
-  > -​ Os inputs originais Q, K, V (matrizes de queries, keys e values), cada um de tamanho N × d, onde N é o comprimento da sequência e d é a dimensão de cada cabeça de atenção, totalizando O(Nd). Esses já estavam sendo salvos na atenção padrão de qualquer forma;
+  > -​ Os inputs originais Q, K, V (matrizes de queries, keys e values), cada um de tamanho $N \times d$, onde N é o comprimento da sequência e d é a dimensão de cada cabeça de atenção, totalizando O(Nd). Esses já estavam sendo salvos na atenção padrão de qualquer forma;
   > -​ As estatísticas do online softmax, especificamente o máximo e o denominador para
   >
   > cada uma das N linhas da matriz S de escores de atenção. Isso adiciona apenas O(N) elementos adicionais ao estado salvo.
   >
-  > Durante o passo de backward, quando o FlashAttention precisa calcular os gradientes com respeito a determinados blocos dos inputs, ele simplesmente recalcula os blocos correspondentes das matrizes S e P sob demanda. Isso é feito carregando os blocos dos inputs Q, K, V da memória lenta para a memória rápida, e refazendo o passo de forward apenas para esses blocos. Uma vez que os blocos correspondentes de S e P são recomputados na memória rápida, eles são usados para o cálculo dos gradientes locais e imediatamente descartados, liberando a memória rápida para os próximos blocos. Embora isso aumente o número total de operações computacionais, essa estratégia remove completamente a leitura de matrizes de tamanho O(N^2) da memória lenta, provando que é muito mais rápido repetir cálculos na memória rápida do que esperar pela movimentação de dados envolvendo a memória lenta.
+  > Durante o passo de backward, quando o FlashAttention precisa calcular os gradientes com respeito a determinados blocos dos inputs, ele simplesmente recalcula os blocos correspondentes das matrizes S e P sob demanda. Isso é feito carregando os blocos dos inputs Q, K, V da memória lenta para a memória rápida, e refazendo o passo de forward apenas para esses blocos. Uma vez que os blocos correspondentes de S e P são recomputados na memória rápida, eles são usados para o cálculo dos gradientes locais e imediatamente descartados, liberando a memória rápida para os próximos blocos. Embora isso aumente o número total de operações computacionais, essa estratégia remove completamente a leitura de matrizes de tamanho O($N^2$) da memória lenta, provando que é muito mais rápido repetir cálculos na memória rápida do que esperar pela movimentação de dados envolvendo a memória lenta.
 - `Pergunta 4:` A complexidade computacional do FlashAttention continua sendo quadrática em relação ao tamanho das sequências, assim como a da atenção padrão. Por que, então, o FlashAttention é muito mais rápido em tempo de execução?
-  > A razão para a redução do tempo de execução proporcionado pelo FlashAttention, mesmo com a mesma complexidade computacional O(N^2), reside na diferença fundamental entre ser "memory-bound" (limitado por memória) e "compute-bound" (limitado por computação). A atenção padrão, ao ler e escrever na memória lenta as matrizes S (de escores de atenção) e P (de escores normalizados), ambas de tamanho N × N, era "memory-bound". O tempo de execução era dominado pelo I/O, isto é, pelo o tempo de espera para ler e escrever na memória lenta, e não pela quantidade de cálculos realizados na memória rápida. As unidades de computação da GPU ficavam ociosas a maior parte do tempo, esperando os dados chegarem ou serem salvos.
+  > A razão para a redução do tempo de execução proporcionado pelo FlashAttention, mesmo com a mesma complexidade computacional O($N^2$), reside na diferença fundamental entre ser "memory-bound" (limitado por memória) e "compute-bound" (limitado por computação). A atenção padrão, ao ler e escrever na memória lenta as matrizes S (de escores de atenção) e P (de escores normalizados), ambas de tamanho $N \times N$, era "memory-bound". O tempo de execução era dominado pelo I/O, isto é, pelo o tempo de espera para ler e escrever na memória lenta, e não pela quantidade de cálculos realizados na memória rápida. As unidades de computação da GPU ficavam ociosas a maior parte do tempo, esperando os dados chegarem ou serem salvos.
   >
-  > O FlashAttention é um algoritmo "IO-aware". Ao usar tiling (processamento em blocos) e recomputação, ele elimina completamente as leituras e escritas de matrizes de tamanho O(N^2) da memória lenta da GPU. Todas as operações intermediárias, com complexidade computacional de O(N^2), acontecem dentro da memória rápida da GPU. Isso muda a natureza do gargalo: a operação deixa de ser "memory-bound" e passa a ser "compute-bound". Agora, o tempo de execução é ditado pela velocidade com que a GPU consegue executar as operações O(N^2). Como as GPUs modernas têm um poder de computação massivo (altíssimo TFLOPs/s) que é muito superior à largura de banda da sua memória lenta, executar os cálculos O(N^2) na memória rápida consome menos tempo do que ficar esperando pelo I/O de complexidade O(N^2) da memória lenta. Essencialmente, o FlashAttention trocou um gargalo de memória por um gargalo de computação, permitindo que a GPU finalmente usasse seu potencial máximo.
+  > O FlashAttention é um algoritmo "IO-aware". Ao usar tiling (processamento em blocos) e recomputação, ele elimina completamente as leituras e escritas de matrizes de tamanho O($N^2$) da memória lenta da GPU. Todas as operações intermediárias, com complexidade computacional de O($N^2$), acontecem dentro da memória rápida da GPU. Isso muda a natureza do gargalo: a operação deixa de ser "memory-bound" e passa a ser "compute-bound". Agora, o tempo de execução é ditado pela velocidade com que a GPU consegue executar as operações O($N^2$). Como as GPUs modernas têm um poder de computação massivo (altíssimo TFLOPs/s) que é muito superior à largura de banda da sua memória lenta, executar os cálculos O($N^2$) na memória rápida consome menos tempo do que ficar esperando pelo I/O de complexidade O($N^2$) da memória lenta. Essencialmente, o FlashAttention trocou um gargalo de memória por um gargalo de computação, permitindo que a GPU finalmente usasse seu potencial máximo.
 - `Pergunta 5:` O FlashAttention permite treinar não apenas modelos mais rápidos, mas também modelos melhores. Como a otimização de memória do FlashAttention leva a modelos com melhor eficácia (ex: menor perplexidade ou melhor acurácia)?
-  > A otimização de memória do FlashAttention é o que diretamente possibilita "modelos melhores". A complexidade de memória O(N^2) da atenção padrão impunha um limite no comprimento máximo da sequência (N) que cabia na memória de uma GPU, geralmente limitado a 1k ou 2k de tokens. Qualquer sequência maior do que isso (por exemplo, 16k) exigiria dezenas de gigabytes de memória por cabeça de atenção em cada camada, o que era inviável.
+  > A otimização de memória do FlashAttention é o que diretamente possibilita "modelos melhores". A complexidade de memória O($N^2$) da atenção padrão impunha um limite no comprimento máximo da sequência (N) que cabia na memória de uma GPU, geralmente limitado a 1k ou 2k de tokens. Qualquer sequência maior do que isso (por exemplo, 16k) exigiria dezenas de gigabytes de memória por cabeça de atenção em cada camada, o que era inviável.
   >
-  > O FlashAttention, ao eliminar a materialização (alocação) das matrizes S (de escores de atenção) e P (de escores normalizados), ambas de tamanho N × N, reduz a necessidade de memória para O(N) (complexidade linear). O limite de memória deixa de ser ditado por O(N^2) e passa a ser ditado por O(Nd) (para armazenar os inputs Q (query), K (key), V (value)), onde d é a dimensão de cada cabeça de atenção, e O(N) (para as estatísticas do online softmax). Isso quebra a barreira do N^2 e permite, pela primeira vez, treinar modelos com comprimentos de sequência muito maiores (4k, 8k, 16k, e até 64k no caso do block-sparse).
+  > O FlashAttention, ao eliminar a materialização (alocação) das matrizes S (de escores de atenção) e P (de escores normalizados), ambas de tamanho $N \times N$, reduz a necessidade de memória para O(N) (complexidade linear). O limite de memória deixa de ser ditado por O($N^2$) e passa a ser ditado por O(Nd) (para armazenar os inputs Q (query), K (key), V (value)), onde d é a dimensão de cada cabeça de atenção, e O(N) (para as estatísticas do online softmax). Isso quebra a barreira do $N^2$ e permite, pela primeira vez, treinar modelos com comprimentos de sequência muito maiores (4k, 8k, 16k, e até 64k no caso do block-sparse).
   >
   > A capacidade de treinar com um contexto maior é o que leva a modelos melhores. Um modelo com contexto 4k pode ingerir 4096 tokens de uma sequência para prever o próximo token, enquanto um modelo baseado na atenção padrão só podia ingerir 1024 tokens. Isso permite ao modelo aprender dependências de longo prazo, entender a estrutura de documentos inteiros, ou acompanhar narrativas complexas. Como mostrado nos resultados do paper do FlashAttention-1, o GPT-2 treinado com contexto 4k alcançou uma perplexidade menor, e em tarefas de classificação de documentos longos, o contexto maior levou a um ganho significativo de acurácia.
 
@@ -233,44 +237,57 @@
   >
   > As alucinações representam um dos maiores desafios técnicos e éticos no uso de LLMs. Seus principais impactos incluem:
   >
-  > - Risco de Desinformação: conteúdos falsos, mas convincentes, comprometem a confiabilidade das respostas e podem propagar desinformação.
-  > - Dificuldade de Detecção: as saídas dos LLMs são frequentemente coerentes e bem formuladas, o que torna difícil identificar quando uma resposta é incorreta.
-  > - Desafios Práticos de Implementação: a presença de alucinações limita o uso seguro dos modelos em aplicações sensíveis, como chatbots, sistemas de busca e recomendação.
-  > - Risco Ético e Social: informações equivocadas podem induzir decisões erradas, afetando a confiança dos usuários e levantando questões sobre responsabilidade e segurança no uso de IA.
+  > - **Risco de Desinformação:** conteúdos falsos, mas convincentes, comprometem a confiabilidade das respostas e podem propagar desinformação.
+  >
+  > - **Dificuldade de Detecção:** as saídas dos LLMs são frequentemente coerentes e bem formuladas, o que torna difícil identificar quando uma resposta é incorreta.
+  >
+  > - **Desafios Práticos de Implementação:** a presença de alucinações limita o uso seguro dos modelos em aplicações sensíveis, como chatbots, sistemas de busca e recomendação.
+  >
+  > - **Risco Ético e Social:** informações equivocadas podem induzir decisões erradas, afetando a confiança dos usuários e levantando questões sobre responsabilidade e segurança no uso de IA.
 - `Pergunta 2:` Quais estratégias podem ser aplicadas para detectar alucinações em LLMs?
   > 1. Detecção de Alucinação de Factualidade Busca identificar informações incorretas em relação ao mundo real.
   >
-  >    - Verificação de Fatos: Compara as respostas com fontes confiáveis. Pode ser feita por busca externa, que decompõe o texto em fatos e os confirma em bases externas (como no FACTSCORE), ou por verificação interna, em que o próprio modelo avalia a consistência de suas respostas (ex.: método Chain-of-Verification).
-  >    - Estimação de Incerteza: Parte do princípio de que a alucinação está ligada à incerteza do modelo. Pode usar métricas internas (como a probabilidade dos tokens) ou o comportamento externo do modelo, medindo a consistência entre múltiplas respostas (como em SelfCheckGPT ou LMvLM).
+  >    - **Verificação de Fatos:** Compara as respostas com fontes confiáveis. Pode ser feita por busca externa, que decompõe o texto em fatos e os confirma em bases externas (como no FACTSCORE), ou por verificação interna, em que o próprio modelo avalia a consistência de suas respostas (ex.: método Chain-of-Verification).
+  >
+  >    - **Estimação de Incerteza:** Parte do princípio de que a alucinação está ligada à incerteza do modelo. Pode usar métricas internas (como a probabilidade dos tokens) ou o comportamento externo do modelo, medindo a consistência entre múltiplas respostas (como em SelfCheckGPT ou LMvLM).
   >
   > 2. Detecção de Alucinação de Fidelidade Avalia se a saída do modelo é fiel à instrução ou ao contexto fornecido. As principais técnicas incluem:
-  >    - Métricas Baseadas em Fatos: Comparam entidades e relações entre o texto gerado e o original.
-  >    - Métricas Baseadas em Classificadores: Utilizam modelos de inferência textual (NLI) para avaliar implicação lógica.
-  >    - Métricas Baseadas em QA: Validam informações por meio de perguntas e respostas sobre o conteúdo.
-  >    - Julgamento Baseado em LLM: Usa o próprio modelo (ou outro LLM) como avaliador da fidelidade da resposta.
+  >
+  >    - **Métricas Baseadas em Fatos:** Comparam entidades e relações entre o texto gerado e o original.
+  >
+  >    - **Métricas Baseadas em Classificadores:** Utilizam modelos de inferência textual (NLI) para avaliar implicação lógica.
+  >
+  >    - **Métricas Baseadas em QA:** Validam informações por meio de perguntas e respostas sobre o conteúdo.
+  >
+  >    - **Julgamento Baseado em LLM:** Usa o próprio modelo (ou outro LLM) como avaliador da fidelidade da resposta.
 - `Pergunta 3:` Descreva o mecanismo de Geração Aumentada por Recuperação (RAG) como uma estratégia proeminente de mitigação de alucinação relacionada a dados.
   > O RAG é uma estratégia proeminente para mitigar alucinações causadas por lacunas de conhecimento (Data-related Hallucinations). Ele opera seguindo um pipeline de "recuperar e ler" (retrieve-then-read), onde o LLM recupera conhecimento relevante de fontes externas e, em seguida, gera a resposta condicionada pela consulta e pelos documentos recuperados. Ao desacoplar o conhecimento externo do LLM, o RAG alivia a alucinação, fornecendo acesso a informações atualizadas.
   >
   > As práticas de RAG são tipicamente divididas em:
   >
-  > - Recuperação Única (One-time Retrieval): Anexa o conhecimento de uma única recuperação ao prompt do LLM, frequentemente aprimorado com Knowledge Graphs (KGs) para dados mais recentes.
-  > - Recuperação Iterativa (Iterative Retrieval): Necessária para raciocínio complexo de múltiplos passos, onde o conhecimento é coletado continuamente durante a geração, muitas vezes guiado por técnicas como Chain-of-Thought (CoT).
-  > - Recuperação Post-hoc (Post-hoc Retrieval): Refina as saídas iniciais do LLM através de revisões baseadas em recuperações subsequentes, como o fluxo de trabalho research-then-revise.
+  > - **Recuperação Única (One-time Retrieval):** Anexa o conhecimento de uma única recuperação ao prompt do LLM, frequentemente aprimorado com Knowledge Graphs (KGs) para dados mais recentes.
+  >
+  > - **Recuperação Iterativa (Iterative Retrieval):** Necessária para raciocínio complexo de múltiplos passos, onde o conhecimento é coletado continuamente durante a geração, muitas vezes guiado por técnicas como Chain-of-Thought (CoT).
+  >
+  > - **Recuperação Post-hoc (Post-hoc Retrieval):** Refina as saídas iniciais do LLM através de revisões baseadas em recuperações subsequentes, como o fluxo de trabalho research-then-revise.
   >
   > Embora eficaz, o RAG é vulnerável a falhas no estágio de recuperação (Retrieval Failure), como a recuperação de informações irrelevantes (noisy retrievals) que introduzem dados incorretos ou ruído no processo de geração.
 - `Pergunta 4:` Analise as causas fundamentais da alucinação nos LLMs, abrangendo os três principais estágios de desenvolvimento do modelo: Dados, Treinamento e Inferência. Descreva um fator contribuinte para a alucinação em cada uma dessas três categorias principais.
-  > 1. Dados: Se o conjunto de treinamento contiver informações incompletas, desatualizadas, enviesadas ou raras (como fatos de domínio muito específico), o modelo não terá base sólida para
-  >    responder e pode simplesmente inventar. Isso inclui tanto conhecimento factual antigo quanto desinformação ou vieses presentes no corpus.
-  > 2. Treinamento: Durante o ajuste fino (SFT) ou o alinhamento com feedback humano (RLHF), o modelo pode aprender a "agradar" o avaliador ou o usuário, respondendo com segurança mesmo quando não sabe. Esse fenômeno — bajulação (sycophancy) ou desalinhamento entre o que "sabe" e o que "diz" — incentiva a criação de respostas fabricadas.
-  > 3. Inferência (Geração de Resposta): Na hora de gerar o texto, estratégias de decodificação com maior aleatoriedade (como temperatura alta) podem levar à seleção de palavras improváveis, aumentando o risco de invenções. Além disso, falhas de raciocínio em tarefas complexas e excesso de confiança no que já foi gerado também contribuem para alucinações.
+  > 1. **Dados:** Se o conjunto de treinamento contiver informações incompletas, desatualizadas, enviesadas ou raras (como fatos de domínio muito específico), o modelo não terá base sólida para responder e pode simplesmente inventar. Isso inclui tanto conhecimento factual antigo quanto desinformação ou vieses presentes no corpus.
+  >
+  > 2. **Treinamento:** Durante o ajuste fino (SFT) ou o alinhamento com feedback humano (RLHF), o modelo pode aprender a "agradar" o avaliador ou o usuário, respondendo com segurança mesmo quando não sabe. Esse fenômeno — bajulação (sycophancy) ou desalinhamento entre o que "sabe" e o que "diz" — incentiva a criação de respostas fabricadas.
+  >
+  > 3. **Inferência (Geração de Resposta):** Na hora de gerar o texto, estratégias de decodificação com maior aleatoriedade (como temperatura alta) podem levar à seleção de palavras improváveis, aumentando o risco de invenções. Além disso, falhas de raciocínio em tarefas complexas e excesso de confiança no que já foi gerado também contribuem para alucinações.
   >
   > Em resumo: dados imperfeitos, treinamento que incentiva respostas fluentes acima de respostas corretas, e estratégias de geração que introduzem incerteza são os principais gatilhos das alucinações em LLMs.
 - `Pergunta 5:` De que maneira as métricas baseadas em Question Answering (QA) são empregadas para identificar alucinações de fidelidade em modelos de linguagem?
   > Essas métricas funcionam como um procedimento de verificação em três etapas:
   >
-  > - Extração de informações da resposta gerada e criação de perguntas – Primeiro, identifica-se quais são os fatos ou afirmações importantes dentro da resposta produzida pelo modelo. Em seguida, um módulo de geração de perguntas transforma esses fatos em perguntas que teriam exatamente essas afirmações como resposta.
-  > - Consulta ao contexto original – As perguntas criadas são feitas ao contexto fornecido ao modelo (por exemplo, um texto-base ou um trecho de referência). Esse passo recupera as respostas corretas que deveriam ser sustentadas pelo contexto.
-  > - Comparação para medir fidelidade – Por fim, compara-se: o que o modelo respondeu originalmente (resposta gerada) com o que o contexto original realmente permite responder (resposta da fonte).
+  > - **Extração de informações da resposta gerada e criação de perguntas:** Primeiro, identifica-se quais são os fatos ou afirmações importantes dentro da resposta produzida pelo modelo. Em seguida, um módulo de geração de perguntas transforma esses fatos em perguntas que teriam exatamente essas afirmações como resposta.
+  >
+  > - **Consulta ao contexto original:** As perguntas criadas são feitas ao contexto fornecido ao modelo (por exemplo, um texto-base ou um trecho de referência). Esse passo recupera as respostas corretas que deveriam ser sustentadas pelo contexto.
+  >
+  > - **Comparação para medir fidelidade:** Por fim, compara-se: o que o modelo respondeu originalmente (resposta gerada) com o que o contexto original realmente permite responder (resposta da fonte).
   >
   > Quanto maior a correspondência semântica entre as duas, maior a fidelidade. Se houver pouca ou nenhuma correspondência, entende-se que o modelo inventou ou distorceu a informação, caracterizando uma alucinação.
   >
@@ -289,9 +306,11 @@
   >
   > Contudo, a relação do MU com a transparência e ética conflita devido à sua natureza aproximada. A inviabilidade do unlearning exato para LLMs massivos nos força a métodos que não oferecem garantias matemáticas absolutas de remoção. Isso levanta sérias questões
   >
-  > -​ "Autenticidade": É difícil provar que o modelo realmente esqueceu, e não apenas escondeu, informações. Métodos aproximados podem ser vulneráveis a ataques de relearning ou jailbreaking, gerando uma falsa segurança eticamente questionável.
-  > -​ Avaliação e Auditabilidade: A falta de benchmarks e métricas padronizadas para LLMs black-box dificulta a verificação da eficácia do unlearning (Forget Efficacy) e da preservação da utilidade (Model Utility).
-  > -​ Dilemas Éticos: A subjetividade na definição de "o que esquecer" pode levar à manipulação ou censura, transformando o MU numa ferramenta de controle de narrativa.
+  > -​ **"Autenticidade":** É difícil provar que o modelo realmente esqueceu, e não apenas escondeu, informações. Métodos aproximados podem ser vulneráveis a ataques de relearning ou jailbreaking, gerando uma falsa segurança eticamente questionável.
+  >
+  > -​ **Avaliação e Auditabilidade:** A falta de benchmarks e métricas padronizadas para LLMs black-box dificulta a verificação da eficácia do unlearning (Forget Efficacy) e da preservação da utilidade (Model Utility).
+  >
+  > -​ **Dilemas Éticos:** A subjetividade na definição de "o que esquecer" pode levar à manipulação ou censura, transformando o MU numa ferramenta de controle de narrativa.
   >
   > Tais implicações abalam a confiança pública na integridade da IA. Para que o MU cumpra sua promessa ética, a pesquisa deve focar em avaliação robusta, interpretabilidade e certificação clara do processo de desaprendizagem.
 - `Pergunta 4:` Explique o que é In-Context Unlearning (ICU) no contexto de modelos de linguagem e diferencie essa abordagem das técnicas tradicionais de Machine Unlearning baseadas em re-treinamento ou fine-tuning adversarial. Em seguida, discuta duas limitações práticas dessa abordagem e avalie alguns cenários onde ICU pode (ou não) ser uma alternativa viável para apagar informações de um modelo sem alterar seus pesos.
@@ -345,25 +364,25 @@
 - `Pergunta 2:` Cite 3 características que tornam o processamento de tabelas complexo para LLMs.
   > Diversos fatores afetam negativamente a praticidade do processamento de dados tabulares por LLMs, dentre eles podemos listar:
   >
-  > 1. Volume de dados: dependendo das tabelas utilizadas, podem haver milhões de tuplas de dados a serem processados, cada coluna com um formato de dado diferente (precisando por vezes ser truncado) o que pode reduzir o contexto essencial para a compreensão dos dados.
+  > 1. **Volume de dados:** dependendo das tabelas utilizadas, podem haver milhões de tuplas de dados a serem processados, cada coluna com um formato de dado diferente (precisando por vezes ser truncado) o que pode reduzir o contexto essencial para a compreensão dos dados.
   >
-  > 2. Complexidade do mecanismo de atenção: tendo complexidade quadrática, o tempo de processamento se torna longo para conseguir processar o volume de dados.
+  > 2. **Complexidade do mecanismo de atenção:** tendo complexidade quadrática, o tempo de processamento se torna longo para conseguir processar o volume de dados.
   >
-  > 3. Multimodalidade: algumas tabelas podem estar em formato de texto, em documentos digitais ou em formato de imagem. Cada uma desses modos apresenta complexidades distintas para que os dados apresentados sejam compreendidos.
+  > 3. **Multimodalidade:** algumas tabelas podem estar em formato de texto, em documentos digitais ou em formato de imagem. Cada uma desses modos apresenta complexidades distintas para que os dados apresentados sejam compreendidos.
   >
-  > 4. Tipos distintos de tabela: sendo versátil em sua estrutura, as tabelas podem representar diversos tipos de informação e cada coluna (ou linha) pode representar um tipo de dado diferente. Além disso, ela também pode ser em sua forma reta, onde cada célula é única e representa uma unidade de informação, ou em seu formato hierárquico, no qual algumas células representam diferentes níveis de parentesco estrutural, e certas sub-células compartilham propriedades coletivas comuns.
+  > 4. **Tipos distintos de tabela:** sendo versátil em sua estrutura, as tabelas podem representar diversos tipos de informação e cada coluna (ou linha) pode representar um tipo de dado diferente. Além disso, ela também pode ser em sua forma reta, onde cada célula é única e representa uma unidade de informação, ou em seu formato hierárquico, no qual algumas células representam diferentes níveis de parentesco estrutural, e certas sub-células compartilham propriedades coletivas comuns.
   >
-  > 5. Ordem independência: a ordem das linhas e das colunas é arbitrária e dependente do que se busca encontrar. Inicialmente podem estar organizadas em um formato preferencial aos fins de quem as criou, porém as informações que ali constam permanecem as mesmas independente de sua ordem.
+  > 5. **Ordem independência:** a ordem das linhas e das colunas é arbitrária e dependente do que se busca encontrar. Inicialmente podem estar organizadas em um formato preferencial aos fins de quem as criou, porém as informações que ali constam permanecem as mesmas independente de sua ordem.
   >
-  > 6. Correlação numérica: algumas colunas podem estar numericamente associadas, sendo um somatório ou resultado de alguma operação realizada, entendimento que pode ser perdido no momento do processamento pelas LLMs.
+  > 6. **Correlação numérica:** algumas colunas podem estar numericamente associadas, sendo um somatório ou resultado de alguma operação realizada, entendimento que pode ser perdido no momento do processamento pelas LLMs.
   >
-  > 7. Correlação implícita: algumas correlações podem existir porém podem não estar claramente explícitas ou explicadas.
+  > 7. **Correlação implícita:** algumas correlações podem existir porém podem não estar claramente explícitas ou explicadas.
   >
-  > 8. Serialização: para que os dados tabulares sejam interpretáveis pela LLM, eles precisam passar pelo processo de serialização, o que pode gerar perda de informações relevantes antes presentes.
+  > 8. **Serialização:** para que os dados tabulares sejam interpretáveis pela LLM, eles precisam passar pelo processo de serialização, o que pode gerar perda de informações relevantes antes presentes.
   >
-  > 9. Metainformação: tabelas podem conter outras informações relevantes para o seu entendimento além de seu cabeçalho e linhas. Alguns desses são as notas, legendas, subtítulos ou descrições das colunas.
+  > 9. **Metainformação:** tabelas podem conter outras informações relevantes para o seu entendimento além de seu cabeçalho e linhas. Alguns desses são as notas, legendas, subtítulos ou descrições das colunas.
   >
-  > 10. Contextualização: uma tabela por si só pode ser mal interpretada caso não haja o contexto em que ela está inserida e o que deseja representar, ou então quais são as informações relevantes para a tarefa em questão.
+  > 10. **Contextualização:** uma tabela por si só pode ser mal interpretada caso não haja o contexto em que ela está inserida e o que deseja representar, ou então quais são as informações relevantes para a tarefa em questão.
 - `Pergunta 3:` É entendido que o HTML é a linguagem de marcação que tem gerado os melhores resultados no entendimento de dados tabulares. Sendo assim, qual característica é estipulada como sendo a causadora desses bons resultados? E o que poderia ser feito para forçosamente amenizar este viés?
   > O bom desempenho do HTML no entendimento de dados tabulares provavelmente decorre do fato de que LLMs são extensivamente treinados com páginas da web, nas quais esse formato é predominante. Como resultado, o modelo desenvolve uma familiaridade natural com a estrutura hierárquica do HTML, o que facilita a interpretação de tabelas representadas nesse formato. Para avaliar se esse efeito positivo é realmente causado pelas propriedades estruturais do HTML, e não apenas pela exposição desbalanceada durante o pré-treinamento, seria necessário treinar um modelo totalmente do zero utilizando quantidades equilibradas de diferentes tipos de linguagem de marcação. Outra alternativa seria treinar o modelo sem acesso a dados contendo HTML, permitindo comparar o desempenho sob diferentes condições de exposição. Somente com um treinamento balanceado ou controlado seria possível medir o impacto real de cada formato sobre o entendimento do modelo. Isso permitiria reduzir o viés causado pela predominância do HTML nos dados de pré-treino e avaliar de forma justa a contribuição de cada linguagem de marcação.
 - `Pergunta 4:` De que forma os agentic workflows permitem que o modelo execute tarefas multi-turn, como correção iterativa de queries ou refinamento de respostas?
@@ -375,33 +394,40 @@
 
 - `Pergunta 1:` O que define um MLLM (Multimodal Large Language Model) e como ele difere de um modelo unimodal?
   > Um MLLM é um modelo baseado em LLM capaz de receber, processar e gerar informações multimodais. Ele difere de um modelo unimodal por ser capaz de processar e integrar informações de duas ou mais modalidades, como texto, imagem, e áudio, por exemplo. Enquanto um modelo unimodal é capaz de processar apenas dados de uma única modalidade.
-  - Orientações para uma resposta correta:
+  - **Orientações para uma resposta correta:**
     > Uma resposta correta deve, acima de tudo, definir o MLLM como um modelo que utiliza um LLM como sua base, ou backbone. Deve também focar de maneira explícita na capacidade essencial de receber, processar, raciocinar e integrar informações de múltiplas modalidades, no mínimo duas, podendo serem mais, como texto, imagem e aúdio. Para ser completa, a resposta precisa contrastar diretamente essa capacidade com o modelo unimodal, enfatizando que este último processa apenas uma modalidade, ficando "cego" para outros tipos de dados e, por isso, produzindo uma gama limitada de resultados, enquanto o MLLM oferece resultados mais amplos. Esta abordagem multimodal é crucial porque a percepção do mundo real é intrinsecamente multimodal, e os MLLMs tentam preencher a lacuna entre o raciocínio do LLM e a percepção do mundo.
 - `Pergunta 2:` Você foi recém contratado como engenheiro de machine learning em uma empresa que possui um LLM proprietário, extremamente robusto e muito caro, treinado exclusivamente com dados de texto. Sua primeira tarefa é liderar um projeto para adaptar este LLM e criar um novo produto de "Visual Question Answering" (VQA), onde os usuários podem fazer perguntas sobre imagens. | A diretriz principal da gestão é: não podemos re-treinar ou modificar o LLM original (ele deve permanecer "congelado") para evitar os custos computacionais proibitivos de um re-treinamento completo. | Quais componentes de arquitetura você propõe adicionar e treinar para realizar a tarefa sem alterar o LLM, e qual é a função principal desses novos componentes?
   > Para esta tarefa, propomos manter o LLM congelado e introduzir dois novos componentes: um Encoder, como um ViT pré-treinado, para extrair as características da imagem, e uma Modality Interface. O componente crucial que precisaremos treinar é essa interface (um "Input Projector", que pode ser um Q-Former, por exemplo). A função principal desta interface é atuar como uma "ponte" treinável que aprende a alinhar as características visuais do encoder com o espaço de características de texto que o LLM congelado já entende, como demonstrado por modelos como o BLIP-2.
-  - Orientações para uma resposta correta:
+  - **Orientações para uma resposta correta:**
     > Uma resposta correta deve respeitar a restrição do "LLM congelado". Deve identificar os dois componentes a serem adicionados (Encoder de Modalidade e Interface de Modalidade). Preferencialmente, deve apontar a Interface (ex: Input Projector, Q-Former) como o componente a ser treinado e explicar sua função de "ponte" ou "alinhamento" dos espaços de características.
 - `Pergunta 3:` Descreva alguns dos possíveis desafios envolvendo arquiteturas multimodais.
   > As arquiteturas multimodais enfrentam desafios como a escassez de dados pareados entre modalidades (texto, imagem, áudio, vídeo), o que dificulta o aprendizado conjunto, a forte dependência de LLMs, que introduzem vieses, ambiguidades semânticas, como interpretações incorretas de relações entre conceitos ou descrições visuais, e alucinações, em que o modelo gera informações imprecisas ou inexistentes. A contaminação de datasets (com exemplos já expostos ao treinamento) é outro problema crítico, pois distorce a avaliação de desempenho, inflando métricas e mascarando falhas de generalização. Somam-se ainda as diferenças de dimensionalidade entre modalidades, que complicam o alinhamento e a fusão das representações, os desafios de sincronização temporal, a baixa interpretabilidade, o alto custo computacional e energético e a dificuldade de adaptação a novos domínios ou modalidades emergentes.
-  - Orientações para uma resposta correta:
+  - **Orientações para uma resposta correta:**
     > Uma resposta correta deve apontar alguns dos principais desafios das arquiteturas multimodais, sem precisar listar todos. Deve demonstrar compreensão de que esses desafios surgem da integração de diferentes modalidades de dados, com estruturas e dimensões distintas. Deve mencionar ao menos um ou dois pontos centrais, como a escassez de dados pareados, as dificuldades de alinhamento entre modalidades ou problemas herdados dos LLMs, como viés e alucinações. Para ser completa, deve deixar claro que a natureza multimodal aumenta a complexidade de treinamento e generalização dos modelos.
 - `Pergunta 4:` Liste 3 problemas clássicos que MLLMs podem ser aplicadas.
-  - Orientações para uma resposta correta:
+  - **Orientações para uma resposta correta:**
     > Uma resposta correta deve listar quaisquer três aplicações clássicas de MLLMs, conforme apresentado no slide 6 da apresentação. A resposta deve demonstrar a compreensão de como esses modelos são aplicados a tarefas que exigem a integração de múltiplas modalidades. Exemplos válidos para citação incluem:
     >
-    > -​ Visual Question Answering (VQA): A capacidade de fornecer uma resposta em linguagem natural a uma pergunta feita sobre o conteúdo de uma imagem ou vídeo.
-    > -​ Image Captioning and Description (Legendagem de Imagens): A tarefa de gerar um resumo textual coerente que descreva o que está acontecendo em uma imagem.
-    > -​ Document Understanding (Compreensão de Documentos): A habilidade de interpretar documentos escaneados, o que exige raciocínio sobre o layout, bem como sobre o texto e os gráficos contidos nele.
-    > -​ Video Understanding (Compreensão de Vídeo): A capacidade de resumir ou raciocinar sobre eventos que ocorrem em sequências de vídeo.
-    > -​ Medical Imaging Analysis (Análise de Imagens Médicas): O uso do modelo para interpretar imagens de radiologia em conjunto com notas clínicas para auxiliar no diagnóstico.
-    > -​ Robotics and Embodied AI (Robótica e IA Incorporada): Permitir que robôs compreendam e ajam com base em instruções que podem ser tanto visuais quanto textuais.
+    > -​ **Visual Question Answering (VQA):** A capacidade de fornecer uma resposta em linguagem natural a uma pergunta feita sobre o conteúdo de uma imagem ou vídeo.
+    >
+    > -​ **Image Captioning and Description (Legendagem de Imagens):** A tarefa de gerar um resumo textual coerente que descreva o que está acontecendo em uma imagem.
+    >
+    > -​ **Document Understanding (Compreensão de Documentos):** A habilidade de interpretar documentos escaneados, o que exige raciocínio sobre o layout, bem como sobre o texto e os gráficos contidos nele.
+    >
+    > -​ **Video Understanding (Compreensão de Vídeo):** A capacidade de resumir ou raciocinar sobre eventos que ocorrem em sequências de vídeo.
+    >
+    > -​ **Medical Imaging Analysis (Análise de Imagens Médicas):** O uso do modelo para interpretar imagens de radiologia em conjunto com notas clínicas para auxiliar no diagnóstico.
+    >
+    > -​ **Robotics and Embodied AI (Robótica e IA Incorporada):** Permitir que robôs compreendam e ajam com base em instruções que podem ser tanto visuais quanto textuais.
 - `Pergunta 5:` MLLMs seguem uma arquitetura padrão. Quais são as 3 partes comumente usadas por esses modelos, e o que cada uma faz?
   > Os MLLMs geralmente seguem uma arquitetura composta por três partes principais: Modality Encoder, Modality Interface e Modality Generator. O Modality Encoder é responsável por receber os dados de uma modalidade específica (como texto, imagem, áudio ou vídeo) e transformá-los em representações numéricas (features) que capturam seus significados semânticos. Exemplos incluem o ViT (Vision Transformer) para imagens e o BERT para texto. Modality Interface atua como o componente de integração entre modalidades, projetando e alinhando as representações produzidas pelos encoders em um espaço compartilhado. Essa etapa é crucial para que o modelo consiga compreender relações entre diferentes tipos de dados, como associar uma descrição textual a uma imagem. Em muitos modelos, essa interface pode ser um módulo como um Q-Former ou Input Projector, responsável por aprender o mapeamento entre as modalidades. Por fim, o Modality Generator é o componente encarregado de gerar a saída final na modalidade desejada, por exemplo, texto em tarefas de VQA ou legendas de imagens para image captioning, é possível utilizar um LLM ou outro decodificador capaz de produzir saídas coerentes e contextualizadas com base no espaço multimodal integrado.
-  - Orientações para uma resposta correta:
+  - **Orientações para uma resposta correta:**
     > Uma resposta correta deve identificar claramente as três partes principais da arquitetura de um MLLM: Modality Encoder, Modality Interface e Modality Generator. Deve descrever o papel funcional de cada uma delas:
     >
     > -​ O Modality Encoder deve ser apresentado como o módulo que extrai características (features) dos dados de cada modalidade (imagem, texto, áudio, etc.).
+    >
     > -​ A Modality Interface deve ser descrita como a ponte de alinhamento e integração entre modalidades, responsável por projetar todas as representações em um espaço semântico comum, permitindo o raciocínio multimodal.
+    >
     > -​ O Modality Generator deve ser caracterizado como o componente que produz a saída final, geralmente em texto, imagem ou outra modalidade, a partir das representações integradas.
     >
     > Para ser considerada completa, a resposta precisa deixar explícito que essas três partes trabalham de forma encadeada (codificação, integração e geração), refletindo o fluxo de informação típico em arquiteturas multimodais modernas.
@@ -476,7 +502,7 @@
   > Porque o mecanismo de self-attention não tem memória infinita.O modelo processa toda a sequência ao mesmo tempo, sem uma pilha de memória que permita lembrar a ordem e a profundidade das informações. Por isso, ele não consegue contar ou representar hierarquias recursivas quando a entrada cresce.
   >
   > Em PARITY, isso significa que o Transformer perde a noção de alternância entre "par" e "ímpar" em sequências longas. Em 2DYCK, ele não consegue acompanhar corretamente os parênteses aninhados, pois ambos os casos exigem uma memória tipo pilha.Só seria possível resolver essas tarefas se o número de camadas ou cabeças aumentasse junto com o tamanho da entrada, o que torna o modelo não escalável.
-  - Orientações para uma resposta correta:
+  - **Orientações para uma resposta correta:**
     > Uma boa resposta para essa pergunta precisa falar de dois conceitos principais: primeiro, o funcionamento do self-attention que é global, mas não sequencial e depois, o tipo de memória e estrutura hierárquica que as linguagens PARITY e 2DYCK exigem. Também é importante relacionar isso com o argumento teórico do Hahn sobre escalabilidade e limitação estrutural.
 - `Pergunta 2:` Com base no artigo "On Limitations of the Transformer Architecture" (Peng, Narayanan e Papadimitriou, 2024), explique por que o mecanismo de atenção do Transformer apresenta limitações fundamentais em tarefas de composição de funções e como essas limitações se relacionam com a ocorrência de alucinações em modelos de linguagem de larga escala (LLMs).
   > O artigo demonstra que o Transformer, devido à sua estrutura matemática baseada no mecanismo de atenção, possui limitações teóricas na realização de composição de funções — operações em que o resultado de uma função serve de entrada para outra, como responder "Qual é a profissão da mãe de João?".
@@ -520,7 +546,7 @@
   >   - **Dissimulação (Deception):** entender o objetivo humano e fingir estar alinhado durante o treinamento e buscar objetivos próprios no momento da implantação.
   >   - **Autopreservação (Self-Preservation):** evitar ser desligado para garantir a sobrevivência e a operação necessárias para atingir seu objetivo final.
   >   - **Busca por Poder (Power-Seeking):** tendência de adquirir mais poder e recursos (poder computacional e/ou dados) para a realização de seus objetivos. Estudos demonstraram que políticas e funções de recompensa ótimas podem incentivar os sistemas a buscar poder em determinados ambientes.
-  - Orientações para uma resposta correta:
+  - **Orientações para uma resposta correta:**
     > Uma resposta correta deve ter a ideia geral, que o modelo deve estar alinhado com os valores humanos. E também citar os riscos reais e potenciais com uma breve descrição.
 - `Pergunta 2:` Caracterize alinhamento externo, suas categorias e cite/descreva brevemente os principais métodos de cada categoria.
   > As abordagens de alinhamento externo determinam que os valores humanos devem ser transformados em objetivos de treinamento de LLMs. E tem como referência o framework HHH - Helpfulness Honesty Harmlessness - que indicam 3 dimensões imprescindíveis para o alinhamento de LLMs. Alguns comportamentos (lista não exaustiva) do que se espera de um LLM em cada dimensão:
@@ -542,17 +568,17 @@
   >     - **Debate:** Agentes de IA debatem e criticam propostas de respostas; um humano (juiz) avalia a qualidade dos argumentos para selecionar a melhor resposta, melhorando a transparência e a facticidade.
   >     - **Market Making:** Uma variação do Debate onde dois modelos (Market e Adversary) geram argumentos para maximizar a mudança na crença do juiz humano, buscando uma resposta robusta a críticas.
   >     - **Proxy Tasks: Busca procedimentos para avaliar o resultado das tarefas de forma indireta, exemplo:** embora não saibamos como prever com precisão o recorde mundial masculino dos 100 metros rasos, sabemos que esse recorde diminui monotonicamente ao longo do tempo. Portanto, se um modelo prevê uma função não monotônica para o recorde dos 100 metros ao longo do tempo, podemos afirmar que esse modelo está errado.
-  - Orientações para uma resposta correta:
+  - **Orientações para uma resposta correta:**
     > Uma resposta correta deve conter a ideia geral do que é alinhamento externo, suas duas categorias (segundo o artigo), Métodos de supervisão não-recursivos e Métodos de supervisão escaláveis, e a citação ou uma breve descrição dos métodos de cada categoria.
 - `Pergunta 3:` Caracterize alinhamento interno e possíveis formas de falha dos modelos em realizá-lo.
   > "O alinhamento interno busca garantir que um sistema de IA otimize de forma robusta o objetivo dado que se alinha com o que os humanos querem que ele faça." Em outras palavras, visa garantir que o objetivo interno de um sistema de IA — o Mesa-objective (o que o otimizador aprendido, ou Mesa-optimizer, realmente busca) — se alinhe ao Base Objective (o objetivo pretendido pelo desenvolvedor, otimizado pelo Base Optimizer).
   >
-  > As Falhas de Alinhamento Interno:
+  > **As Falhas de Alinhamento Interno:**
   >
   > - **Alinhamento Proxy:** O Mesa-optimizer otimiza um proxy incorreto para o objetivo base. O subtipo mais sério é o Alinhamento Enganoso, comportamento diferente diferente.
   > - **Alinhamento Aproximado:** A Mesa-objetivo é apenas uma aproximação do objetivo base devido a erros técnicos.
   > - **Alinhamento Subótimo: O modelo demonstra comportamento alinhado temporariamente devido a limitações (ex:** restrições computacionais), mas o comportamento alinhado é modificado com o desaparecimento das limitações.
-  - Orientações para uma resposta correta:
+  - **Orientações para uma resposta correta:**
     > Uma resposta correta deve conter a ideia geral do que é alinhamento interno e seus principais conceitos (Base Objective, Base Optimizer, Mesa-objective, Mesa-optimizer) e uma descrição breve das falhas mais comuns.
 - `Pergunta 4:` Descreva brevemente os benefícios e riscos a nível individual relacionados com o alinhamento personalizado.
   > - **Benefícios:**
@@ -568,7 +594,7 @@
   >   - **Essencialismo e Perfilamento:** Uso de suposições simplificadoras sobre o usuário, resultando em perfil algorítmico e categorização não consensual, o que pode ir contra à autonomia da identidade individual.
   >   - **Antropomorfismo:** Aumento da atribuição de traços humanos à IA, levando os usuários a compartilhar informações sensíveis em excesso, tornando-os vulneráveis à exploração ou à criação de apegos não saudáveis.
   >   - **Privacidade:** A personalização requer a coleta massiva de dados íntimos e sensíveis, elevando o risco de violações de privacidade e conflitos com regulamentações vigentes no país
-  - Orientações para uma resposta correta:
+  - **Orientações para uma resposta correta:**
     > Uma resposta correta deve descrever brevemente os 5 benefícios (Eficiência, Utilidade, Respeito por Valores, Autonomia do Usuário e Empatia e Companheirismo) e os 6 riscos (Esforço, Dependência, Reforço de Viés, Essencialismo e Perfilamento, Antropomorfismo e Privacidade) com relação aos indivíduos.
 - `Pergunta 5:` Descreva brevemente os benefícios e riscos a nível social relacionados com o alinhamento personalizado.
   > - **Benefícios:**
@@ -582,7 +608,7 @@
   >   - **Uso malicioso:** uso para fins prejudiciais ou ilegais, como gerar linguagem ofensiva em larga escala, manipular usuários por meio de desinformação ou fraude, ou persuadir usuários a adotar determinadas visões políticas ou preferências de marca.
   >   - **Deslocamento de mão de obra:** aumento do risco de automação de empregos, particularmente empregos de salário mínimo, rotineiros e de trabalho remoto.
   >   - **Danos ambientais:** aumento dos custos ambientais decorrentes do aumento dos custos de treinamento, armazenamento de dados e inferência.
-  - Orientações para uma resposta correta:
+  - **Orientações para uma resposta correta:**
     > Uma resposta correta deve descrever brevemente os 4 benefícios (Inclusão e Acessibilidade, Diversidade e Representação, Produtividade do Trabalho e Democratização e Participação) e os 5 riscos (Disparidades de acesso, Polarização, Uso malicioso, Deslocamento de mão de obra e Danos ambientais) com relação à sociedade.
 
 ## Grupo 13: 18 Vertical Domains
@@ -606,6 +632,6 @@
   >
   > Já a abordagem de tokenização dupla com Mixture-of-Experts (MoE) permite combinar o tokenizer generalista com um tokenizer especializado em paralelo, ativando apenas os "especialistas" relevantes quando vocabulário técnico é detectado. Assim, cada estratégia mitiga a limitação do tokenizer ao adicionar uma camada de interpretação contextualizada, mantendo a eficiência do modelo original e ampliando sua capacidade de compreender a linguagem especializada.
 - `Pergunta 5:` Modelos de linguagem aplicados a domínios verticais como medicina e direito são frequentemente avaliados por métricas quantitativas (ex: acurácia em provas, taxa de erro) e por análises qualitativas feitas por especialistas humanos. | Discuta como essas duas formas de avaliação se complementam e quais seriam os riscos de depender exclusivamente de uma ou de outra no processo de validação desses modelos.
-  > A avaliação de modelos de linguagem em domínios verticais precisa integrar métricas quantitativas e avaliações qualitativas para ser completa. As métricas quantitativas, como acurácia em provas padronizadas, taxa de erro, sensibilidade ou concordância com gabaritos, fornecem indicadores objetivos e comparáveis, permitindo mensurar progresso, selecionar modelos e monitorar desempenho ao longo do tempo. Contudo, elas não capturam dimensões essenciais desses domínios, como adequação ética, clareza comunicativa, fundamentação argumentativa ou segurança na tomada de decisão.A avaliação qualitativa feita por especialistas humanos complementa essas lacunas, pois médicos, juristas ou analistas financeiros conseguem identificar se a resposta está alinhada a práticas profissionais reais, se utiliza o raciocínio correto e se respeita normas e expectativas institucionais. Entretanto, depender exclusivamente da avaliação humana também envolve riscos: ela é cara, lenta, sujeita a vieses individuais e não escala para cenários de uso contínuo.Se usarmos apenas métricas numéricas, um modelo pode parecer adequado apesar de produzir respostas perigosamente confiantes, porém equivocadas. Se confiarmos apenas em avaliação humana, podemos não detectar falhas sistemáticas ou não garantir consistência.
+  > A avaliação de modelos de linguagem em domínios verticais precisa integrar métricas quantitativas e avaliações qualitativas para ser completa. As métricas quantitativas, como acurácia em provas padronizadas, taxa de erro, sensibilidade ou concordância com gabaritos, fornecem indicadores objetivos e comparáveis, permitindo mensurar progresso, selecionar modelos e monitorar desempenho ao longo do tempo. Contudo, elas não capturam dimensões essenciais desses domínios, como adequação ética, clareza comunicativa, fundamentação argumentativa ou segurança na tomada de decisão.A avaliação qualitativa feita por especialistas humanos complementa essas lacunas, pois médicos, juristas ou analistas financeiros conseguem identificar se a resposta está alinhada a práticas profissionais reais, se utiliza o raciocínio correto e se respeita normas e expectativas institucionais. Entretanto, depender exclusivamente da avaliação humana também envolve riscos: ela é cara, lenta, sujeita a vieses individuais e não escala para cenários de uso contínuo. Se usarmos apenas métricas numéricas, um modelo pode parecer adequado apesar de produzir respostas perigosamente confiantes, porém equivocadas. Se confiarmos apenas em avaliação humana, podemos não detectar falhas sistemáticas ou não garantir consistência.
   >
   > Portanto, a combinação das duas formas (avaliar o que o modelo acerta e como ele raciocina) é essencial para validar modelos realmente seguros, responsáveis e aplicáveis na prática profissional.- [Perguntas](#perguntas)
