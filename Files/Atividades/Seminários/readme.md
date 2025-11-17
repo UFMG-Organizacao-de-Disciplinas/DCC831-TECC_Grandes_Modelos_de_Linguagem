@@ -19,7 +19,7 @@
 |    13 |  18 | Vertical Domains          |   [P18][P18] |         [Q18][Q18] | [N18][N18] |
 |    14 |  03 | Interpretability          |   [P03][P03] |         [Q03][Q03] | [N03][N03] |
 |    15 |  16 | Transformer Limitations   |   [P16][P16] |         [Q16][Q16] | [N16][N16] |
-|    16 |  02 | Reasoning                 |   [P02][P02] |           [-][Q02] |   [-][N02] |
+|    16 |  02 | Reasoning                 |   [P02][P02] |         [Q02][Q02] |   [-][N02] |
 |    17 |  10 | Tabular Data              |   [P10][P10] |         [Q10][Q10] | [N10][N10] |
 |    18 |  13 | Harms                     |   [P13][P13] |           [-][Q13] | [N13][N13] |
 
