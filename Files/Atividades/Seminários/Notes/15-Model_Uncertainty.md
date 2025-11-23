@@ -1,6 +1,6 @@
 # Model Uncertainty
 
-## LLMs são boas
+## LLMs são muito boas
 
 - Igualam e até superam humanos (ENEM, POSCOMP)
 - Alucinações
@@ -8,28 +8,43 @@
 ## Mas...
 
 - Algumas alucinações são óbvias.
+- Às vezes são confiantes no erro. E confiantes em excesso.
 - Maiores problemas: predição de modelos pra medicina.
 
-## (Me desatentei)
+---
+
+- Uncertainty Quantification (UQ): técnicas para medir a incerteza nas previsões de modelos de linguagem.
+
+## Por que estudar isso?
+
+- Ter clareza no que não se sabe ajuda a decidir o que e como responder.
+- Saber a incerteza ajuda a se abster quando o risco é alto.
+  - {Parece ser meio que aprender a quando não assumir o BO}
+- Predição Conformal (CP): técnica estatística que fornece garantias de cobertura para predições, útil para medir a incerteza.
 
 ## O que é
 
 - Quantificação de Incerteza (UQ)
 - Predição Conformal (CP)
 
-Incertezas: Epistêmica e Aleatória (várias respostas certas)
+Incertezas:
+
+1. Epistêmica: O modelo não sabe (falta de dados)
+2. Aleatória: Os dados são inerentemente ruidosos e mesmo com dados infinitos continuará existindo.
 
 ## Dificuldades
 
 Não temos acesso à distribuição real dos dados no mundo, apenas amostras.
 
+O modelo, como caixa preta, não nos fornece os dados numéricos reais. E mesmo as métricas simples, caso disponíveis, sofrem de vieses (comprimento, mudança de domínio, acúmulo de erros).
+
 ## Panorama
 
-- Token-level
-- Auto-verbalizada
-- Consenso semântico
-- Interpretabilidade mecanística
-- Predição Conformal
+- **Token-level:** entropia, medidas sensíveis ao significado
+- **Auto-verbalizada:** confiança declarada pelo próprio modelo
+- **Consenso semântico:** verifica se várias respostas apresentam o mesmo significado.
+- **Interpretabilidade mecanística:** análise dos neurônios ativados
+- **Predição Conformal:** garante formalmente que a resposta correta está dentro de um intervalo
 
 ### UQ Token-level
 

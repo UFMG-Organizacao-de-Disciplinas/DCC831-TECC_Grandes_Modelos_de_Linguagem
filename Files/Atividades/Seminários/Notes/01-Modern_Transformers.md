@@ -1,5 +1,11 @@
 # Modern Transformers - 04/11/2025
 
+## Roteiro
+
+## Otimizações na Arquitetura Transformer
+
+### Multi-Head Latent Attention (MLA)
+
 ## ?
 
 ## Group QKV
