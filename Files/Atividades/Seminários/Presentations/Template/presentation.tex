@@ -1,0 +1,151 @@
+\documentclass[10pt]{beamer}
+%\mode<presentation>{}
+
+%\usepackage{media9}
+\usepackage[]{units}
+\usepackage[brazil]{babel} % Português do Brasil
+\usepackage[parfill]{parskip}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts,amscd}
+\usepackage{amssymb,amsmath,amsthm,enumerate}
+\usepackage{array}
+\usepackage{bm}
+\usepackage{caption}
+\usepackage{fontawesome}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{physics}
+\usepackage{ragged2e}
+\usepackage{subcaption}
+\usepackage{tcolorbox}
+
+\hypersetup{colorlinks=true} % Enable colored hyperlinks
+
+% The following three lines are for crossmarks & checkmarks
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+\setbeamertemplate{caption}[numbered] % Numbered captions of tables, pictures, etc.
+
+\usepackage{algorithm2e} %\usepackage[superscript,biblabel]{cite}
+\renewcommand{\thealgocf}{}
+
+\usepackage[style=ieee]{biblatex} % Bibliography settings
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+\addbibresource{referencias.bib}
+
+\usepackage[acronym]{glossaries} % Glossary entries
+\newacronym{ML}{ML}{machine learning}
+\newacronym{HRI}{HRI}{human-robot interactions}
+\newacronym{RNN}{RNN}{Recurrent Neural Network}
+\newacronym{LSTM}{LSTM}{Long Short-Term Memory}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+
+\newcommand{\empy}[1]{{\color{darkorange}\emph{#1}}}
+\newcommand{\empr}[1]{{\color{cardinalred}\emph{#1}}}
+\newcommand{\examplebox}[2]{
+\begin{tcolorbox}[colframe=darkcardinal,colback=boxgray,title=#1]
+#2
+\end{tcolorbox}}
+
+\usetheme{Stanford} 
+\input{./style_files_stanford/my_beamer_defs.sty}
+\logo{\raisebox{0.15cm}{\hspace*{-1.5cm}\includegraphics[height=0.6cm]{./images/Logo-DCC.png}}}
+
+\setbeamerfont{frametitle}{size=\normalsize }
+
+% commands to relax beamer and subfig conflicts
+% see here: https://tex.stackexchange.com/questions/426088/texlive-pretest-2018-beamer-and-subfig-collide
+\makeatletter
+\let\@@magyar@captionfix\relax
+\makeatother
+
+\title{Título da apresentação}
+
+\subtitle{subtítulo}
+
+\begin{document}
+
+\author[Grupo XXXXXX]{%
+	\centering
+	\small
+	\begin{tabular}{cc}
+		Autor 1 & Autor 2 \\[3pt]
+		Autor 3 & Autor 4 \\[3pt]
+	\end{tabular}\\[6pt]
+	\footnotesize
+	\href{}{\texttt{}}
+}
+
+%\vspace{-4ex}
+
+\institute{
+	\vskip 5pt
+	\begin{figure}
+		\centering
+		\begin{subfigure}[t]{0.5\textwidth}
+			\centering
+			\includegraphics[height=0.33in]{./style_files_stanford/logo_ufmg.jpg}
+		\end{subfigure}%
+		~
+		\begin{subfigure}[t]{0.5\textwidth}
+			\centering
+			\includegraphics[height=0.33in]{./images/Logo-DCC.png}
+		\end{subfigure}
+	\end{figure}
+	\vskip 5pt
+}
+
+% \date{June 15, 2020}
+\date{\today}
+
+\begin{noheadline}
+	\begin{frame} \maketitle \end{frame}
+\end{noheadline}
+
+\setbeamertemplate{itemize items}[default]
+\setbeamertemplate{itemize subitem}[circle]
+
+\begin{frame}
+	\frametitle{Tópicos} % Table of contents slide, comment this block out to remove it
+	\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+\end{frame}
+
+\section{Introdução}
+\frame[allowframebreaks]{ \justifying \small
+	\frametitle{Introdução}
+	Texto de Introdução
+	% \cite{TesteInProceedings, TesteArticle}
+}
+
+\section{Seção 01}
+
+\subsection{Subseção}
+
+\frame[allowframebreaks]{ \justifying \small
+	\frametitle{title}
+	Texto da Subseção 1
+	% \citet{TesteInProceedings, TesteArticle}
+}
+
+\section{Conclusão}
+
+\frame[allowframebreaks]{ \justifying \small
+	\frametitle{Conclusão}
+	Texto da Conclusão
+}
+
+\begin{frame}[allowframebreaks]
+	\frametitle{Referências}
+	\nocite{*}
+	\printbibliography
+\end{frame}
+
+\end{document}

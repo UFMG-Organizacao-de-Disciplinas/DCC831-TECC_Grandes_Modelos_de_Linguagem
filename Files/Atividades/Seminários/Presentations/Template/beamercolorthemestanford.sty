@@ -1,0 +1,58 @@
+% Copyright 2007 by Till Tantau
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/color/beamercolorthemestanford.sty,v 1.4 2007/01/28 20:48:24 tantau Exp $
+
+% Cores (nomes semânticos baseados nos valores RGB)
+\definecolor{deepRed}{RGB}{140,30,30}       % antigo: cardinalred
+\definecolor{charcoalGray}{RGB}{77,79,83}   % antigo: coolgray
+\definecolor{black}{RGB}{0,0,0}             % preto
+\definecolor{sandBeige}{RGB}{210,194,149}   % antigo: beige
+\definecolor{camelBrown}{RGB}{179,153,93}   % antigo: darkbeige
+\definecolor{burgundy}{RGB}{94,48,50}       % antigo: darkcardinal
+\definecolor{rustRed}{RGB}{141,60,30}       % antigo: lightcardinal
+\definecolor{plum}{RGB}{83,40,79}           % antigo: darkpurple
+\definecolor{teal}{RGB}{0,124,146}          % antigo: darkcyan
+\definecolor{skyBlue}{RGB}{0,152,219}       % antigo: skyblue
+\definecolor{emeraldGreen}{RGB}{0,155,118}  % antigo: treegreen
+\definecolor{amber}{RGB}{168,101,12}        % antigo: darkorange
+\definecolor{taupeGray}{RGB}{95,87,79}      % antigo: beigegray
+\definecolor{offWhite}{RGB}{238,235,233}    % antigo: boxgray
+\definecolor{sageGray}{RGB}{199,209,197}    % antigo: footergray
+
+\mode<presentation>
+
+% Paletas principais
+%\setbeamercolor*{palette primary}{use=structure,fg=white,bg= deepRed}
+\setbeamercolor*{palette primary}{use=structure,fg=white,bg= sageGray}
+\setbeamercolor*{palette secondary}{use=structure,fg=white,bg= emeraldGreen}
+\setbeamercolor*{palette tertiary}{use=structure,fg=white,bg= burgundy}
+\setbeamercolor*{palette quaternary}{fg=white,bg= camelBrown}
+
+% Barra lateral e rodapé
+\setbeamercolor*{sidebar}{use=structure,bg= sandBeige}
+\setbeamercolor*{footer}{use=structure,bg= sageGray,fg=deepRed}
+
+% Paleta da sidebar
+%\setbeamercolor*{palette sidebar primary}{use=structure,fg=structure.fg!10}
+\setbeamercolor*{palette sidebar primary}{fg=white}
+\setbeamercolor*{palette sidebar secondary}{fg=white}
+\setbeamercolor*{palette sidebar tertiary}{use=structure,fg=structure.fg!50}
+\setbeamercolor*{palette sidebar quaternary}{fg=white}
+
+% Títulos e rodapé
+\setbeamercolor*{titlelike}{parent=palette primary}
+\setbeamercolor*{foot line}{parent=palette secondary}
+
+% Linhas de separação (mantidas vazias para herança padrão)
+\setbeamercolor*{separation line}{}
+\setbeamercolor*{fine separation line}{}
+
+% Itens (lista/enum/descrição) usando a cor principal (deepRed)
+\setbeamercolor{itemize item}{fg

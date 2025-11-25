@@ -9,3 +9,5 @@
 *.gz
 *.blg
 *.bbl
+*.nav
+*.snm
